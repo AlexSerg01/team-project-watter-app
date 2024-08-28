@@ -1,16 +1,20 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/auth/operations";
-import AuthForm from "../../components/AuthForm";
+import AuthForm from "../../components/AuthFrom/AuthForm";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignup = (values, { setSubmitting }) => {
-    dispatch(registerUser(values)).then((result) => {
+    // Очищення поля repeatPassword
+    // eslint-disable-next-line no-unused-vars
+    const { repeatPassword, ...signupData } = values;
+
+    dispatch(registerUser(signupData)).then((result) => {
       if (registerUser.fulfilled.match(result)) {
-        navigate("/home"); // Redirect to HomePage
+        navigate("/signin");
       }
       setSubmitting(false);
     });
@@ -20,9 +24,6 @@ const SignupPage = () => {
     <div className="signup-container">
       <h2>Sign Up</h2>
       <AuthForm type="signup" onSubmit={handleSignup} />
-      <p>
-        Already have an account? <a href="/signin">Sign In</a>
-      </p>
     </div>
   );
 };
