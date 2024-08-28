@@ -8,9 +8,9 @@ import {
 
 import SigninPage from "./pages/SigninPage/SigninPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
-import Layout from "./components/Layout/Layout";
-import HomePage from "./pages/HomePage/HomePage";
-import Main from "./pages/WelcomePage/Main";
+// import Layout from "./components/Layout/Layout";
+// import HomePage from "./pages/HomePage/HomePage";
+// import Main from "./pages/WelcomePage/Main";
 
 function App() {
   const PrivateRoute = ({ children }) => {
@@ -20,22 +20,17 @@ function App() {
   };
 
   return (
-    <Layout>
-      <Router>
-        <Routes>
-          <Route path="/welcome" element={<Main />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/signin" element={<SigninPage />} />
-          <Route
-            path="/home"
-            element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
-          />
-          {/* Redirect to home if user is authenticated */}
-          <Route path="/" element={<Navigate to="/home" />} />
-          {/* Add more routes as necessary */}
-        </Routes>
-      </Router>
-    </Layout>
+    <Router>
+      <Routes>
+        {/* <Route path="/welcome" element={} /> */}
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/signin" element={<SigninPage />} />
+        <Route path="/home" element={<PrivateRoute>{}</PrivateRoute>} />
+        {/* Redirect to home if user is authenticated */}
+        <Route path="/" element={<Navigate to="/home" />} />
+        {/* Add more routes as necessary */}
+      </Routes>
+    </Router>
   );
 }
 
