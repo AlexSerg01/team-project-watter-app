@@ -1,0 +1,26 @@
+@media (max-width: 767px) {
+  .signin_container {
+    align-items: center;
+    width: 320px;
+    height: 100vh;
+    background-image: url("../../assets/images/background/mobile/Background-m-MainPage.png");
+    background-position: center 52px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+  }
+
+  .form_container {
+    display: block;
+    max-width: 280px;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .block_name {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    width: 100%;
+  }
+}
