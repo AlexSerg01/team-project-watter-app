@@ -9,7 +9,7 @@ import {
 import SigninPage from "./pages/SigninPage/SigninPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 // import Layout from "./components/Layout/Layout";
-import HomePage from "./pages/HomePage/HomePage";
+// import HomePage from "./pages/HomePage/HomePage";
 // import Main from "./pages/WelcomePage/Main";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
 // import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
