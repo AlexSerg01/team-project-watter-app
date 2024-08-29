@@ -9,7 +9,7 @@ import css from "./HomePage.module.css";
 const HomePage = () => {
   return (
     <div>
-      <div className={css}>
+      <div>
         <Header />
       </div>
       <div>
