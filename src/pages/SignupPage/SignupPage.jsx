@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/auth/operations";
 import AuthForm from "../../components/AuthFrom/AuthForm";
+import css from "./Signup.module.css";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,11 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      <AuthForm type="signup" onSubmit={handleSignup} />
+    <div className={css.signup_container}>
+      <div className={css.form_container}>
+        <h2>Sign Up</h2>
+        <AuthForm type="signup" onSubmit={handleSignup} />
+      </div>
     </div>
   );
 };

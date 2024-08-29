@@ -1,0 +1,67 @@
+@media (max-width: 767px) {
+  .auth_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-top: 16px;
+  }
+
+  .auth_form label {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .auth_form input {
+    color: var(--SECONDARY-BLUE);
+    /* background-color: inherit; */
+    padding: 12px 10px;
+    border: 1px solid var(--SECONDARY-GRAY);
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .auth_form input::placeholder {
+    color: var(--SECONDARY-BLUE);
+  }
+
+  .auth_form input:focus {
+    color: var(--PRIMERY-BLUE);
+    outline: none;
+  }
+
+  .auth_form .error_input {
+    border-color: var(--SECONDARY-RED);
+    color: var(--SECONDARY-RED);
+  }
+
+  .input_error {
+    color: var(--SECONDARY-RED);
+    font-size: 14px;
+    top: 100%; /* Поміщає повідомлення під input */
+    left: 0;
+    transform: translateY(2px); /* Додає трохи відступу зверху */
+    margin-top: 4px;
+  }
+
+  .auth_form button {
+    padding: 8px 30px;
+    background-color: var(--PRIMERY-BLUE);
+    color: var(--PRIMERY-WHITE);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .auth_form a {
+    color: var(--PRIMERY-BLUE);
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
