@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import "./AuthForm.css"; // Імпортуємо CSS
+import css from "./AuthForm.module.css"; // Імпортуємо CSS
 
 export default function AuthForm({ type, onSubmit }) {
   const isSignup = type === "signup";
@@ -31,16 +31,20 @@ export default function AuthForm({ type, onSubmit }) {
       onSubmit={onSubmit}
     >
       {({ isSubmitting, errors, touched }) => (
-        <Form className="auth-form">
+        <Form className={css.auth_form}>
           <div>
             <label htmlFor="email">Enter your email:</label>
             <Field
               type="email"
               name="email"
               placeholder="E-mail"
-              className={touched.email && errors.email ? "error-input" : ""}
+              className={touched.email && errors.email ? css.error_input : ""}
             />
-            <ErrorMessage name="email" component="div" className="error" />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className={css.input_error}
+            />
           </div>
           <div>
             <label htmlFor="password">Enter your password:</label>
@@ -49,10 +53,14 @@ export default function AuthForm({ type, onSubmit }) {
               name="password"
               placeholder="Password"
               className={
-                touched.password && errors.password ? "error-input" : ""
+                touched.password && errors.password ? css.error_input : ""
               }
             />
-            <ErrorMessage name="password" component="div" className="error" />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className={css.input_error}
+            />
           </div>
           {isSignup && (
             <div>
@@ -63,14 +71,14 @@ export default function AuthForm({ type, onSubmit }) {
                 placeholder="Repeat Password"
                 className={
                   touched.repeatPassword && errors.repeatPassword
-                    ? "error-input"
+                    ? css.error_input
                     : ""
                 }
               />
               <ErrorMessage
                 name="repeatPassword"
                 component="div"
-                className="error"
+                className={css.input_error}
               />
             </div>
           )}
@@ -78,7 +86,7 @@ export default function AuthForm({ type, onSubmit }) {
             {isSignup ? "Sign Up" : "Sign In"}
           </button>
           {!isSignup && <a href="/signup">Sign up</a>}
-          {isSignup && <a href="/signup">Sign in</a>}
+          {isSignup && <a href="/signin">Sign in</a>}
         </Form>
       )}
     </Formik>
