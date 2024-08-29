@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import validateForgotPasswordEmail from '../../utils/validateForgotPasswordEmail'
-import { sendForgotPasswordEmail } from '../../utils/sendForgotPasswordEmail'
+import validateForgotPasswordEmail from '../utils/validateForgotPasswordEmail'
+import { sendForgotPasswordEmail } from '../../fetch/fetch'
 const useForgotPasswordForm = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
