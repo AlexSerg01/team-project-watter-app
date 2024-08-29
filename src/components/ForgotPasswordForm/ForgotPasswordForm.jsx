@@ -1,13 +1,12 @@
-import React from 'react'
-import useForgotPasswordForm from './useForgotPasswordForm'
-import css from './ForgotPasswordForm.module.css'
+import useForgotPasswordForm from "./useForgotPasswordForm";
+import css from "./ForgotPasswordForm.module.css";
 
 const ForgotPasswordForm = () => {
   const { email, error, success, loading, handleEmailChange, handleSubmit } =
-    useForgotPasswordForm()
+    useForgotPasswordForm();
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.ForgotPasswordForm}>
       <label htmlFor="email"> Email:</label>
       <input
         type="email"
@@ -22,6 +21,6 @@ const ForgotPasswordForm = () => {
         {loading ? `Sending...` : `Send`}
       </button>
     </form>
-  )
-}
-export default ForgotPasswordForm
+  );
+};
+export default ForgotPasswordForm;
