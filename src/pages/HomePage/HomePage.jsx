@@ -8,15 +8,17 @@ import css from "./HomePage.module.css";
 
 const HomePage = () => {
   return (
-    <div>
-      <div className={css}>{/* <Header /> */}</div>
-      <div>{/* <DailyNorma /> */}</div>
-      <div>{/* <WaterRatioPanel /> */}</div>
-      <div className={css.tableWrapper}>
-        <TodayWaterList />
-        {/* <div>
+    <div className={css.homeMain}>
+      <div className={css.homeHeader}>{/* <Header /> */}</div>
+      <div className={css.homeContainer}>
+        <div className={css.dailyBox}>{/* <DailyNorma /> */}</div>
+        <div className={css.waterRatioPanel}>{/* <WaterRatioPanel /> */}</div>
+        <div className={css.tableWrapper}>
+          <TodayWaterList />
+          {/* <div>
         <MonthStatsTable />
       </div> */}
+        </div>
       </div>
     </div>
   );
