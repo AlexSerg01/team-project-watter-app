@@ -1,4 +1,3 @@
-
 :root {
   --PRIMERY-WHITE: #ffffff;
   --PRIMERY-BLACK: #2f2f2f;
@@ -9,7 +8,6 @@
   --SECONDARY-ORANGE: #ff9d43;
   --SECONDARY-GRAY: #d7e3ff;
 }
-
 
 *,
 ::before,
@@ -48,7 +46,6 @@ body {
   font-size: 16px;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -71,4 +68,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} 
+}
