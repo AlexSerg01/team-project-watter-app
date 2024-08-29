@@ -1,3 +1,4 @@
+
 :root {
   --PRIMERY-WHITE: #ffffff;
   --PRIMERY-BLACK: #2f2f2f;
@@ -8,6 +9,7 @@
   --SECONDARY-ORANGE: #ff9d43;
   --SECONDARY-GRAY: #d7e3ff;
 }
+
 
 *,
 ::before,
@@ -45,5 +47,28 @@ body {
   color: var(--PRIMERY-BLACK);
   font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} 
