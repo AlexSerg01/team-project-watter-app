@@ -1,4 +1,4 @@
-import useForgotPasswordForm from "./useForgotPasswordForm";
+import useForgotPasswordForm from "../hooks/useForgotPasswordForm";
 import css from "./ForgotPasswordForm.module.css";
 
 const ForgotPasswordForm = () => {
