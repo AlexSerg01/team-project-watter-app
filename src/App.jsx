@@ -11,7 +11,7 @@ import SignupPage from './pages/SignupPage/SignupPage'
 // import Layout from "./components/Layout/Layout";
 // import HomePage from "./pages/HomePage/HomePage";
 // import Main from "./pages/WelcomePage/Main";
-import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx'
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.1.jsx'
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
 
 function App() {
