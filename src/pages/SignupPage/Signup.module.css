@@ -7,7 +7,7 @@
     max-width: 320px;
     height: 100vh;
     background-image: url("../../assets/images/background/mobile/Background-m-MainPage.png");
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center 20px;
     margin: 0 auto;
