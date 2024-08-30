@@ -6,8 +6,10 @@ import {
   Navigate,
 } from 'react-router-dom'
 
-import SigninPage from './pages/SigninPage/SigninPage'
-import SignupPage from './pages/SignupPage/SignupPage'
+import SigninPage from "./pages/SigninPage/SigninPage";
+import SignupPage from "./pages/SignupPage/SignupPage";
+import HomePage from "./pages/HomePage/HomePage";
+
 // import Layout from "./components/Layout/Layout";
 // import HomePage from "./pages/HomePage/HomePage";
 // import Main from "./pages/WelcomePage/Main";
@@ -27,7 +29,7 @@ function App() {
         {/* <Route path="/welcome" element={} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signin" element={<SigninPage />} />
-        <Route path="/home" element={<PrivateRoute>{}</PrivateRoute>} />
+        <Route path="/home" element={<PrivateRoute>{<HomePage/>}</PrivateRoute>} />
         {/* Redirect to home if user is authenticated */}
         <Route path="/" element={<Navigate to="/home" />} />
         {/* Add more routes as necessary */}

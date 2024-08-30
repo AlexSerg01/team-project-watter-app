@@ -1,0 +1,22 @@
+.welcomePage {
+  padding: 20px;
+  background-image: url("/path/to/your/background-image.jpg"); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure it covers the full height of the viewport */
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+  .welcomePage {
+    margin: 0, auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 40px;
+  }
+}
