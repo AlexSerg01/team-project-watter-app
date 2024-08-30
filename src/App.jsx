@@ -28,7 +28,10 @@ function App() {
         {/* <Route path="/welcome" element={} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signin" element={<SigninPage />} />
-        <Route path="/home" element={<PrivateRoute>{<HomePage/>}</PrivateRoute>} />
+        <Route
+          path="/home"
+          element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
+        />
         {/* Redirect to home if user is authenticated */}
         <Route path="/" element={<Navigate to="/home" />} />
         {/* Add more routes as necessary */}
