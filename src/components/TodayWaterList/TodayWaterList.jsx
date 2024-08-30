@@ -25,8 +25,10 @@ export const TodayWaterList = () => {
     }
 
 
+
     return (
 
+        <div className={css.tableWrapper}>
             <div className={css.todayWrapper}>
                 <p className={css.today}>Today</p>
                 <div className={css.listContainer}>
@@ -51,28 +53,7 @@ export const TodayWaterList = () => {
                     </div>
                 </div>
             </div>
-
-        // <div className={css.listContainer}>
-        //     <div className={css.hightRegulator}>
-        //         <ul className={css.listWraper}>
-        //             {waterItems.map(elem => (
-        //                 <li key={elem.id}>
-        //                     <TodayWaterItem
-        //                         initialAmount={elem.amount}
-        //                         initialDate={elem.date}
-        //                         onDelete={() => handleDelete(elem.id)}
-
-        //                     />
-        //                 </li>
-        //             ))}
-        //         </ul>
-        //         <button className={css.addBtn} onClick={handleAddWater}>
-        //             <svg>
-        //                 <use href={`${icons}#icon-increment`}></use>
-        //             </svg>
-        //             <span>Add water</span></button>
-        //     </div>
-        // </div>
+        </div>
 
     );
 };

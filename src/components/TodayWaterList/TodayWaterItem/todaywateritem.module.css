@@ -125,10 +125,6 @@
 
 
 
-/* .modalDelete p {
-    margin: 0;
-} */
-
 .deleteEntry {
     font-family: Roboto;
     font-size: 26px;
@@ -145,6 +141,12 @@
     line-height: 20px;
     text-align: left;
     margin: 0;
+}
+
+.deleteQuestion{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .crossSvg {

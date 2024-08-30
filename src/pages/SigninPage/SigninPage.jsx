@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthFrom/AuthForm";
 import { loginUser } from "../../redux/auth/operations";
+import { Header } from "../../components/Header/Header.jsx";
 import css from "./SigninPage.module.css";
 
 import BottleSigninDesktop from "../../assets/images/signin/BottleSignin-Desktop/Bottle-for-Sign-in.png";
@@ -25,6 +26,7 @@ const SigninPage = () => {
   };
 
   return (
+
     <div className={css.signin_container}>
       <div className={css.image_container}>
         <picture>
@@ -43,6 +45,7 @@ const SigninPage = () => {
           <img src={BottleSigninDesktop} alt="bottle" className={css.img} />
         </picture>
       </div>
+
       <div className={css.form_container}>
         <h2 className={css.block_name}>Sign In</h2>
         <AuthForm type="signin" onSubmit={handleSignin} />
@@ -51,6 +54,7 @@ const SigninPage = () => {
       </p> */}
       </div>
     </div>
+    </>
   );
 };
 

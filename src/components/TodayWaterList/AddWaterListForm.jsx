@@ -91,7 +91,7 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate, updateWaterD
                         />
                     </div>
                     <div className={css.inputWrapper}>
-                        <p>Enter the value of the water used:</p>
+                        <p className={css.numberTopic}>Enter the value of the water used:</p>
                         <input type="number"
                             value={amount}
                             onChange={handleChange}

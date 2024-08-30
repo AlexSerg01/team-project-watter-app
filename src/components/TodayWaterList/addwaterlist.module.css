@@ -74,7 +74,7 @@ svg {
 .amountCorrection {
     display: flex;
     flex-direction: column;
-    /* height: 112px; */
+    gap: 16px;
     justify-content: space-between;
 }
 
@@ -118,6 +118,20 @@ svg {
     align-items: center;
 }
 
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputWrapper .numberTopic {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
 input {
     width: 544px;
     height: 44px;
@@ -135,6 +149,9 @@ input {
 
 .formEditInfo {
     width: 544px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .saveBtnWrapper {
@@ -178,12 +195,31 @@ input {
     list-style: none;
     padding: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 24px;
     min-height: 0;
     max-height: 212px;
+    scrollbar-width: 2px;
+}
+
+.listWraper::-webkit-scrollbar {
+    width: 1px;
+}
+
+.listWraper::-webkit-scrollbar-button {
+    display: none;
+}
+
+.listWraper::-webkit-scrollbar-thumb {
+    background-color: #9EBBFF;
+    border-radius: 8px;
+}
+
+.listWraper::-webkit-scrollbar-track {
+    background-color: #D7E3FF;
 }
 
 
@@ -202,9 +238,16 @@ input {
 
 }
 
+
 .listContainer {
     box-sizing: border-box;
     overflow-y: auto;
+}
+
+.hightRegulator {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .tableWrapper {
@@ -219,9 +262,11 @@ input {
 }
 
 .todayWrapper {
+    width: 544px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    /* background-color: #ECF2FF; */
 }
 
 .today {
