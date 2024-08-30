@@ -37,7 +37,9 @@ export default function AuthForm({ type, onSubmit }) {
             <Field
               type="email"
               name="email"
+              id="email"
               placeholder="E-mail"
+              autocomplete="email"
               className={touched.email && errors.email ? css.error_input : ""}
             />
             <ErrorMessage
@@ -51,7 +53,9 @@ export default function AuthForm({ type, onSubmit }) {
             <Field
               type="password"
               name="password"
+              id="password"
               placeholder="Password"
+              autocomplete="current-password"
               className={
                 touched.password && errors.password ? css.error_input : ""
               }
@@ -68,7 +72,9 @@ export default function AuthForm({ type, onSubmit }) {
               <Field
                 type="password"
                 name="repeatPassword"
+                id="repeatPassword"
                 placeholder="Repeat Password"
+                autocomplete="new-password"
                 className={
                   touched.repeatPassword && errors.repeatPassword
                     ? css.error_input

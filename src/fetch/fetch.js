@@ -17,3 +17,11 @@ export const sendForgotPasswordEmail = async (email) => {
     throw new Error(error.response?.data?.message || 'Failed to send email')
   }
 }
+export const UpdatePassword = async (token, newPassword) => {
+  const response = await axios.post('users/update-password', {
+    token,
+    newPassword,
+  })
+
+  return response
+}
