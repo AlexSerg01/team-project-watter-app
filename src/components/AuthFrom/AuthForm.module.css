@@ -64,3 +64,69 @@
     line-height: 20px;
   }
 }
+
+@media (min-width: 768px) {
+  .auth_form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .auth_form label {
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .auth_form input {
+    color: var(--SECONDARY-BLUE);
+    /* background-color: inherit; */
+    padding: 12px 10px;
+    border: 1px solid var(--SECONDARY-GRAY);
+    border-radius: 6px;
+    width: 336px;
+    box-sizing: border-box;
+  }
+
+  .auth_form input::placeholder {
+    color: var(--SECONDARY-BLUE);
+  }
+
+  .auth_form input:focus {
+    color: var(--PRIMERY-BLUE);
+    outline: none;
+  }
+
+  .auth_form .error_input {
+    border-color: var(--SECONDARY-RED);
+    color: var(--SECONDARY-RED);
+  }
+
+  .input_error {
+    color: var(--SECONDARY-RED);
+    font-size: 14px;
+    top: 100%; /* Поміщає повідомлення під input */
+    left: 0;
+    transform: translateY(2px); /* Додає трохи відступу зверху */
+    margin-top: 4px;
+  }
+
+  .auth_form button {
+    display: flex;
+    padding: 10px 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--PRIMERY-BLUE);
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+    color: var(--PRIMERY-WHITE);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+}
