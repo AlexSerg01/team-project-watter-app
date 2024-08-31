@@ -12,7 +12,7 @@ import HomePage from "./pages/HomePage/HomePage";
 
 // import Layout from "./components/Layout/Layout";
 // import HomePage from "./pages/HomePage/HomePage";
-// import Main from "./pages/WelcomePage/Main";
+import Main from "./pages/WelcomePage/Main";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 
@@ -27,7 +27,7 @@ function App() {
     <Layout>
       <Router>
         <Routes>
-          {/* <Route path="/welcome" element={} /> */}
+          <Route path="/welcome" element={<Main />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/signin" element={<SigninPage />} />
           <Route
