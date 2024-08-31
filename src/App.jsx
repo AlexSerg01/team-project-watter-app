@@ -32,7 +32,8 @@ function App() {
           <Route path="/signin" element={<SigninPage />} />
           <Route
             path="/home"
-            element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
+            element={<HomePage />}
+            // element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
           />
           {/* Redirect to home if user is authenticated */}
           <Route path="/" element={<Navigate to="/home" />} />

@@ -1,4 +1,98 @@
 .monthHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.monthTitle {
+    font-size: 26px;
+    line-height: 1.23;
+    color: #2f2f2f;
+}
+
+.calendarWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 592px;
+    height: 680px;
+    background-color: #ECF2FF;
+    padding: 32px 24px;
+}
+
+.tableWrapper {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+
+}
+
+.calendarNavi {
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+    color: #407BFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: normal;
+    width: 155px;
+    height: 20px
+}
+
+.chevronBtnIcon {
+    width: 14px;
+    height: 14px;
+}
+
+.chevronBtn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    line-height: 0;
+}
+
+.chevronBtnHidden {
+    opacity: 0;
+}
+
+
+
+
+.dayItem {
+    width: 34px;
+    height: 34px;
+    background-color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #2f2f2f
+}
+
+.percentDayItem {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #9EBBFF;
+    text-align: center;
+}
+
+.dayInCalendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 8px;
 }

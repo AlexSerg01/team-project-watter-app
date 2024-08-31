@@ -15,9 +15,7 @@ const HomePage = () => {
         <div className={css.waterRatioPanel}>{/* <WaterRatioPanel /> */}</div>
         <div className={css.tableWrapper}>
           <TodayWaterList />
-          <div>
-            <MonthStatsTable />
-          </div>
+          <MonthStatsTable />
         </div>
       </div>
     </div>
