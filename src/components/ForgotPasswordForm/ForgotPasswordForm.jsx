@@ -39,14 +39,11 @@ const ForgotPasswordForm = () => {
             {({ errors, touched }) => (
               <Form className={css.formContainer}>
                 <div className={css.containerEmail}>
-                  <p className={css.textInput}>
-                    Enter your email and we will send you a link to reset your
-                    password
-                  </p>
+                  <p className={css.textInput}>Enter your email</p>
                   <Field
                     type="text"
                     name="email"
-                    placeholder="Enter your email"
+                    placeholder="E-mail"
                     className={`${css.inputField} ${
                       errors.email && touched.email ? css.inputError : ''
                     }`}
