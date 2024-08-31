@@ -1,37 +1,74 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const API_URL = "https://nodejs-hw-mongodb-v8s9.onrender.com"; // add URL!!!!
+const API_URL = 'https://nodejs-hw-mongodb-v8s9.onrender.com' // add URL!!!!
 
 export const registerUser = createAsyncThunk(
-  "auth/registerUser",
+  'auth/registerUser',
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, data);
-      toast.success("Registration successful!");
-      return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
+      const response = await axios.post(`${API_URL}/auth/register`, data)
+      toast.success('Registration successful!')
+      return response.data.data // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
         error.response?.data?.message ||
-        "Registration failed. Please try again.";
-      toast.error(message);
-      return thunkAPI.rejectWithValue(message);
+        'Registration failed. Please try again.'
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
     }
   }
-);
+)
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
+  'auth/loginUser',
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, data);
-      return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
+      const response = await axios.post(`${API_URL}/auth/login`, data)
+      return response.data.data // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
-        error.response?.data?.message || "Login failed. Please try again.";
-      toast.error(message);
-      return thunkAPI.rejectWithValue(message);
+        error.response?.data?.message || 'Login failed. Please try again.'
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
     }
   }
-);
+)
+// Додавання forgotPassword та updatePassword операцій
+export const forgotPassword = createAsyncThunk(
+  'auth/forgotPassword',
+  async (body, thunkAPI) => {
+    try {
+      const response = await axios.post(`${API_URL}/auth/password/forgot`, body)
+      toast.success('Password reset email sent!')
+      return response.data
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        'Failed to send password reset email. Please try again.'
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const updatePassword = createAsyncThunk(
+  'auth/updatePassword',
+  async ({ token, ...body }, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/auth/password/reset/${token}`,
+        body
+      )
+      toast.success('Password updated successfully!')
+      return response.data
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        'Failed to update password. Please try again.'
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
