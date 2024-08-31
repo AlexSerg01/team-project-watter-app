@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import axios from "axios";
 
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
@@ -29,8 +28,6 @@ export default function MonthStatsTable() {
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const modalRef = useRef(null);
-  console.log(isModalOpen);
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -89,24 +86,8 @@ export default function MonthStatsTable() {
     setIsModalOpen(false);
   };
 
-  // const handleClickOutside = () => {
-  //   {
-  //     handleCloseDayInfo();
-  //   }
-  // };
-
-  // const handleEscKeyPress = (event) => {
-  //   if (event.key === "Escape") {
-  //     handleCloseDayInfo();
-  //   }
-  // };
-
   return (
-    <div
-      className={css.calendarWrapper}
-      // onKeyDown={handleEscKeyPress}
-      // tabIndex="0"
-    >
+    <div className={css.calendarWrapper}>
       <div className={css.monthHeader}>
         <p className={css.monthTitle}>Month</p>
         <div className={css.calendarNavi}>
