@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import avatar from "../../assets/images/avatar.png";
 import { DropDownContainer, DropDownBtn, UserName, UserAvatar, ChevronIcon, Menu, MenuItem} from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
@@ -9,10 +9,27 @@ export const DropDownMenu = () => {
   const userAvatar = avatar; 
 
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
 
   const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
   };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
     console.log(action);
@@ -20,7 +37,7 @@ export const DropDownMenu = () => {
   }
 
   return (
-    <DropDownContainer>
+    <DropDownContainer ref={menuRef}>
       <DropDownBtn onClick={toggleMenu}>
         <UserName>{userName}</UserName>
         <UserAvatar src={userAvatar} alt="User`s Avatar" width="28" height="28" ></UserAvatar>
