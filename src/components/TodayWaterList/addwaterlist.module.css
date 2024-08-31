@@ -1,0 +1,279 @@
+.section {
+    padding: 32px 24px;
+    width: 592px;
+    height: 580px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.crossBtn {
+    position: absolute;
+    top: 36px;
+    right: 24px;
+    background-color: transparent;
+    border: none;
+}
+
+svg {
+    width: 24px;
+    height: 24px;
+}
+
+.sectionHeader {
+    margin: 0;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 32px;
+}
+
+.waterPreInfo {
+    display: flex;
+    flex-direction: row;
+    background-color: #ECF2FF;
+    width: 254px;
+    height: 52px;
+    gap: 12px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.svgGlass {
+    width: 36px;
+    height: 36px;
+}
+
+.waterAmount {
+    color: #407BFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+}
+
+.timeAmount {
+    width: 156px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.spanTime {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.amountCorrection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+
+.enteredData {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
+.amountBtnDec,
+.amountBtnInc {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #9EBBFF;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px #407BFF33;
+}
+
+.spanAmount {
+    width: 92px;
+    height: 36px;
+    border-radius: 40px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D7E3FF;
+    color: #407BFF;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.amountCalc {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    align-items: center;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputWrapper .numberTopic {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
+input {
+    width: 544px;
+    height: 44px;
+    border: 1px solid #D7E3FF;
+    padding: 12px 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #407BFF;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}
+
+.formEditInfo {
+    width: 544px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.saveBtnWrapper {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.finalAmountSave {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+
+}
+
+.saveBtnWrapper button {
+    height: 44px;
+    width: 160px;
+    background-color: #407BFF;
+    color: #FFFFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px 30px;
+    border: none;
+    box-shadow: 0 4px 8px 0 #407BFF57;
+}
+
+.saveBtnWrapper p {
+    margin: auto;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    color: #407BFF;
+}
+
+.listWraper {
+    list-style: none;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 0;
+    max-height: 212px;
+    scrollbar-width: 2px;
+}
+
+.listWraper::-webkit-scrollbar {
+    width: 1px;
+}
+
+.listWraper::-webkit-scrollbar-button {
+    display: none;
+}
+
+.listWraper::-webkit-scrollbar-thumb {
+    background-color: #9EBBFF;
+    border-radius: 8px;
+}
+
+.listWraper::-webkit-scrollbar-track {
+    background-color: #D7E3FF;
+}
+
+
+.addBtn {
+    background-color: transparent;
+    border: none;
+    color: #407BFF;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+
+}
+
+
+.listContainer {
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.hightRegulator {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tableWrapper {
+    width: 592px;
+    height: 680px;
+    padding: 32px 24px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: #ECF2FF;
+}
+
+.todayWrapper {
+    width: 544px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* background-color: #ECF2FF; */
+}
+
+.today {
+    font-family: Roboto;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    text-align: left;
+    margin: 0;
+}

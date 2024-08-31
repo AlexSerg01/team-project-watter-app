@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-const API_URL = 'https://nodejs-hw-mongodb-v8s9.onrender.com' // add URL!!!!
+
+const API_URL = "https://team-project-b-watter-app.onrender.com"; // add URL!!!!
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
