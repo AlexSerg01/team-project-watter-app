@@ -54,7 +54,6 @@ export const Menu = styled.div`
   border-radius: 10px;
   padding: 16px 16px;
   box-shadow: 0px 4px 8px 0px #407BFF33;
-  ;
   z-index: 1000;
 `;
 
