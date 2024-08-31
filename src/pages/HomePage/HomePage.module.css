@@ -1,32 +1,56 @@
+.homeMain {
+  background-color: #fff;
+}
+
 @media (max-width: 767px) {
-  .homeMain {
-    background-color: #fff;
-  }
-
-  .homeHeader {
-    width: 280px;
-    height: 48px;
-    display: flex;
-    margin: 8px auto 24px;
-  }
-
   .homeContainer {
     background-color: #fff;
-    background-image: url("../../assets/images/background/mobile/Background-m-MainPage.png"),
-      url("../../assets/images/bottle-home-page/Mobile-Botle-Home-screen@1x.png");
+    background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@1x.png");
     background-repeat: no-repeat;
+    background-size: contain;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 24px;
+  }
+
+  .homeBotle {
+    width: 280px;
+    height: 208px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("../../assets/images/home-page/bottle-home-page/Mobile-Botle-Home-screen@1x.png");
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .homeContainer {
+      background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@2x.png");
+    }
+    .homeBotle {
+      background-image: url("../../assets/images/home-page/bottle-home-page/Mobile-Botle-Home-screen@2x.png");
+    }
   }
 
   .dailyBox {
     border: 1px solid #ecf2ff;
+    background-color: #fff;
     border-radius: 10px;
     padding: 8px 20px;
     width: 164px;
     height: 74px;
     box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
     margin-left: 20px;
+  }
+
+  .waterRatioPanel {
+    margin-top: 40px;
+    height: 134px;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .tableWrapper {
@@ -42,9 +66,56 @@
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+/*=================Tablet=================*/
+@media screen and (min-width: 768px) {
+  .homeContainer {
+    width: 764px;
+    height: 1280px;
+    margin-top: 24px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@1x.png");
+    position: relative;
+  }
+
+  .homeBotle {
+    width: 518px;
+    height: 386px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("../../assets/images/home-page/bottle-home-page/Tablet-Botle-Home-screen@1x.png");
+    position: absolute;
+    top: -16px;
+    left: 125px;
+    z-index: 2;
+  }
+
+  .dailyBox {
+    border: 1px solid #ecf2ff;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px 20px;
+    width: 164px;
+    height: 76px;
+    box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
+    margin-left: 32px;
+  }
 
   .waterRatioPanel {
-    margin-top: 232px;
-    height: 134px;
+    width: 704px;
+    height: 90px;
+    margin-top: 326px;
+    margin-left: auto;
+    margin-right: auto;
   }
-}
+
+  .tableWrapper {
+    margin-top: 40px;
+    width: 704px;
+    margin-left: auto;
+    margin-right: auto;
+  }
