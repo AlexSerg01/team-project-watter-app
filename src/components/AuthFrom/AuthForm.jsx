@@ -32,14 +32,14 @@ export default function AuthForm({ type, onSubmit }) {
     >
       {({ isSubmitting, errors, touched }) => (
         <Form className={css.auth_form}>
-          <div>
+          <div className={css.form_group}>
             <label htmlFor="email">Enter your email:</label>
             <Field
               type="email"
               name="email"
               id="email"
               placeholder="E-mail"
-              autocomplete="email"
+              autoComplete="email"
               className={touched.email && errors.email ? css.error_input : ""}
             />
             <ErrorMessage
@@ -48,14 +48,15 @@ export default function AuthForm({ type, onSubmit }) {
               className={css.input_error}
             />
           </div>
-          <div>
+
+          <div className={css.form_group}>
             <label htmlFor="password">Enter your password:</label>
             <Field
               type="password"
               name="password"
               id="password"
               placeholder="Password"
-              autocomplete="current-password"
+              autoComplete="current-password"
               className={
                 touched.password && errors.password ? css.error_input : ""
               }
@@ -66,15 +67,16 @@ export default function AuthForm({ type, onSubmit }) {
               className={css.input_error}
             />
           </div>
+
           {isSignup && (
-            <div>
+            <div className={css.form_group}>
               <label htmlFor="repeatPassword">Repeat password:</label>
               <Field
                 type="password"
                 name="repeatPassword"
                 id="repeatPassword"
                 placeholder="Repeat Password"
-                autocomplete="new-password"
+                autoComplete="new-password"
                 className={
                   touched.repeatPassword && errors.repeatPassword
                     ? css.error_input
@@ -88,11 +90,29 @@ export default function AuthForm({ type, onSubmit }) {
               />
             </div>
           )}
-          <button type="submit" disabled={isSubmitting}>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={css.submit_button}
+          >
             {isSignup ? "Sign Up" : "Sign In"}
           </button>
-          {!isSignup && <a href="/signup">Sign up</a>}
-          {isSignup && <a href="/signin">Sign in</a>}
+
+          {!isSignup && (
+            <div className={css.link_container}>
+              <a href="/signup" className={css.link}>
+                Sign up
+              </a>
+            </div>
+          )}
+          {isSignup && (
+            <div className={css.link_container}>
+              <a href="/signin" className={css.link}>
+                Sign in
+              </a>
+            </div>
+          )}
         </Form>
       )}
     </Formik>
