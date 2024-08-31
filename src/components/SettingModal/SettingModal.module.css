@@ -1,0 +1,185 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modalContent {
+  font-family: Roboto;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  margin: 44px 20px auto 20px;
+  padding: 32px 12px; /* Отступы, указанные на макете */
+  overflow-y: auto;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px; /*Отступ между заголовком и контентом*/
+  /* padding-bottom: 12px; Отступ снизу для разделения */
+}
+
+h2 {
+  font-size: 26px; /* Размер текста заголовка */
+  font-weight: 500;
+  line-height: 32px; /* Высота строки заголовка */
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 32px; /* Размер иконки закрытия */
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.photoUpload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.photoUpload img {
+  width: 88px; /* Размер фото */
+  height: 88px;
+  border-radius: 50%;
+  margin-right: 8px; /* Отступ справа от фото */
+}
+
+.photoUpload button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgb(64, 123, 255);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.photoUpload button svg {
+  margin-right: 8px; /* Отступ между иконкой и текстом */
+}
+
+.formGroup {
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 24px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 7px; /* Отступ между кнопкой и текстом */
+  margin-top: 12px;
+  font-size: 16px; /* Размер шрифта */
+  font-weight: 400;
+}
+
+.radioGroup input[type="radio"] {
+  appearance: none; /*Убираем стандартный стиль браузера*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-bottom: auto;
+  padding: 0;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(64, 123, 255); /* Цвет рамки */
+  border-radius: 50%; /* Круглая форма */
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: white; /* Цвет фона */
+}
+
+.radioGroup input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: rgb(64, 123, 255); /* Цвет точки внутри */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid rgb(215, 227, 255);
+}
+
+.passwordName {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.passwordGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordGroup input {
+  margin-top: 8px;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.passwordGroup svg {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Кнопка Submit */
+button[type="submit"] {
+  width: 100%;
+  padding: 16px;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  background: rgb(64, 123, 255);
+}
+
+button[type="submit"]:hover {
+  background-color: rgb(64, 123, 255);
+  box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -15,12 +16,19 @@ import HomePage from "./pages/HomePage/HomePage";
 // import Main from "./pages/WelcomePage/Main";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
 import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
+import SettingModal from "./components/SettingModal/SettingModal";
 
 function App() {
+  const [isModalOpen, setModalOpen] = useState(false);
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     return isAuthenticated ? children : <Navigate to="/signin" />;
+  };
+
+  const handleSave = (data) => {
+    console.log("Saving user data...", data);
+    setModalOpen(false); // Закрытие модалки после успешного сохранения
   };
 
   return (
@@ -29,7 +37,30 @@ function App() {
         <Routes>
           {/* <Route path="/welcome" element={} /> */}
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/signin" element={<SigninPage />} />
+          <Route
+            path="/signin"
+            element={
+              <>
+                <SigninPage />
+                {/* Кнопка для открытия модального окна */}
+                <button onClick={() => setModalOpen(true)}>
+                  Open Settings
+                </button>
+                {/* Модальное окно */}
+                <SettingModal
+                  isOpen={isModalOpen}
+                  onClose={() => setModalOpen(false)}
+                  userData={{
+                    photo: "",
+                    gender: "male",
+                    name: "David",
+                    email: "david401@gmail.com",
+                  }}
+                  onSave={handleSave}
+                />
+              </>
+            }
+          />
           <Route
             path="/home"
             element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
