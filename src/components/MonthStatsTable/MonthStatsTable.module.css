@@ -51,21 +51,26 @@
 .chevronBtnIcon {
     width: 14px;
     height: 14px;
+    border: none;
 }
 
 .chevronBtn {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
     line-height: 0;
+    stroke: #407BFF
+}
+
+.chevronBtn:hover,
+.chevronBtn:focus {
+    border: none;
 }
 
 .chevronBtnHidden {
     opacity: 0;
 }
-
-
-
 
 .dayItem {
     width: 34px;
@@ -95,4 +100,11 @@
     align-items: center;
     justify-content: space-around;
     gap: 8px;
+}
+
+.popUpWindow {
+    width: 292px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

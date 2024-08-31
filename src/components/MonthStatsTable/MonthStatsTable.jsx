@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
+import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
 
 import responseFromFile from "../../daily-water.json";
 
@@ -27,9 +28,10 @@ export default function MonthStatsTable() {
 
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const modalRef = useRef(null);
+  console.log(isModalOpen);
 
-  console.log(year);
-  console.log(month);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const nextMonth = () => {
@@ -78,8 +80,33 @@ export default function MonthStatsTable() {
     );
   }
 
+  const handleOpenDayInfo = (day) => {
+    setIsModalOpen(true);
+    console.log(`hover on day, ${day}`);
+  };
+
+  const handleCloseDayInfo = () => {
+    setIsModalOpen(false);
+  };
+
+  // const handleClickOutside = () => {
+  //   {
+  //     handleCloseDayInfo();
+  //   }
+  // };
+
+  // const handleEscKeyPress = (event) => {
+  //   if (event.key === "Escape") {
+  //     handleCloseDayInfo();
+  //   }
+  // };
+
   return (
-    <div className={css.calendarWrapper}>
+    <div
+      className={css.calendarWrapper}
+      // onKeyDown={handleEscKeyPress}
+      // tabIndex="0"
+    >
       <div className={css.monthHeader}>
         <p className={css.monthTitle}>Month</p>
         <div className={css.calendarNavi}>
@@ -106,10 +133,16 @@ export default function MonthStatsTable() {
           </button>
         </div>
       </div>
-
       <ul className={css.calendar}>
         {days.map((day) => (
-          <li className={css.dayInCalendar} key={day.key}>
+          <li
+            className={css.dayInCalendar}
+            key={day.key}
+            onMouseEnter={() => {
+              handleOpenDayInfo(day.key);
+            }}
+            onMouseLeave={handleCloseDayInfo}
+          >
             <div className={css.dayItem}>{day.key}</div>
             <div className={css.percentDayItem}>
               {responseFromFile[0].percent}%
@@ -117,6 +150,11 @@ export default function MonthStatsTable() {
           </li>
         ))}
       </ul>
+      {isModalOpen && (
+        <div className={css.popUpWindow}>
+          <DaysGeneralStats />
+        </div>
+      )}
     </div>
   );
 }
