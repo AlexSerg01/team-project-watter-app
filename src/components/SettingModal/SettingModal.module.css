@@ -13,11 +13,12 @@
 }
 
 .modalContent {
+  max-width: 320px;
   font-family: Roboto;
   border-radius: 10px;
   background: rgb(255, 255, 255);
   margin: 44px 20px auto 20px;
-  padding: 32px 12px; /* Отступы, указанные на макете */
+  padding: 32px 12px;
   overflow-y: auto;
 }
 
@@ -25,14 +26,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px; /*Отступ между заголовком и контентом*/
-  /* padding-bottom: 12px; Отступ снизу для разделения */
+  margin-bottom: 24px;
 }
 
 h2 {
-  font-size: 26px; /* Размер текста заголовка */
+  font-size: 26px;
   font-weight: 500;
-  line-height: 32px; /* Высота строки заголовка */
+  line-height: 32px;
 }
 
 .closeBtn {
@@ -40,7 +40,7 @@ h2 {
   border: none;
   cursor: pointer;
   padding: 0;
-  width: 32px; /* Размер иконки закрытия */
+  width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -61,10 +61,10 @@ h2 {
 }
 
 .photoUpload img {
-  width: 88px; /* Размер фото */
-  height: 88px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin-right: 8px; /* Отступ справа от фото */
+  margin-right: 8px;
 }
 
 .photoUpload button {
@@ -80,7 +80,7 @@ h2 {
 }
 
 .photoUpload button svg {
-  margin-right: 8px; /* Отступ между иконкой и текстом */
+  margin-right: 8px;
 }
 
 .formGroup {
@@ -96,26 +96,26 @@ h2 {
 .radioGroup label {
   display: flex;
   align-items: center;
-  gap: 7px; /* Отступ между кнопкой и текстом */
+  gap: 7px;
   margin-top: 12px;
-  font-size: 16px; /* Размер шрифта */
+  font-size: 16px;
   font-weight: 400;
 }
 
 .radioGroup input[type="radio"] {
-  appearance: none; /*Убираем стандартный стиль браузера*/
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   margin-bottom: auto;
   padding: 0;
   width: 14px;
   height: 14px;
-  border: 1px solid rgb(64, 123, 255); /* Цвет рамки */
-  border-radius: 50%; /* Круглая форма */
+  border: 1px solid rgb(64, 123, 255);
+  border-radius: 50%;
   outline: none;
   cursor: pointer;
   position: relative;
-  background-color: white; /* Цвет фона */
+  background-color: white;
 }
 
 .radioGroup input[type="radio"]:checked::before {
@@ -125,7 +125,7 @@ h2 {
   left: 50%;
   width: 6px;
   height: 6px;
-  background-color: rgb(64, 123, 255); /* Цвет точки внутри */
+  background-color: rgb(64, 123, 255);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
@@ -141,6 +141,7 @@ h2 {
 
 .passwordName {
   margin-top: 12px;
+  margin-bottom: 8px;
   font-size: 16px;
   font-weight: 400;
 }
@@ -153,26 +154,41 @@ h2 {
 
 .passwordGroup input {
   margin-top: 8px;
-  margin-bottom: 12px;
   flex-grow: 1;
 }
 
 .passwordGroup svg {
   position: absolute;
-  right: 10px;
+  right: 12px;
   cursor: pointer;
 }
 
-/* Кнопка Submit */
+.togglePassword {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.togglePassword svg {
+  width: 24px;
+  height: 24px;
+}
+
 button[type="submit"] {
   width: 100%;
-  padding: 16px;
+  padding: 8px 30px;
   color: rgb(255, 255, 255);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   border-radius: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
@@ -182,4 +198,48 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: rgb(64, 123, 255);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+}
+
+.errorInput {
+  border-color: rgb(239, 80, 80);
+  outline: none;
+}
+
+.errorMessage {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(239, 80, 80);
+}
+
+@media screen and (min-width: 768px) {
+  .modalContent {
+    max-width: 740px;
+    padding: 32px 24px;
+    margin: 44px 20px auto 20px;
+  }
+
+  .formGroup {
+    margin-right: 264px;
+  }
+
+  button[type="submit"] {
+    width: 160px;
+    height: 44px;
+    margin-left: 530px;
+    padding: 10px 30px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .modalContent {
+    max-width: 1008px;
+    margin: 104px 216px auto 216px;
+    padding: 32px 24px;
+  }
+
+  .formGroup {
+    /* margin-bottom: 40px; */
+  }
 }
