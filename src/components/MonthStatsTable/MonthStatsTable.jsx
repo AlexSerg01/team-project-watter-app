@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
-
 import responseFromFile from "../../daily-water.json";
 
 export default function MonthStatsTable() {
@@ -28,6 +26,21 @@ export default function MonthStatsTable() {
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredDay, setHoveredDay] = useState(null);
+
+  const formatCurrentDay = (year, month, day) => {
+    const formattedMonth = String(month + 1).padStart(2, "0");
+    const formattedDay = String(day).padStart(2, "0");
+    return `${formattedMonth}/${formattedDay}/${year}`;
+  };
+
+  const currentHoveredDate = hoveredDay
+    ? formatCurrentDay(year, month, hoveredDay)
+    : null;
+
+  const dayData = responseFromFile.find(
+    (data) => data.date === currentHoveredDate
+  );
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -78,13 +91,20 @@ export default function MonthStatsTable() {
   }
 
   const handleOpenDayInfo = (day) => {
+    setHoveredDay(day);
     setIsModalOpen(true);
-    console.log(`hover on day, ${day}`);
   };
 
   const handleCloseDayInfo = () => {
     setIsModalOpen(false);
+    setHoveredDay(null);
   };
+
+  const dateInWord = () => {
+    return `${hoveredDay}, ${monthsNames[month]}`;
+  };
+
+  const newDate = dateInWord();
 
   return (
     <div className={css.calendarWrapper}>
@@ -114,28 +134,33 @@ export default function MonthStatsTable() {
           </button>
         </div>
       </div>
-      <ul className={css.calendar}>
-        {days.map((day) => (
-          <li
-            className={css.dayInCalendar}
-            key={day.key}
-            onMouseEnter={() => {
-              handleOpenDayInfo(day.key);
-            }}
-            onMouseLeave={handleCloseDayInfo}
-          >
-            <div className={css.dayItem}>{day.key}</div>
-            <div className={css.percentDayItem}>
-              {responseFromFile[0].percent}%
+      <div className={css.daysWrapper}>
+        <ul className={css.calendar}>
+          {days.map((day) => (
+            <li className={css.dayInCalendar} key={day.key}>
+              <div
+                className={css.dayItem}
+                onMouseEnter={() => {
+                  handleOpenDayInfo(day.key);
+                }}
+                onMouseLeave={handleCloseDayInfo}
+              >
+                {day.key}
+              </div>
+              <div className={css.percentDayItem}>
+                {dayData ? `${dayData.percent}%` : "0%"}
+              </div>
+            </li>
+          ))}
+        </ul>
+        {isModalOpen && hoveredDay && (
+          <div className={css.tableWrapper}>
+            <div className={css.popUpWindow}>
+              <DaysGeneralStats day={currentHoveredDate} dayInWord={newDate} />
             </div>
-          </li>
-        ))}
-      </ul>
-      {isModalOpen && (
-        <div className={css.popUpWindow}>
-          <DaysGeneralStats />
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
