@@ -10,7 +10,7 @@ const WelcomePage = () => {
     navigate("/signup");
   };
   return (
-    <div className={css.welcomePage}>
+    <div className={css.welcome_page}>
       <WaterConsumptionTracker onTryTrackerClick={handleTryTrackerClick} />
       <WhyDrinkWater />
     </div>

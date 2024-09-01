@@ -1,4 +1,4 @@
-.whyDrinkWater {
+.why_drink_water {
   margin-bottom: 40px;
   padding: 16px;
   border-radius: 10px;
@@ -46,7 +46,7 @@
 }
 
 @media (min-width: 768px) {
-  .whyDrinkWater {
+  .why_drink_water {
     width: 494px;
     padding: 32px 24px 32px 24px;
     margin-bottom: 0;
@@ -54,7 +54,7 @@
 }
 
 @media (min-width: 1024px) {
-  .whyDrinkWater {
+  .why_drink_water {
     margin-top: 50px;
   }
 }

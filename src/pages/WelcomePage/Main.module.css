@@ -1,4 +1,4 @@
-.welcomePage {
+.welcome_page {
   padding: 20px;
   background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile.png");
   background-size: cover;
@@ -8,14 +8,16 @@
 }
 @media only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
-  .welcomePage {
+  .welcome_page {
     background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile@2x.png");
   }
 }
 
 @media (min-width: 768px) {
-  .welcomePage {
-    padding: 32px;
+  .welcome_page {
+    padding: 104px 32px 32px 32px;
+
+    margin-top: -64px;
     background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab.png");
     background-size: cover;
     background-position: bottom;
@@ -23,13 +25,13 @@
   }
   @media only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
-    .welcomePage {
+    .welcome_page {
       background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab@2x.png");
     }
   }
 }
 @media (min-width: 1024px) {
-  .welcomePage {
+  .welcome_page {
     padding-top: 140px;
     margin-top: -60px;
     display: flex;
@@ -45,7 +47,7 @@
 
   @media only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
-    .welcomePage {
+    .welcome_page {
       background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page@2x.png"),
         url("../../assets/images/background-main-page/desktop/Background-element-Main-Page@2x.png");
     }
