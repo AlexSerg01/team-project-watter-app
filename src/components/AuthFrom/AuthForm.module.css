@@ -4,13 +4,15 @@
     flex-direction: column;
     gap: 16px;
     margin-top: 16px;
+    margin-bottom: 16px;
   }
 
   .auth_form label {
+    display: block;
     font-size: 18px;
     line-height: 24px;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .auth_form input {
@@ -58,6 +60,7 @@
   }
 
   .auth_form a {
+    display: block;
     color: var(--PRIMERY-BLUE);
     text-decoration: none;
     font-size: 16px;
@@ -86,7 +89,7 @@
     padding: 12px 10px;
     border: 1px solid var(--SECONDARY-GRAY);
     border-radius: 6px;
-    width: 336px;
+    width: 384px;
     box-sizing: border-box;
   }
 
@@ -131,9 +134,11 @@
   }
 
   .auth_form a {
+    display: block;
     color: var(--PRIMERY-BLUE);
     text-decoration: none;
     font-size: 16px;
     line-height: 20px;
+    margin-bottom: 16px;
   }
 }
