@@ -5,15 +5,16 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-
+import Layout from "./components/Layout/Layout";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage";
+
 // import Layout from "./components/Layout/Layout";
 // import HomePage from "./pages/HomePage/HomePage";
-// import Main from "./pages/WelcomePage/Main";
+import Main from "./pages/WelcomePage/Main";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-// import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
+import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 
 function App() {
   const PrivateRoute = ({ children }) => {
@@ -23,22 +24,27 @@ function App() {
   };
 
   return (
-    <Router>
-      <Routes>
-        {/* <Route path="/welcome" element={} /> */}
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/signin" element={<SigninPage />} />
-        <Route path="/home" element={<PrivateRoute>{<HomePage/>}</PrivateRoute>} />
-        {/* Redirect to home if user is authenticated */}
-        <Route path="/" element={<Navigate to="/home" />} />
-        {/* Add more routes as necessary */}
-        <Route path="/reset-password" element={<ForgotPasswordPage />} />
-        {/* <Route
-          path="/reset-password/:verificationToken"
-          element={<ResetPasswordPage />}
-        /> */}
-      </Routes>
-    </Router>
+    <Layout>
+      <Router>
+        <Routes>
+          <Route path="/welcome" element={<Main />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/signin" element={<SigninPage />} />
+          <Route
+            path="/home"
+            element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
+          />
+          {/* Redirect to home if user is authenticated */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          {/* Add more routes as necessary */}
+          <Route path="/reset-password" element={<ForgotPasswordPage />} />
+          <Route
+            path="/reset-password/:verificationToken"
+            element={<UpdatePasswordPage />}
+          />
+        </Routes>
+      </Router>
+    </Layout>
   );
 }
 

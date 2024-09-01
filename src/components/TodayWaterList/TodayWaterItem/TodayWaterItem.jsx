@@ -81,7 +81,7 @@ export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
                         <svg className={css.crossSvg} onClick={handleCloseDelete}>
                             <use href={`${icons}#icon-cross`}></use>
                         </svg>
-                        <div>
+                        <div className={css.deleteQuestion}>
                             <p className={css.deleteEntry}>Delete entry</p>
                             <p className={css.sure}>Are you sure you want to delete the entry?</p>
                         </div>
