@@ -28,7 +28,7 @@ const ForgotPasswordForm = () => {
     <Section className={css.sectionForm}>
       <Container className={css.resetPasswordContainer}>
         <div className={css.titleFormThumb}>
-          <h1 className={css.title}>Forgot your password?</h1>
+          <h2 className={css.title}>Forgot your password?</h2>
 
           <Formik
             initialValues={{
@@ -60,6 +60,9 @@ const ForgotPasswordForm = () => {
                 </div>
                 <Link to="/signin" className={css.redirektLink}>
                   Sign in
+                </Link>
+                <Link to="/signup" className={css.redirektLink}>
+                  Sign up
                 </Link>
               </Form>
             )}

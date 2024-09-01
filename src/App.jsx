@@ -39,7 +39,10 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           {/* Add more routes as necessary */}
           <Route path="/reset-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password1" element={<UpdatePasswordPage />} />
+          <Route
+            path="/reset-password/:token"
+            element={<UpdatePasswordPage />}
+          />
         </Routes>
       </Router>
     </Layout>

@@ -1,68 +1,85 @@
-@media (max-width: 767px) {
-  /* Основні стилі */
-  .signin_container {
+.sectionForm {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  height: calc(100vh - 65px);
+  background-image: image-set(
+    url(../../assets/images/background/Forfot_Update_Password/sign-in-out-mobile.png)
+      1x,
+    url(../../assets/images/background/Forfot_Update_Password/sign-in-out-mobile-2x.png)
+      2x
+  );
+}
+.titleFormThumb {
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.redirektLink {
+  margin-top: 16px;
+  font: weight 400px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--PRIMERY-BLUE);
+}
+.block_name {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23;
+}
+@media screen and (max-width: 767px) {
+  .resetPasswordContainer {
+    padding-top: 40px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 320px;
-    height: 100vh;
-    background-image: url("../../assets/images/background/mobile/Background-m-MainPage.png");
+    justify-content: center;
+  }
+  .titleFormThumb {
+    margin-top: 24px;
+  }
+}
+.resetPasswordContainer {
+  padding-top: 40px;
+}
+@media screen and (min-width: 768px) {
+  .sectionForm {
+    background-position: top center;
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center 20px;
-    margin: 0 auto;
-    position: relative; /* Додаємо для позиціонування елементів всередині */
+    background-image: image-set(
+      url(../../assets/images/background/Forfot_Update_Password/botle-sign-in-tablet.png)
+        1x,
+      url(../../assets/images/background/Forfot_Update_Password/botle-sign-in-tablet-2x.png)
+        2x
+    );
   }
-
-  .form_container {
-    max-width: 280px;
-    width: 100%;
+  .titleFormThumb {
+    width: 336px;
+    margin-left: 32px;
+    margin-top: 40px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .sectionForm {
+    background-position: bottom left;
+    background-image: image-set(
+      url(../../assets/images/background/Forfot_Update_Password/sign-in-out-desktop.png)
+        1x,
+      url(../../assets/images/background/Forfot_Update_Password/sign-in-out-desktop-2x.png)
+        2x
+    );
+  }
+  .resetPasswordContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    order: 1;
-    position: relative; /* Контейнер з формою тепер відносний */
-    z-index: 2; /* Піднімаємо форму над фоном */
+    justify-content: right;
+    padding-right: 216px;
+    padding-top: 162px;
   }
-
-  .block_name {
-    font-size: 26px;
-    font-weight: 500;
-    line-height: 32px;
-    width: 100%;
-  }
-
-  .image_container {
-    width: 280px;
-    height: 210px;
-    align-items: center;
-    overflow: hidden;
-    flex-shrink: 0;
-    order: 2;
-  }
-
-  .img {
-    margin-top: 66px;
-    margin-left: 20px;
-    width: 280px;
-    height: 210px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  /* Медіа-запит для мобільних пристроїв */
-  .signin_container {
-    width: 100%;
-  }
-
-  .form_container {
-    max-width: 280px;
-    margin: 0 auto;
-  }
-
-  .image_container {
-    width: 320px; /* Зменшений розмір для мобільних пристроїв */
-    height: auto;
+  .titleFormThumb {
+    margin-top: 162px;
+    margin-right: 216px;
+    width: 384px;
+    align-self: flex-end;
   }
 }
