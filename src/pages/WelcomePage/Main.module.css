@@ -1,15 +1,33 @@
 .welcomePage {
   padding: 20px;
-  background-image: url("/path/to/your/background-image.jpg"); /* Replace with your image path */
+  background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh; /* Ensure it covers the full height of the viewport */
 }
-
-@media (min-width: 768px) {
+@media only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .welcomePage {
+    background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile@2x.png");
+  }
 }
 
+@media (min-width: 768px) {
+  .welcomePage {
+    background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
+  @media only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    .welcomePage {
+      background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab@2x.png");
+    }
+  }
+}
 @media (min-width: 1024px) {
   .welcomePage {
     margin: 0, auto;
@@ -18,5 +36,18 @@
     align-items: center;
     gap: 60px;
     padding: 40px;
+    background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page.png"),
+      url("../../assets/images/background-main-page/desktop/Background-element-Main-Page.png");
+    background-size: 1440px, 1404px;
+    background-position: bottom, center;
+    background-repeat: no-repeat, no-repeat;
+  }
+
+  @media only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    .welcomePage {
+      background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page@2x.png"),
+        url("../../assets/images/background-main-page/desktop/Background-element-Main-Page@2x.png");
+    }
   }
 }
