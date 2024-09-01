@@ -2,7 +2,7 @@ import css from "./WhyDrinkWater.module.css";
 
 const WhyDrinkWater = () => {
   return (
-    <section className={css.whyDrinkWater}>
+    <section className={css.why_drink_water}>
       <h3 className={css.title}>Why drink water</h3>
       <ul className={css.list}>
         <li className={css.list_item}>
