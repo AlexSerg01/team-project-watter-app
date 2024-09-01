@@ -18,10 +18,15 @@
     height: 680px;
     background-color: #ECF2FF;
     padding: 32px 24px;
+    border-radius: 10px;
+}
+
+.daysWrapper {
+    position: relative;
+
 }
 
 .tableWrapper {
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -44,7 +49,7 @@
     display: flex;
     justify-content: space-between;
     align-items: normal;
-    width: 155px;
+    width: 150px;
     height: 20px
 }
 
@@ -55,7 +60,6 @@
 }
 
 .chevronBtn {
-    cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -66,13 +70,17 @@
 .chevronBtn:hover,
 .chevronBtn:focus {
     border: none;
+
 }
 
 .chevronBtnHidden {
     opacity: 0;
+    border: none;
+    padding: 0;
 }
 
 .dayItem {
+    position: relative;
     width: 34px;
     height: 34px;
     background-color: #ffffff;
@@ -103,8 +111,11 @@
 }
 
 .popUpWindow {
+    border-radius: 10px;
+    background-color: #ffffff;
     width: 292px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    position: absolute;
+    top: 80%;
+    left: 30%;
+    /* transform: translate(-80%, -30%); */
 }
