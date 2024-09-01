@@ -18,26 +18,22 @@ const WhyDrinkWater = () => {
           <div className={css.item_text}>Maintaining the work of the heart</div>
         </li>
         <li className={css.list_item}>
-          {" "}
           <div className={css.disc}></div>
           <div className={css.item_text}>Release of processed substances</div>
         </li>
         <li className={css.list_item}>
-          {" "}
           <div className={css.disc}></div>
           <div className={css.item_text}>
             Ensuring the stability of the internal environment
           </div>
         </li>
         <li className={css.list_item}>
-          {" "}
           <div className={css.disc}></div>
           <div className={css.item_text}>
             Maintaining within the normal temperature
           </div>
         </li>
         <li className={css.list_item}>
-          {" "}
           <div className={css.disc}></div>
           <div className={css.item_text}>
             Maintaining an immune system capable of resisting disease
