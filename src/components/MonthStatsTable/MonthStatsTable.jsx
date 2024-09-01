@@ -2,7 +2,7 @@ import { useState } from "react";
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
-import responseFromFile from "../../daily-water.json";
+// import responseFromFile from "../../daily-water.json";
 
 export default function MonthStatsTable() {
   const currentMonth = new Date().getMonth();
@@ -38,9 +38,9 @@ export default function MonthStatsTable() {
     ? formatCurrentDay(year, month, hoveredDay)
     : null;
 
-  const dayData = responseFromFile.find(
-    (data) => data.date === currentHoveredDate
-  );
+  // const dayData = responseFromFile.find(
+  //   (data) => data.date === currentHoveredDate
+  // );
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -81,14 +81,29 @@ export default function MonthStatsTable() {
     });
   };
 
-  const days = [];
-  for (let day = 1; day <= daysInMonth; day++) {
-    days.push(
+  // const days = [];
+  // for (let day = 1; day <= daysInMonth; day++) {
+  //   // const dayPercentage = datePer === day ? `${dayData.percent}%` : "0%";
+
+  //   days.push(
+  //     <div key={day} className={css.day}>
+  //       <span>{day}</span>
+  //       {/* <span>{dayPercentage}</span> */}
+  //     </div>
+  //   );
+  // }
+  // ========================
+  const days = Array.from({ length: daysInMonth }, (_, index) => {
+    const day = index + 1;
+    // const dayPercentage = datePer === day ? `${dayData.percent}%` : "0%";
+    return (
       <div key={day} className={css.day}>
-        {day}
+        <span>{day}</span>
       </div>
     );
-  }
+  });
+
+  // ========================
 
   const handleOpenDayInfo = (day) => {
     setHoveredDay(day);
@@ -140,16 +155,16 @@ export default function MonthStatsTable() {
             <li className={css.dayInCalendar} key={day.key}>
               <div
                 className={css.dayItem}
-                onMouseEnter={() => {
+                onClick={() => {
                   handleOpenDayInfo(day.key);
                 }}
                 onMouseLeave={handleCloseDayInfo}
               >
                 {day.key}
               </div>
-              <div className={css.percentDayItem}>
+              {/* <div className={css.percentDayItem}>
                 {dayData ? `${dayData.percent}%` : "0%"}
-              </div>
+              </div> */}
             </li>
           ))}
         </ul>
