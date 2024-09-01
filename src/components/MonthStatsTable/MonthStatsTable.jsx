@@ -116,7 +116,7 @@ export default function MonthStatsTable() {
               <use href={`${icons}#icon-chevron-left`}></use>
             </svg>
           </button>
-          <div>
+          <div className={css.monthName}>
             {monthsNames[month]}, {year}
           </div>
 
