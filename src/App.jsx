@@ -1,27 +1,27 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from 'react-router-dom'
-import Layout from './components/Layout/Layout'
-import SigninPage from './pages/SigninPage/SigninPage'
-import SignupPage from './pages/SignupPage/SignupPage'
-import HomePage from './pages/HomePage/HomePage'
+} from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import SigninPage from "./pages/SigninPage/SigninPage";
+import SignupPage from "./pages/SignupPage/SignupPage";
+import HomePage from "./pages/HomePage/HomePage";
 
 // import Layout from "./components/Layout/Layout";
 // import HomePage from "./pages/HomePage/HomePage";
-import Main from './pages/WelcomePage/Main'
-import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage'
-import UpdatePasswordPage from './pages/UpdatePasswordPage/UpdatePasswordPage'
+import Main from "./pages/WelcomePage/Main";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 
 function App() {
   const PrivateRoute = ({ children }) => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    return isAuthenticated ? children : <Navigate to="/signin" />
-  }
+    return isAuthenticated ? children : <Navigate to="/signin" />;
+  };
 
   return (
     <Layout>
@@ -38,11 +38,14 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           {/* Add more routes as necessary */}
           <Route path="/reset-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password1" element={<UpdatePasswordPage />} />
+          <Route
+            path="/reset-password/:token"
+            element={<UpdatePasswordPage />}
+          />
         </Routes>
       </Router>
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

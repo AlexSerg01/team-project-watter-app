@@ -1,0 +1,36 @@
+.dayStatus {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(64, 123, 255, 0.3);
+    padding: 24px 13px;
+}
+
+.dayStatusDate {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #407BFF;
+}
+
+.dayStatusItem {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.textColorAccent {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    color: #407BFF;
+}
+
+@media screen and (min-width: 768px) {
+    .dayStatus {
+        gap: 16px;
+        padding: 24px 16px;
+    }
+
+}
