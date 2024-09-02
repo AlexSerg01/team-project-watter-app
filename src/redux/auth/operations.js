@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_URL = "https://team-project-b-watter-app.onrender.com"; // add URL!!!!
+// const API_URL = "https://team-project-b-watter-app.onrender.com"; // add URL!!!!
+const API_URL = "http://localhost:14000";
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -10,6 +11,7 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axios.post(`${API_URL}/auth/register`, data);
       toast.success("Registration successful!");
+      axios.defaults.headers.common.Authorization = `Bearer ${response.data.data.accessToken}`;
       return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
@@ -26,6 +28,7 @@ export const loginUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/auth/login`, data);
+      axios.defaults.headers.common.Authorization = `Bearer ${response.data.data.accessToken}`;
       return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
