@@ -26,6 +26,9 @@ export const loginUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/auth/login`, data);
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.data.data.accessToken}`;
       return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
