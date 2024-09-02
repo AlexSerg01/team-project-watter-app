@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
-import responseFromFile from "../../daily-water.json";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWaterInfo } from "../../redux/waterInfo/waterOperations.js";
 
 export default function MonthStatsTable() {
   const currentMonth = new Date().getMonth();
@@ -28,21 +29,16 @@ export default function MonthStatsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredDay, setHoveredDay] = useState(null);
 
-  const formatCurrentDay = (year, month, day) => {
-    const formattedMonth = String(month + 1).padStart(2, "0");
-    const formattedDay = String(day).padStart(2, "0");
-    return `${formattedMonth}/${formattedDay}/${year}`;
-  };
+  const waterItems = useSelector((state) => state.waterInfo.items);
 
-  const currentHoveredDate = hoveredDay
-    ? formatCurrentDay(year, month, hoveredDay)
-    : null;
+  const dispatch = useDispatch();
 
-  const dayData = responseFromFile.find(
-    (data) => data.date === currentHoveredDate
-  );
-
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  useEffect(() => {
+    const currentDate = () => {
+      return { month, year };
+    };
+    dispatch(fetchWaterInfo(currentDate));
+  }, [dispatch, month, year]);
 
   const nextMonth = () => {
     setMonth((prevMonth) => {
@@ -81,15 +77,6 @@ export default function MonthStatsTable() {
     });
   };
 
-  const days = [];
-  for (let day = 1; day <= daysInMonth; day++) {
-    days.push(
-      <div key={day} className={css.day}>
-        {day}
-      </div>
-    );
-  }
-
   const handleOpenDayInfo = (day) => {
     setHoveredDay(day);
     setIsModalOpen(true);
@@ -99,12 +86,6 @@ export default function MonthStatsTable() {
     setIsModalOpen(false);
     setHoveredDay(null);
   };
-
-  const dateInWord = () => {
-    return `${hoveredDay}, ${monthsNames[month]}`;
-  };
-
-  const newDate = dateInWord();
 
   return (
     <div className={css.calendarWrapper}>
@@ -136,19 +117,23 @@ export default function MonthStatsTable() {
       </div>
       <div className={css.daysWrapper}>
         <ul className={css.calendar}>
-          {days.map((day) => (
-            <li className={css.dayInCalendar} key={day.key}>
+          {waterItems.map((item) => (
+            <li className={css.dayInCalendar} key={item.date}>
               <div
-                className={css.dayItem}
-                onMouseEnter={() => {
-                  handleOpenDayInfo(day.key);
+                className={
+                  item.percentageConsumed !== "100%"
+                    ? css.dayAccentColor
+                    : css.dayItem
+                }
+                onClick={() => {
+                  handleOpenDayInfo(item.date);
                 }}
                 onMouseLeave={handleCloseDayInfo}
               >
-                {day.key}
+                {Number(item.date.split(",")[0])}
               </div>
               <div className={css.percentDayItem}>
-                {dayData ? `${dayData.percent}%` : "0%"}
+                {item.percentageConsumed}
               </div>
             </li>
           ))}
@@ -156,7 +141,7 @@ export default function MonthStatsTable() {
         {isModalOpen && hoveredDay && (
           <div className={css.tableWrapper}>
             <div className={css.popUpWindow}>
-              <DaysGeneralStats day={currentHoveredDate} dayInWord={newDate} />
+              <DaysGeneralStats day={hoveredDay} />
             </div>
           </div>
         )}
