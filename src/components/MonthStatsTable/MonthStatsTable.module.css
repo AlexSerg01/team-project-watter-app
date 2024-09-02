@@ -15,7 +15,6 @@
     flex-direction: column;
     gap: 20px;
     width: 592px;
-    height: 340px;
     background-color: #ECF2FF;
     padding: 16px 24px 32px 24px;
     border-bottom-left-radius: 10px;
@@ -24,14 +23,22 @@
 
 .daysWrapper {
     position: relative;
-
 }
 
-.tableWrapper {
+.dayAccentColor {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    background-color: #ffffff;
+    text-align: center;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #2f2f2f;
+    border: 1px solid #FF9D43;
 }
 
 .calendar {
@@ -81,7 +88,7 @@
 }
 
 .dayItem {
-    position: relative;
+    /* position: relative; */
     width: 34px;
     height: 34px;
     background-color: #ffffff;
@@ -123,7 +130,7 @@
     background-color: #ffffff;
     width: 292px;
     position: absolute;
-    top: 80%;
-    left: 30%;
-    /* transform: translate(-80%, -30%); */
+    top: -90%;
+    left: 0%;
+
 }

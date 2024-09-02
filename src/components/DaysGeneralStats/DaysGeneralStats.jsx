@@ -1,14 +1,16 @@
 import css from "./DaysGeneralStats.module.css";
-import responseFromFile from "../../daily-water.json";
+import { useSelector } from "react-redux";
 
-export default function DaysGeneralStats({ day, dayInWord }) {
-  const dayData = responseFromFile.find((data) => data.date === day);
+export default function DaysGeneralStats({ day }) {
+  const waterItems = useSelector((state) => state.waterInfo.items);
 
-  if (!dayData) {
+  const dayData = waterItems.find((data) => data.date === day);
+
+  if (!waterItems) {
     return (
       <div className={css.dayStatusWrapper}>
         <ul className={css.dayStatus}>
-          <li className={css.dayStatusDate}>{dayInWord}</li>
+          <li className={css.dayStatusDate}>{day}</li>
           <li className={css.dayStatusItem}>
             Daily norma: <span className={css.textColorAccent}>1.5L</span>
           </li>
@@ -28,18 +30,20 @@ export default function DaysGeneralStats({ day, dayInWord }) {
   return (
     <div className={css.dayStatusWrapper}>
       <ul className={css.dayStatus}>
-        <li className={css.dayStatusDate}>{dayInWord}</li>
+        <li className={css.dayStatusDate}>{day}</li>
         <li className={css.dayStatusItem}>
           Daily norma:{" "}
-          <span className={css.textColorAccent}>{dayData.daily_norma}ml</span>
+          <span className={css.textColorAccent}>{dayData.dailyNorm}</span>
         </li>
         <li className={css.dayStatusItem}>
           Fulfillment of the daily norm:{" "}
-          <span className={css.textColorAccent}>{dayData.percent}%</span>
+          <span className={css.textColorAccent}>
+            {dayData.percentageConsumed}
+          </span>
         </li>
         <li className={css.dayStatusItem}>
           How many servings of water:{" "}
-          <span className={css.textColorAccent}>{dayData.quantity}</span>
+          <span className={css.textColorAccent}>{dayData.entries}</span>
         </li>
       </ul>
     </div>
