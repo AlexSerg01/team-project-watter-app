@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:14000";
+axios.defaults.baseURL = "https://team-project-b-watter-app.onrender.com";
 
 export const fetchWaterInfo = createAsyncThunk(
   "water/fetchInfo",
