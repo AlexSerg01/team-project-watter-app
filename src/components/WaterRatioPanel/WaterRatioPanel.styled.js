@@ -1,165 +1,129 @@
+import { theme } from "../../components/theme";
+
 import styled from "styled-components";
 
-export const StyledRangeInput = styled.input`
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  cursor: default;
-  outline: none;
-  border-radius: 15px;
-  margin-bottom: 16px;
-  margin-left: 9px;
-  margin-right: 13px;
-  display: block;
-  height: 8px;
-  background: var(--color-secondary-gray);
-  @media (min-width: 320px) {
-    width: 258px;
-  }
-  @media (min-width: 768px) {
-    width: 334px;
-  }
-  @media (min-width: 1440px) {
-    width: 360px;
-  }
-
-  /* Thumb: webkit */
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 14px;
-    width: 14px;
-    background-color: var(--color-primary-white);
-    border-radius: 50%;
-    border: 1px solid var(--color-primary-blue);
-  }
-
-  /* Thumb: Firefox */
-  &::-moz-range-thumb {
-    height: 14px;
-    width: 14px;
-    background-color: var(--color-primary-white);
-    border-radius: 50%;
-    border: 1px solid var(--color-primary-blue);
-  }
-`;
-
-export const RangeAndAddWater = styled.div`
+export const WaterWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: space-between;
-  margin-bottom: 40px;
-  @media (min-width: 768px) {
-    flex-wrap: nowrap;
-    gap: 24px;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: normal;
   }
-  @media (min-width: 1440px) {
-    gap: 28px;
-    margin-bottom: 0px;
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    top: 620px;
   }
 `;
 
-export const RangeDiv = styled.div`
-  width: 280px;
-  @media (min-width: 768px) {
+export const WaterPanel = styled.div`
+  position: relative;
+  text-align: center;
+  width: 100%;
+  @media screen and (min-width: 768px) {
     width: 356px;
   }
-  @media (min-width: 768px) {
+  @media screen and (min-width: 1440px) {
     width: 391px;
   }
 `;
 
-export const RangeTitle = styled.p`
+export const WaterLabel = styled.label`
+  display: block;
   font-size: 18px;
-  font-weight: 400;
-  line-height: 133%;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-bottom: 8px;
-  color: var(--color-primary-blue);
-  @media (min-width: 768px) {
-    margin-bottom: 16px;
-  }
+  line-height: 1.33;
+  color: ${theme.colors.blue};
+  margin-bottom: ${theme.spacing(4)};
+  text-align: start;
 `;
-export const PercentageOfRange = styled.div`
-  position: relative;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: var(--color-primary-blue);
-  left: 4px;
-  &::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    width: 1px;
-    height: 8px;
-    background-color: var(--color-secondary-gray);
-  }
-`;
-export const BoldPercentageOfRange = styled.p`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0em;
-`;
-export const PercentageDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-basis: auto;
-`;
-export const ButtonAddWater = styled.button`
-  width: 100%;
-  height: 36px;
+export const WaterRangeField = styled.input`
+  appearance: none;
+  outline: none;
+  width: 256px;
+  height: 8px;
+  margin-bottom: ${theme.spacing(6)};
+  margin-right: ${theme.spacing(4)};
+  background: ${theme.colors.skyblue};
   border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0em;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  background-color: var(--color-primary-blue);
-  color: var(--color-primary-white);
-  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
-  &:hover,
-  &:focus {
-    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+  overflow: hidden;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: ${theme.colors.white};
+    border-radius: 50%;
+    border: 1px solid ${theme.colors.blue};
+    cursor: pointer;
+    box-shadow: -410px 0 0 400px ${theme.colors.lightblue};
   }
+  @media screen and (min-width: 768px) {
+    width: 325px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 360px;
+  }
+`;
+export const BtnAddWater = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 6px 76px;
+  width: 280px;
+  background: ${theme.colors.blue};
+  color: ${theme.colors.white};
+  line-height: 1.25;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  border-radius: 10px;
+  border: none;
+  margin-top: ${theme.spacing(8)};
+  margin-bottom: ${theme.spacing(20)};
+  cursor: pointer;
+  transition: box-shadow ${theme.transition};
+
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+
   &:active {
     box-shadow: none;
   }
-  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98) 0s;
-  @media (min-width: 320px) {
-    width: 280px;
+
+  & svg {
+    margin-right: 10px;
   }
 
-  @media (min-width: 768px) {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 24px;
-    padding: 8px 90px 8px 90px;
+  @media screen and (min-width: 768px) {
     width: 336px;
-    height: 44px;
+    padding: 10px 104px;
+    font-size: 18px;
+    line-height: 1.33;
+    margin-bottom: ${theme.spacing(30.5)};
   }
-
-  @media (min-width: 1440px) {
-    width: 182px;
-    padding: 10px 29px 10px 29px;
+  @media screen and (min-width: 1440px) {
+    width: 178px;
+    padding: 10px 30px;
   }
 `;
-export const SvgButton = styled.svg`
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-  fill: transparent;
-  stroke: var(--color-primary-white);
+
+export const PercentageWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const PercentageValue = styled.span`
+  color: ${theme.colors.blue};
+  margin-top: ${theme.spacing(2)};
+  position: relative;
+  &:before {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 8px;
+    background-color: ${theme.colors.lightblue};
+    left: 50%;
+    top: -10px;
+  }
+  &:nth-child(2) {
+    margin-left: ${theme.spacing(3.5)};
+  }
 `;

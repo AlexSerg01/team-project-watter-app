@@ -1,82 +1,84 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import moment from "moment";
-
 import {
-  RangeAndAddWater,
-  RangeDiv,
-  RangeTitle,
-  StyledRangeInput,
-  PercentageDiv,
-  PercentageOfRange,
-  BoldPercentageOfRange,
-  ButtonAddWater,
-  SvgButton,
-} from "./WaterRatioPanel.styled";
-
+  BtnAddWater,
+  PercentageValue,
+  PercentageWrapper,
+  WaterLabel,
+  WaterPanel,
+  WaterRangeField,
+  WaterWrapper,
+} from "./WaterRatioPanel.styled.js";
+import { AddWaterForm } from "../../components/TodayWaterList/AddWaterListForm.jsx";
+import SpriteIcons from "../../assets/icons.svg";
 import {
-  todayConsumptionPercentageSelector,
-  // Цей селектор, ймовірно, витягує відсоток споживання води за сьогодні
-  viewingDateSelector,
-  // Цей селектор, ймовірно, витягує дату, яку користувач переглядає або яка впливає на відображення даних.
-} 
-// from "  ";
-
-import iconSprite from "images/icons.svg";
-import { useState, useEffect } from "react";
-import { WaterConsumptionAddModal } 
-// Аналогічно до попереднього селектора, цей витягує значення viewingDate. Це, можливо, дата, яку користувач переглядає або яка впливає на відображення даних.
-// from "";
+  selectWaterToday,
+  selectWaterRate,
+} from "../../redux/auth/selectors.js";
 
 export const WaterRatioPanel = () => {
-  const consumptionPercentage = useSelector(todayConsumptionPercentageSelector);
-  const viewingDate = useSelector(viewingDateSelector);
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
-  useEffect(() => {
-    const body = document.body;
-    let over_flow = "auto";
-    if (isOpen) {
-      over_flow = "hidden";
-    }
-    body.style.overflow = over_flow;
-  }, [isOpen]);
+  const waterTodayState = useSelector(selectWaterToday);
+  const waterRate = useSelector(selectWaterRate);
 
-  const sliderStyle = {
-    background: `linear-gradient(to right, #9EBBFF ${consumptionPercentage}%, #D7E3FF ${consumptionPercentage}%)`,
+  if (!waterTodayState || !waterRate) {
+    return <div>Loading...</div>;
+  }
+
+  const { dailyWaterList } = waterTodayState;
+  const totalWaterVolume = dailyWaterList.reduce(
+    (sum, entry) => sum + entry.waterVolume,
+    0
+  );
+
+  const handleRangeChange = (event) => {
+    // Реалізуйте логіку обробки зміни діапазону, якщо потрібно
   };
 
   return (
-    <RangeAndAddWater>
-      <RangeDiv>
-        <RangeTitle>
-          {viewingDate ? moment(viewingDate).format("LL") : "Today"}
-        </RangeTitle>
-        <StyledRangeInput
+    <WaterWrapper>
+      <WaterPanel>
+        <WaterLabel htmlFor="water-ratio">Today</WaterLabel>
+        <WaterRangeField
           type="range"
-          value={consumptionPercentage}
-          style={sliderStyle}
+          name="water-ratio"
+          id="water-ratio"
+          value={Math.round((totalWaterVolume / waterRate) * 100)}
           min="0"
           max="100"
-          readOnly={true}
+          onChange={handleRangeChange}
         />
-        <PercentageDiv>
-          <PercentageOfRange>0%</PercentageOfRange>
-          <PercentageOfRange>
-            <BoldPercentageOfRange>50%</BoldPercentageOfRange>
-          </PercentageOfRange>
-          <PercentageOfRange>100%</PercentageOfRange>
-        </PercentageDiv>
-      </RangeDiv>
-      <ButtonAddWater onClick={() => setIsOpen(true)}>
-        <SvgButton>
-          <use href={iconSprite + "#icon-plus-circle"} />
-        </SvgButton>
-        Add Water
-      </ButtonAddWater>
-      <WaterConsumptionAddModal
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
-      />
-    </RangeAndAddWater>
+        <PercentageWrapper>
+          <PercentageValue className="water-range-value-min">
+            0%
+          </PercentageValue>
+          <PercentageValue className="water-range-value">50%</PercentageValue>
+          <PercentageValue className="water-range-value-max">
+            100%
+          </PercentageValue>
+        </PercentageWrapper>
+      </WaterPanel>
+      <BtnAddWater type="button" onClick={openModal}>
+        <svg width="24" height="24" stroke="#fff" fill="none">
+          <use xlinkHref={`${SpriteIcons}#icon-plus-circle`} />
+        </svg>
+        <span>Add water</span>
+      </BtnAddWater>
+      {modalIsOpen && (
+        <AddWaterForm
+          onClose={closeModal} // Переконайтеся, що onClose передається правильно
+          initialAmount={0} // Або інше значення, яке потрібно
+          initialDate={new Date()} // Або інше значення, яке потрібно
+          updateWaterData={(amount, date) => {
+            // Реалізуйте функцію оновлення даних про воду тут
+            console.log("Amount:", amount);
+            console.log("Date:", date);
+          }}
+        />
+      )}
+    </WaterWrapper>
   );
 };
