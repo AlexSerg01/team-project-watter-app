@@ -7,6 +7,7 @@ import { updatePasswordSelector } from '../../redux/auth/selectors'
 import { updatePassword } from '../../redux/auth/operations'
 import { Section } from '../Section/Section.jsx'
 import { Container } from '../Container/Container.jsx'
+import { Icon } from '../Icon/Icon.jsx'
 import { UpdatePasswordSchema } from '../utils/UpdatePasswordSchema.js'
 
 import css from './UpadatePasswordForm.module.css'

@@ -39,7 +39,7 @@ function App() {
           {/* Add more routes as necessary */}
           <Route path="/reset-password" element={<ForgotPasswordPage />} />
           <Route
-            path="/reset-password/:verificationToken"
+            path="/reset-password/:token"
             element={<UpdatePasswordPage />}
           />
         </Routes>

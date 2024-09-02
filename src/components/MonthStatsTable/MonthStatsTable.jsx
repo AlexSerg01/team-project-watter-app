@@ -1,11 +1,9 @@
-import { useState } from "react";
-// import axios from "axios";
-
+import { useState, useEffect } from "react";
 import icons from "../../assets/icons.svg";
 import css from "./MonthStatsTable.module.css";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
-
-import responseFromFile from "../../daily-water.json";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWaterInfo } from "../../redux/waterInfo/waterOperations.js";
 
 export default function MonthStatsTable() {
   const currentMonth = new Date().getMonth();
@@ -29,10 +27,20 @@ export default function MonthStatsTable() {
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const modalRef = useRef(null);
+  const [hoveredDay, setHoveredDay] = useState(null);
+
   console.log(isModalOpen);
 
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const waterItems = useSelector((state) => state.waterInfo.items);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const currentDate = () => {
+      return { month, year };
+    };
+    dispatch(fetchWaterInfo(currentDate));
+  }, [dispatch, month, year]);
 
   const nextMonth = () => {
     setMonth((prevMonth) => {
@@ -71,42 +79,19 @@ export default function MonthStatsTable() {
     });
   };
 
-  const days = [];
-  for (let day = 1; day <= daysInMonth; day++) {
-    days.push(
-      <div key={day} className={css.day}>
-        {day}
-      </div>
-    );
-  }
-
   const handleOpenDayInfo = (day) => {
+    setHoveredDay(day);
     setIsModalOpen(true);
-    console.log(`hover on day, ${day}`);
   };
 
   const handleCloseDayInfo = () => {
     setIsModalOpen(false);
+
+    setHoveredDay(null);
   };
 
-  // const handleClickOutside = () => {
-  //   {
-  //     handleCloseDayInfo();
-  //   }
-  // };
-
-  // const handleEscKeyPress = (event) => {
-  //   if (event.key === "Escape") {
-  //     handleCloseDayInfo();
-  //   }
-  // };
-
   return (
-    <div
-      className={css.calendarWrapper}
-      // onKeyDown={handleEscKeyPress}
-      // tabIndex="0"
-    >
+    <div className={css.calendarWrapper}>
       <div className={css.monthHeader}>
         <p className={css.monthTitle}>Month</p>
         <div className={css.calendarNavi}>
@@ -115,7 +100,7 @@ export default function MonthStatsTable() {
               <use href={`${icons}#icon-chevron-left`}></use>
             </svg>
           </button>
-          <div>
+          <div className={css.monthName}>
             {monthsNames[month]}, {year}
           </div>
 
@@ -133,28 +118,37 @@ export default function MonthStatsTable() {
           </button>
         </div>
       </div>
-      <ul className={css.calendar}>
-        {days.map((day) => (
-          <li
-            className={css.dayInCalendar}
-            key={day.key}
-            onMouseEnter={() => {
-              handleOpenDayInfo(day.key);
-            }}
-            onMouseLeave={handleCloseDayInfo}
-          >
-            <div className={css.dayItem}>{day.key}</div>
-            <div className={css.percentDayItem}>
-              {responseFromFile[0].percent}%
+      <div className={css.daysWrapper}>
+        <ul className={css.calendar}>
+          {waterItems.map((item) => (
+            <li className={css.dayInCalendar} key={item.date}>
+              <div
+                className={
+                  item.percentageConsumed !== "100%"
+                    ? css.dayItemAccentColor
+                    : css.dayItem
+                }
+                onClick={() => {
+                  handleOpenDayInfo(item.date);
+                }}
+                onMouseLeave={handleCloseDayInfo}
+              >
+                {Number(item.date.split(",")[0])}
+              </div>
+              <div className={css.percentDayItem}>
+                {item.percentageConsumed}
+              </div>
+            </li>
+          ))}
+        </ul>
+        {isModalOpen && hoveredDay && (
+          <div className={css.tableWrapper}>
+            <div className={css.popUpWindow}>
+              <DaysGeneralStats day={hoveredDay} />
             </div>
-          </li>
-        ))}
-      </ul>
-      {isModalOpen && (
-        <div className={css.popUpWindow}>
-          <DaysGeneralStats />
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

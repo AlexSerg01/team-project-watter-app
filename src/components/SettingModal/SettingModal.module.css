@@ -1,0 +1,245 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modalContent {
+  max-width: 320px;
+  font-family: Roboto;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  margin: 44px 20px auto 20px;
+  padding: 32px 12px;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.photoUpload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.photoUpload img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.photoUpload button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgb(64, 123, 255);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.photoUpload button svg {
+  margin-right: 8px;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 24px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.radioGroup input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-bottom: auto;
+  padding: 0;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(64, 123, 255);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+
+.radioGroup input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: rgb(64, 123, 255);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid rgb(215, 227, 255);
+}
+
+.passwordName {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.passwordGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordGroup input {
+  margin-top: 8px;
+  flex-grow: 1;
+}
+
+.passwordGroup svg {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+}
+
+.togglePassword {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.togglePassword svg {
+  width: 24px;
+  height: 24px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 8px 30px;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  background: rgb(64, 123, 255);
+}
+
+button[type="submit"]:hover {
+  background-color: rgb(64, 123, 255);
+  box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+}
+
+.errorInput {
+  border-color: rgb(239, 80, 80);
+  outline: none;
+}
+
+.errorMessage {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(239, 80, 80);
+}
+
+@media screen and (min-width: 768px) {
+  .modalContent {
+    max-width: 740px;
+    padding: 32px 24px;
+    margin: 44px 20px auto 20px;
+  }
+
+  .formGroup {
+    margin-right: 264px;
+  }
+
+  button[type="submit"] {
+    width: 160px;
+    height: 44px;
+    margin-left: 530px;
+    padding: 10px 30px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .modalContent {
+    max-width: 1008px;
+    margin: 104px 216px auto 216px;
+    padding: 32px 24px;
+  }
+
+  .formGroup {
+    /* margin-bottom: 40px; */
+  }
+}
