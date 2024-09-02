@@ -1,5 +1,4 @@
-.welcome_page {
-  padding: 20px;
+.welcome_page_backgr {
   background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile.png");
   background-size: cover;
   background-position: center;
@@ -8,14 +7,17 @@
 }
 @media only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
-  .welcome_page {
+  .welcome_page_backgr {
     background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile@2x.png");
   }
 }
 
+.welcome_page_components {
+  padding: 20px;
+}
+
 @media (min-width: 768px) {
-  .welcome_page {
-    padding: 50px 32px 32px 32px;
+  .welcome_page_backgr {
     background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab.png");
     background-size: cover;
     background-position: bottom;
@@ -23,19 +25,17 @@
   }
   @media only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
-    .welcome_page {
+    .welcome_page_backgr {
       background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab@2x.png");
     }
   }
+
+  .welcome_page_components {
+    padding: 40px 32px 32px 32px;
+  }
 }
 @media (min-width: 1024px) {
-  .welcome_page {
-    padding-top: 140px;
-    margin-top: -60px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 60px;
+  .welcome_page_backgr {
     background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page.png"),
       url("../../assets/images/background-main-page/desktop/Background-element-Main-Page.png");
     background-size: contain, contain;
@@ -45,9 +45,17 @@
 
   @media only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
-    .welcome_page {
+    .welcome_page_backgr {
       background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page@2x.png"),
         url("../../assets/images/background-main-page/desktop/Background-element-Main-Page@2x.png");
     }
+  }
+  .welcome_page_components {
+    padding-top: 140px;
+    margin-top: -60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
   }
 }
