@@ -38,10 +38,11 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  margin-right: 8px;
+  padding-right: 8px;
 }
 
 .item_text {
-  margin-left: 8px;
   font-weight: 400;
 }
 

@@ -15,9 +15,7 @@
 
 @media (min-width: 768px) {
   .welcome_page {
-    padding: 104px 32px 32px 32px;
-
-    margin-top: -64px;
+    padding: 50px 32px 32px 32px;
     background-image: url("../../assets/images/background-main-page/tablet/Background-Main-Page-Tab.png");
     background-size: cover;
     background-position: bottom;
