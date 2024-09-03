@@ -144,7 +144,7 @@
 @media (min-width: 768px) {
   .homeContainer {
     width: 764px;
-    height: 1280px;
+    /* height: 1280px; */
     margin-top: 24px;
     background-repeat: no-repeat;
     background-size: contain;
@@ -202,14 +202,12 @@
     margin: 0;
     top: 654px;
     left: 112px;
-    /* border: 1px solid #ecf2ff;
-    background-color: #fff;
-    border-radius: 10px; */
   }
 
   .tableWrapper {
     display: inline;
     width: 592px;
     margin-right: 112px;
+    box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3);
   }
 }

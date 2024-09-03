@@ -28,7 +28,7 @@ export const addWaterRecord = createAsyncThunk(
         }
       );
       console.log(response.data.data);
-      
+
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -39,7 +39,6 @@ export const addWaterRecord = createAsyncThunk(
     }
   }
 );
-
 
 export const deleteWaterRecord = createAsyncThunk(
   "water/deleteWaterRecord",
@@ -58,11 +57,49 @@ export const deleteWaterRecord = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-     
+
       console.log(response.data.data_id);
       console.log(state.water.waterRecords.length);
-      
-      return response.data._id;
+
+      return id;
+    } catch (error) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      } else {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+
+export const updateWaterRecord = createAsyncThunk(
+  "water/updateWaterRecord",
+  async ({ id, amount }, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const token = state.auth.user.accessToken;
+
+      if (!token) {
+        return thunkAPI.rejectWithValue("Token not found");
+      }
+
+      const response = await axios.patch(
+        `/water/${id}`,
+        {
+          amount: amount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data);
+
+      return response.data;
     } catch (error) {
       if (error.response) {
         return thunkAPI.rejectWithValue(error.response.data);

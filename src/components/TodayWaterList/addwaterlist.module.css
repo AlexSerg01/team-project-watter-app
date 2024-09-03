@@ -1,7 +1,6 @@
 .section {
     padding: 32px 24px;
     width: 592px;
-    height: 580px;
     border-radius: 10px;
     position: relative;
     display: flex;
@@ -242,17 +241,19 @@ input {
 .listContainer {
     box-sizing: border-box;
     overflow-y: auto;
+    
 }
 
 .hightRegulator {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    height: 212px;
 }
 
 .tableWrapper {
     width: 592px;
-    height: 680px;
+    /* height: 680px; */
     padding: 32px 24px;
     border-radius: 10px;
     display: flex;

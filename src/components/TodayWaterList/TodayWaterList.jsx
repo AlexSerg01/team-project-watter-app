@@ -1,25 +1,26 @@
-import { nanoid } from "nanoid";
 import { useState, useEffect } from "react";
 import { TodayWaterItem } from "./TodayWaterItem/TodayWaterItem";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addWaterRecord, deleteWaterRecord } from "../../redux/water/waterOperations";
+import { addWaterRecord, deleteWaterRecord, updateWaterRecord } from "../../redux/water/waterOperations";
 import { selectWaterRecords } from "../../redux/water/waterSelectors";
+import { EditWaterForm } from "./AddWaterListForm";
 
 export const TodayWaterList = () => {
   const dispatch = useDispatch();
 
   const waterRecords = useSelector(selectWaterRecords);
   const [waterItems, setWaterItems] = useState(waterRecords);
+  const [editingRecord, setEditingRecord] = useState(null);
 
-   useEffect(() => {
+  useEffect(() => {
     setWaterItems(waterRecords);
   }, [waterRecords]);
 
   const handleAddWater = () => {
     const newWaterItem = {
-      amount: 250, 
+      amount: 250,
     };
 
     dispatch(addWaterRecord(newWaterItem))
@@ -41,9 +42,18 @@ export const TodayWaterList = () => {
       .catch((error) => {
         console.error("Failed to delete water record:", error);
       });
-    
   };
 
+  const handleUpdate = (id, amount, date) => {
+    dispatch(updateWaterRecord({ id, amount, date }))
+      .unwrap()
+      .then(() => {
+        console.log("Water record updated:", id);
+      })
+      .catch((error) => {
+        console.error("Failed to update water record:", error);
+      });
+  };
 
   return (
     <div className={css.tableWrapper}>
@@ -56,8 +66,9 @@ export const TodayWaterList = () => {
                 <li key={elem.data._id}>
                   <TodayWaterItem
                     initialAmount={elem.data.amount}
-                    initialDate={new Date()}
-                    onDelete={() => handleDelete(elem._id)}
+                    initialDate={new Date(elem.data.date)}
+                    onDelete={() => handleDelete(elem.data._id)}
+                    onEdit={() => setEditingRecord(elem.data)}
                   />
                 </li>
               ))}
@@ -71,6 +82,14 @@ export const TodayWaterList = () => {
           </div>
         </div>
       </div>
+      {editingRecord && (
+        <EditWaterForm
+          onClose={() => setEditingRecord(null)}
+          initialAmount={editingRecord.amount}
+          initialDate={new Date(editingRecord.date)}
+          updateWaterData={(amount, date) => handleUpdate(editingRecord._id, amount, date)}
+        />
+      )}
     </div>
   );
 };
