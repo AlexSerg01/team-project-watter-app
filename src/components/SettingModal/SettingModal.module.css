@@ -146,7 +146,7 @@
 }
 
 .modalContent input::placeholder {
-  color: rgb(158, 187, 255); /* Замените на нужный цвет */
+  color: rgb(158, 187, 255);
 }
 
 .inputGroup {
@@ -285,20 +285,17 @@
   }
 
   .formDesktop {
-    display: flex; /* Добавляем флекс-контейнер */
-    /* justify-content: space-between; Разделяем блоки по сторонам */
-    align-items: flex-start; /* Выравниваем блоки по началу (вверх) */
+    display: flex;
+    align-items: flex-start;
   }
 
   .leftColumn {
-    /* flex: 1; Занимаем все доступное пространство влево */
-    max-width: 45%; /* Максимальная ширина левой колонки */
-    margin-right: 2%; /* Добавляем небольшое расстояние справа */
+    max-width: 45%;
+    margin-right: 2%;
   }
 
   .rightColumn {
-    /* flex: 1; Занимаем все доступное пространство вправо */
-    max-width: 45%; /* Максимальная ширина правой колонки */
+    max-width: 45%;
   }
 
   .modalContent button[type="submit"] {
