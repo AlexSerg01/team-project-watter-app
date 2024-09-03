@@ -20,8 +20,7 @@ export const DropDownMenu = () => {
   const userAvatar = avatar;
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
   const menuRef = useRef(null);
 
@@ -45,50 +44,49 @@ export const DropDownMenu = () => {
   }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
-
-    
-    if (action === "setting") {
-      setIsSettingModalOpen(true);
-    } else if (action === "logout") {
-      // Додати логіку для вихіда из аккаунта
-    }
-    console.log(action);
+    setActiveModal(action);
     setIsOpen(false);
   };
 
+  const handleModalClose = () => {
+    setActiveModal(null);
+  };
+
   return (
-    <DropDownContainer ref={menuRef}>
-      <DropDownBtn onClick={toggleMenu}>
-        <UserName>{userName}</UserName>
-        <UserAvatar
-          src={userAvatar}
-          alt="User`s Avatar"
-          width="28"
-          height="28"
-        ></UserAvatar>
-        <ChevronIcon>
-          <use href={`${icons}#icon-chevron-down`} />
-        </ChevronIcon>
-      </DropDownBtn>
-      {isOpen && (
-        <Menu>
-          <MenuItem onClick={() => handleMenuItemClick("setting")}>
-            <svg width="16" height="16">
-              <use href={`${icons}#icon-setting`} />
-            </svg>
-            Setting
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick("logout")}>
-            <svg width="16" height="16">
-              <use href={`${icons}#icon-logout`} />
-            </svg>
-            Log out
-          </MenuItem>
-        </Menu>
-      )}
-      <SettingModal
-        isOpen={isSettingModalOpen}
-        onClose={() => setIsSettingModalOpen(false)}
+    <>
+      <DropDownContainer ref={menuRef}>
+        <DropDownBtn onClick={toggleMenu}>
+          <UserName>{userName}</UserName>
+          <UserAvatar
+            src={userAvatar}
+            alt="User`s Avatar"
+            width="28"
+            height="28"
+          ></UserAvatar>
+          <ChevronIcon>
+            <use href={`${icons}#icon-chevron-down`} />
+          </ChevronIcon>
+        </DropDownBtn>
+        {isOpen && (
+          <Menu>
+            <MenuItem onClick={() => handleMenuItemClick("setting")}>
+              <svg width="16" height="16">
+                <use href={`${icons}#icon-setting`} />
+              </svg>
+              Setting
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("logout")}>
+              <svg width="16" height="16">
+                <use href={`${icons}#icon-logout`} />
+              </svg>
+              Log out
+            </MenuItem>
+          </Menu>
+        )}
+      </DropDownContainer>
+      {activeModal === "setting" && <SettingModal
+        isOpen={true}
+        onClose={handleModalClose}
         userData={{
           photo: userAvatar,
           name: userName,
@@ -96,7 +94,8 @@ export const DropDownMenu = () => {
           gender: "male",
         }}
         onSave={(data) => console.log("Saved data:", data)}
-      />
-    </DropDownContainer>
+         />}
+      {activeModal === "logout" && <UserLogoutModal isOpen={true} onClose={handleModalClose} />}
+    </>
   );
 };
