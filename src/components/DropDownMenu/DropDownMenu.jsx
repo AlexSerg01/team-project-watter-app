@@ -1,29 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import avatar from "../../assets/images/avatar.png";
-import { 
+import {
   DropDownContainer,
-  DropDownBtn, 
-  UserName, 
-  UserAvatar, 
-  ChevronIcon, 
-  Menu, 
-  MenuItem} from "./DropDownMenu.styled";
+  DropDownBtn,
+  UserName,
+  UserAvatar,
+  ChevronIcon,
+  Menu,
+  MenuItem,
+} from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
+import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
-// import { SettingModal } from "../SettingModal/SettingModal.jsx";
+
 
 export const DropDownMenu = () => {
   //все пов'язане з юзером замінити на данні з БД та видалити картинку для аватар
-  const userName = 'David';
-  const userAvatar = avatar; 
+  const userName = "David";
+  const userAvatar = avatar;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [activeModal, setActiveModal] = useState(null);
+
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+
   const menuRef = useRef(null);
 
-
   const toggleMenu = () => {
-    setIsOpen(prevState => !prevState);
+    setIsOpen((prevState) => !prevState);
   };
 
   const handleClickOutside = (event) => {
@@ -34,51 +37,66 @@ export const DropDownMenu = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
-    setActiveModal(action);
+
+    
+    if (action === "setting") {
+      setIsSettingModalOpen(true);
+    } else if (action === "logout") {
+      // Додати логіку для вихіда из аккаунта
+    }
+    console.log(action);
     setIsOpen(false);
   };
 
-  const handleModalClose = () => {
-    setActiveModal(null);
-  };
-
   return (
-    <>
-      <DropDownContainer ref={menuRef}>
-        <DropDownBtn onClick={toggleMenu}>
-          <UserName>{userName}</UserName>
-          <UserAvatar src={userAvatar} alt="User`s Avatar" width="28" height="28" ></UserAvatar>
-          <ChevronIcon>
-                  <use href={`${icons}#icon-chevron-down`} /> 
-          </ChevronIcon>
-        </DropDownBtn>
-        {isOpen && (
-          <Menu>
-            <MenuItem onClick={() => handleMenuItemClick('setting')}>
-              <svg width="16" height="16">
-                <use href={`${icons}#icon-setting`} />
-              </svg>
-              Setting
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick('logout')}>
-              <svg width="16" height="16">
-                <use href={`${icons}#icon-logout`} />
-              </svg>
-              Log out
-            </MenuItem>
-          </Menu>
-        )}
-      </DropDownContainer>
-      {/* {activeModal === "setting" && <SettingModal isOpen={true} onClose={handleModalClose} />} */}
-      {activeModal === "logout" && <UserLogoutModal isOpen={true} onClose={handleModalClose} />}
-    </>
-  )
+    <DropDownContainer ref={menuRef}>
+      <DropDownBtn onClick={toggleMenu}>
+        <UserName>{userName}</UserName>
+        <UserAvatar
+          src={userAvatar}
+          alt="User`s Avatar"
+          width="28"
+          height="28"
+        ></UserAvatar>
+        <ChevronIcon>
+          <use href={`${icons}#icon-chevron-down`} />
+        </ChevronIcon>
+      </DropDownBtn>
+      {isOpen && (
+        <Menu>
+          <MenuItem onClick={() => handleMenuItemClick("setting")}>
+            <svg width="16" height="16">
+              <use href={`${icons}#icon-setting`} />
+            </svg>
+            Setting
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("logout")}>
+            <svg width="16" height="16">
+              <use href={`${icons}#icon-logout`} />
+            </svg>
+            Log out
+          </MenuItem>
+        </Menu>
+      )}
+      <SettingModal
+        isOpen={isSettingModalOpen}
+        onClose={() => setIsSettingModalOpen(false)}
+        userData={{
+          photo: userAvatar,
+          name: userName,
+          email: "david401@gmail.com",
+          gender: "male",
+        }}
+        onSave={(data) => console.log("Saved data:", data)}
+      />
+    </DropDownContainer>
+  );
 };

@@ -17,7 +17,7 @@
   font-family: Roboto;
   border-radius: 10px;
   background: rgb(255, 255, 255);
-  margin: 44px 20px auto 20px;
+  margin-top: 44px;
   padding: 32px 12px;
   overflow-y: auto;
 }
@@ -38,10 +38,11 @@ h2 {
 .closeBtn {
   background: none;
   border: none;
+  outline: none;
   cursor: pointer;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,18 +65,26 @@ h2 {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
-.photoUpload button {
+.uploadIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.uploadButton {
   background: none;
   border: none;
+  outline: none;
   padding: 0;
   color: rgb(64, 123, 255);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
+  gap: 10px;
   align-items: center;
 }
 
@@ -98,6 +107,7 @@ h2 {
   align-items: center;
   gap: 7px;
   margin-top: 12px;
+  margin-bottom: 24px;
   font-size: 16px;
   font-weight: 400;
 }
@@ -130,18 +140,26 @@ h2 {
   transform: translate(-50%, -50%);
 }
 
-.inputGroup {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
+.input {
   border-radius: 6px;
   border: 1px solid rgb(215, 227, 255);
 }
 
+input::placeholder {
+  color: rgb(158, 187, 255); /* Замените на нужный цвет */
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 256px;
+  height: 44px;
+  margin-top: 8px;
+}
+
 .passwordName {
   margin-top: 12px;
-  margin-bottom: 8px;
   font-size: 16px;
   font-weight: 400;
 }
@@ -150,6 +168,7 @@ h2 {
   position: relative;
   display: flex;
   align-items: center;
+  max-width: 256px;
 }
 
 .passwordGroup input {
@@ -159,7 +178,9 @@ h2 {
 
 .passwordGroup svg {
   position: absolute;
-  right: 12px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) translateY(5px);
   cursor: pointer;
 }
 
@@ -185,6 +206,7 @@ button[type="submit"] {
   padding: 8px 30px;
   color: rgb(255, 255, 255);
   border: none;
+  outline: none;
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
@@ -219,8 +241,12 @@ button[type="submit"]:hover {
     margin: 44px 20px auto 20px;
   }
 
-  .formGroup {
-    margin-right: 264px;
+  .inputGroup {
+    max-width: 392px;
+  }
+
+  .passwordGroup {
+    max-width: 392px;
   }
 
   button[type="submit"] {
@@ -235,11 +261,47 @@ button[type="submit"]:hover {
 @media screen and (min-width: 1280px) {
   .modalContent {
     max-width: 1008px;
-    margin: 104px 216px auto 216px;
+    margin-top: 104px;
     padding: 32px 24px;
   }
 
   .formGroup {
-    /* margin-bottom: 40px; */
+    margin-right: 12px;
+    margin-bottom: 23px;
+  }
+
+  .radioGroup {
+    margin-bottom: 24px;
+  }
+
+  .radioGroup label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .formDesktop {
+    display: flex; /* Добавляем флекс-контейнер */
+    /* justify-content: space-between; Разделяем блоки по сторонам */
+    align-items: flex-start; /* Выравниваем блоки по началу (вверх) */
+  }
+
+  .leftColumn {
+    /* flex: 1; Занимаем все доступное пространство влево */
+    max-width: 45%; /* Максимальная ширина левой колонки */
+    margin-right: 2%; /* Добавляем небольшое расстояние справа */
+  }
+
+  .rightColumn {
+    /* flex: 1; Занимаем все доступное пространство вправо */
+    max-width: 45%; /* Максимальная ширина правой колонки */
+  }
+
+  button[type="submit"] {
+    margin-left: 800px;
   }
 }
