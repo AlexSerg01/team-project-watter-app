@@ -11,6 +11,8 @@ import {
 } from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
+import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
+
 
 export const DropDownMenu = () => {
   //все пов'язане з юзером замінити на данні з БД та видалити картинку для аватар
@@ -18,7 +20,9 @@ export const DropDownMenu = () => {
   const userAvatar = avatar;
 
   const [isOpen, setIsOpen] = useState(false);
+
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+
   const menuRef = useRef(null);
 
   const toggleMenu = () => {
@@ -41,6 +45,8 @@ export const DropDownMenu = () => {
   }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
+
+    
     if (action === "setting") {
       setIsSettingModalOpen(true);
     } else if (action === "logout") {
