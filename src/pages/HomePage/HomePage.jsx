@@ -5,13 +5,14 @@ import { TodayWaterList } from "../../components/TodayWaterList/TodayWaterList";
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 
 import css from "./HomePage.module.css";
+import MyDailyNorma from "../../components/MyDailyNorma/MyDailyNorma";
 
 const HomePage = () => {
   return (
     <div className={css.homeMain}>
       <div>{/* <Header /> */}</div>
       <div className={css.homeContainer}>
-        <div className={css.dailyBox}>{/* <DailyNorma /> */}</div>
+        <MyDailyNorma/>
         <div className={css.homeBotle}></div>
         <div className={css.waterRatioPanel}>{/* <WaterRatioPanel /> */}</div>
         <div className={css.tableWrapper}>
