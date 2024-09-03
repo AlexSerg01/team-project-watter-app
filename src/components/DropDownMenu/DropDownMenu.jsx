@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import avatar from "../../assets/images/avatar.png";
+import { useSelector } from "react-redux";
 import {
   DropDownContainer,
   DropDownBtn,
@@ -12,18 +12,33 @@ import {
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
+import { getUserInfo } from "../../fetch/fetch.js";
 
 
 export const DropDownMenu = () => {
-  //все пов'язане з юзером замінити на данні з БД та видалити картинку для аватар
-  const userName = "David";
-  const userAvatar = avatar;
-
   const [isOpen, setIsOpen] = useState(false);
+  const [userData, setUserData] = useState({});
   const [activeModal, setActiveModal] = useState(null);
-
   const menuRef = useRef(null);
+  const token = useSelector((state) => state.auth.user.accessToken);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (!token) return;
+        const response = await getUserInfo(token);
+        setUserData(response.data.data);
+      } catch (error) {
+        console.error("error1", error);
+      }
+    };
+
+    fetchUserData();
+  }, [token]);
+
+  const userName = userData.name || ""
+  const userEmail = userData.email || ""
+  
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -56,9 +71,9 @@ export const DropDownMenu = () => {
     <>
       <DropDownContainer ref={menuRef}>
         <DropDownBtn onClick={toggleMenu}>
-          <UserName>{userName}</UserName>
+          <UserName>{userName || "User"}</UserName>
           <UserAvatar
-            src={userAvatar}
+            src={userData.photo || "/path/to/default-avatar.png"}
             alt="User`s Avatar"
             width="28"
             height="28"
@@ -88,10 +103,10 @@ export const DropDownMenu = () => {
         isOpen={true}
         onClose={handleModalClose}
         userData={{
-          photo: userAvatar,
+          photo: "userAvatar",
           name: userName,
-          email: "david401@gmail.com",
-          gender: "male",
+          email: userEmail,
+          gender: userData.gender || "male",
         }}
         onSave={(data) => console.log("Saved data:", data)}
          />}

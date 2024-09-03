@@ -10,7 +10,6 @@ import icons from "../../assets/icons.svg";
 import { useSelector } from "react-redux";
 
 export const Header = () => {
-  // замінити isLogedin на данні з БД по юзеру
   const isLogedin = useSelector((state) => state.auth.isAuthenticated);
 
   return (
