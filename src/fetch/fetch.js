@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "https://team-project-b-watter-app.onrender.com";
 
 export function setAuthHeader(token) {
-  axios.defaults.headers.common.Authorization = token;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 export async function registerFetch(data) {
