@@ -57,8 +57,11 @@ export const ModalCloseBtn = styled.button`
   border: none;
   cursor: pointer;
 
-  &:focus {
+  &:focus,
+  &:hover,
+  &:active {
     outline: none;
+    border: none;
   }
 `;
 
@@ -100,6 +103,13 @@ export const StyledButton = styled.button`
     width: 160px;
     height: 44px;
     padding: 10px 30px;
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+    border: none;
   }
 
   &.logout-button {

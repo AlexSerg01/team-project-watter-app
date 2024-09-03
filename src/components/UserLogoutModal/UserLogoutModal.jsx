@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/auth/operations.js";
 import { 
   ModalBackdrop, 
   ModalContent, 
@@ -12,6 +14,19 @@ import {
 import icons from "../../assets/icons.svg"
 
 export const UserLogoutModal = ({isOpen, onClose}) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+      .unwrap()
+      .then(() => {
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+  };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -49,7 +64,7 @@ export const UserLogoutModal = ({isOpen, onClose}) => {
         </ModalHeader>
         <ModalText>Do you really want to leave?</ModalText>
         <ContainerLogoutBtn>
-            <StyledButton className="logout-button">Log out</StyledButton>
+            <StyledButton className="logout-button" onClick={handleLogout}>Log out</StyledButton>
             <StyledButton className="cancel-button" onClick={onClose}>Cancel</StyledButton>
         </ContainerLogoutBtn>
       </ModalContent>
