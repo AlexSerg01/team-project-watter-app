@@ -81,3 +81,19 @@ export const updatePassword = createAsyncThunk(
     }
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.post(`${API_URL}/auth/logout`);
+      toast.info("You have been logged out.");
+      return response.data;
+    } catch (error) {
+      const message =
+        error.response?.data?.message || "Logout failed. Please try again.";
+      toast.error(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);

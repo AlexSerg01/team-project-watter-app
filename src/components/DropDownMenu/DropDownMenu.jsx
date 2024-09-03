@@ -1,7 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import avatar from "../../assets/images/avatar.png";
-import { DropDownContainer, DropDownBtn, UserName, UserAvatar, ChevronIcon, Menu, MenuItem} from "./DropDownMenu.styled";
+import { 
+  DropDownContainer,
+  DropDownBtn, 
+  UserName, 
+  UserAvatar, 
+  ChevronIcon, 
+  Menu, 
+  MenuItem} from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
+import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
+// import { SettingModal } from "../SettingModal/SettingModal.jsx";
 
 export const DropDownMenu = () => {
   //все пов'язане з юзером замінити на данні з БД та видалити картинку для аватар
@@ -9,6 +18,7 @@ export const DropDownMenu = () => {
   const userAvatar = avatar; 
 
   const [isOpen, setIsOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
   const menuRef = useRef(null);
 
 
@@ -32,35 +42,43 @@ export const DropDownMenu = () => {
   }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
-    console.log(action);
+    setActiveModal(action);
     setIsOpen(false);
-  }
+  };
+
+  const handleModalClose = () => {
+    setActiveModal(null);
+  };
 
   return (
-    <DropDownContainer ref={menuRef}>
-      <DropDownBtn onClick={toggleMenu}>
-        <UserName>{userName}</UserName>
-        <UserAvatar src={userAvatar} alt="User`s Avatar" width="28" height="28" ></UserAvatar>
-        <ChevronIcon>
-                <use href={`${icons}#icon-chevron-down`} /> 
-        </ChevronIcon>
-      </DropDownBtn>
-      {isOpen && (
-        <Menu>
-          <MenuItem onClick={() => handleMenuItemClick('setting')}>
-            <svg width="16" height="16">
-              <use href={`${icons}#icon-setting`} />
-            </svg>
-            Setting
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick('logout')}>
-            <svg width="16" height="16">
-              <use href={`${icons}#icon-logout`} />
-            </svg>
-            Log out
-          </MenuItem>
-        </Menu>
-      )}
-    </DropDownContainer>
+    <>
+      <DropDownContainer ref={menuRef}>
+        <DropDownBtn onClick={toggleMenu}>
+          <UserName>{userName}</UserName>
+          <UserAvatar src={userAvatar} alt="User`s Avatar" width="28" height="28" ></UserAvatar>
+          <ChevronIcon>
+                  <use href={`${icons}#icon-chevron-down`} /> 
+          </ChevronIcon>
+        </DropDownBtn>
+        {isOpen && (
+          <Menu>
+            <MenuItem onClick={() => handleMenuItemClick('setting')}>
+              <svg width="16" height="16">
+                <use href={`${icons}#icon-setting`} />
+              </svg>
+              Setting
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick('logout')}>
+              <svg width="16" height="16">
+                <use href={`${icons}#icon-logout`} />
+              </svg>
+              Log out
+            </MenuItem>
+          </Menu>
+        )}
+      </DropDownContainer>
+      {/* {activeModal === "setting" && <SettingModal isOpen={true} onClose={handleModalClose} />} */}
+      {activeModal === "logout" && <UserLogoutModal isOpen={true} onClose={handleModalClose} />}
+    </>
   )
 };

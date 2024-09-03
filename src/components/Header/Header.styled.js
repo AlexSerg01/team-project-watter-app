@@ -16,17 +16,16 @@ export const HeaderContainer = styled.div`
   margin-top: 8px;
   background-color: transparent;
 
-
-  padding: 8px 10px;
+  padding: 8px 20px;
 
   @media (min-width: 768px)  {
     margin-top: 16px;
-    padding: 16px 16px;
+    padding: 16px 32px;
   }
 
   @media (min-width: 1440px)  {
     margin-top: 12px;
-    padding: 12px 56px;
+    padding: 12px 112px;
   }
 `;
 

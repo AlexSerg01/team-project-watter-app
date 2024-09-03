@@ -87,6 +87,7 @@ import {
   loginUser,
   forgotPassword,
   updatePassword,
+  logoutUser
 } from "./operations";
 
 const authSlice = createSlice({
@@ -152,6 +153,16 @@ const authSlice = createSlice({
         state.status = "succeeded";
       })
       .addCase(updatePassword.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.isAuthenticated = false;
+        state.status = "succeeded";
+        toast.success("Logout successful!");
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
