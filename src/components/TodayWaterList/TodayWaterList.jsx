@@ -1,30 +1,49 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TodayWaterItem } from "./TodayWaterItem/TodayWaterItem";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { addWaterRecord, deleteWaterRecord } from "../../redux/water/waterOperations";
+import { selectWaterRecords } from "../../redux/water/waterSelectors";
 
 export const TodayWaterList = () => {
-  const [waterItems, setWaterItems] = useState([
-    {
-      id: nanoid(),
-      amount: 340,
-      date: new Date(),
-    },
-  ]);
+  const dispatch = useDispatch();
+
+  const waterRecords = useSelector(selectWaterRecords);
+  const [waterItems, setWaterItems] = useState(waterRecords);
+
+   useEffect(() => {
+    setWaterItems(waterRecords);
+  }, [waterRecords]);
 
   const handleAddWater = () => {
     const newWaterItem = {
-      id: nanoid(),
-      amount: 250,
-      date: new Date(),
+      amount: 250, 
     };
-    setWaterItems([newWaterItem, ...waterItems]);
+
+    dispatch(addWaterRecord(newWaterItem))
+      .unwrap()
+      .then((response) => {
+        console.log("New water record added:", response);
+      })
+      .catch((error) => {
+        console.error("Failed to add water record:", error);
+      });
   };
 
   const handleDelete = (id) => {
-    setWaterItems(waterItems.filter((elem) => elem.id !== id));
+    dispatch(deleteWaterRecord(id))
+      .unwrap()
+      .then(() => {
+        console.log("Water record deleted:", id);
+      })
+      .catch((error) => {
+        console.error("Failed to delete water record:", error);
+      });
+    
   };
+
 
   return (
     <div className={css.tableWrapper}>
@@ -34,11 +53,11 @@ export const TodayWaterList = () => {
           <div className={css.hightRegulator}>
             <ul className={css.listWraper}>
               {waterItems.map((elem) => (
-                <li key={elem.id}>
+                <li key={elem.data._id}>
                   <TodayWaterItem
-                    initialAmount={elem.amount}
-                    initialDate={elem.date}
-                    onDelete={() => handleDelete(elem.id)}
+                    initialAmount={elem.data.amount}
+                    initialDate={new Date()}
+                    onDelete={() => handleDelete(elem._id)}
                   />
                 </li>
               ))}

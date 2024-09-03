@@ -10,9 +10,11 @@ const WelcomePage = () => {
     navigate("/signup");
   };
   return (
-    <div className={css.welcome_page}>
-      <WaterConsumptionTracker onTryTrackerClick={handleTryTrackerClick} />
-      <WhyDrinkWater />
+    <div className={css.welcome_page_backgr}>
+      <div className={css.welcome_page_components}>
+        <WaterConsumptionTracker onTryTrackerClick={handleTryTrackerClick} />
+        <WhyDrinkWater />
+      </div>
     </div>
   );
 };

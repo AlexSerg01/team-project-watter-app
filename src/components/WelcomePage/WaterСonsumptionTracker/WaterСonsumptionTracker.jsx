@@ -9,19 +9,19 @@ const WaterConsumptionTracker = ({ onTryTrackerClick }) => {
       <ul className={css.tracker_benefits}>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-calendar-days"></use>
+            <use href="src/assets/icons.svg#icon-calendar-days"></use>
           </svg>
           <p className={css.benefit_discrip}>Habit drive</p>
         </li>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-presentation-bar"></use>
+            <use href="src/assets/icons.svg#icon-presentation-bar"></use>
           </svg>
           <p className={css.benefit_discrip}>View statistics</p>
         </li>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-wrench-screwdriver"></use>
+            <use href="src/assets/icons.svg#icon-wrench-screwdriver"></use>
           </svg>
           <p className={css.benefit_discrip}>Personal rate setting</p>
         </li>

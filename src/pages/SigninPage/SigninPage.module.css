@@ -61,7 +61,7 @@
 }
 @media screen and (min-width: 1440px) {
   .sectionForm {
-    background-position: bottom left;
+    background-size: cover;
     background-image: image-set(
       url(../../assets/images/background/Forfot_Update_Password/sign-in-out-desktop.png)
         1x,

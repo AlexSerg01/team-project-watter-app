@@ -29,6 +29,8 @@ export default function MonthStatsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredDay, setHoveredDay] = useState(null);
 
+  console.log(isModalOpen);
+
   const waterItems = useSelector((state) => state.waterInfo.items);
 
   const dispatch = useDispatch();
@@ -84,6 +86,7 @@ export default function MonthStatsTable() {
 
   const handleCloseDayInfo = () => {
     setIsModalOpen(false);
+
     setHoveredDay(null);
   };
 
@@ -122,7 +125,7 @@ export default function MonthStatsTable() {
               <div
                 className={
                   item.percentageConsumed !== "100%"
-                    ? css.dayAccentColor
+                    ? css.dayItemAccentColor
                     : css.dayItem
                 }
                 onClick={() => {

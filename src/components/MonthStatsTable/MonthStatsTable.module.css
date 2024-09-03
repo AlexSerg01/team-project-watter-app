@@ -1,34 +1,62 @@
+.calendarWrapper {
+    font-family: "Roboto", sans-serif;
+    color: #2f2f2f;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 280px;
+    background-color: #ECF2FF;
+    padding: 12px 8px 24px 8px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3);
+}
+
 .monthHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
 }
 
 .monthTitle {
-    font-size: 26px;
-    line-height: 1.23;
-    color: #2f2f2f;
+    font-size: 24px;
+    line-height: 1.25;
 }
 
-.calendarWrapper {
+.calendar {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 592px;
-    background-color: #ECF2FF;
-    padding: 16px 24px 32px 24px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 16px;
+    column-gap: 26px;
+    justify-content: space-between;
 }
 
 .daysWrapper {
     position: relative;
 }
 
-.dayAccentColor {
-    position: relative;
-    width: 34px;
-    height: 34px;
+.dayItem {
+    /* position: relative; */
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.28571;
+    text-align: center;
+    color: #2f2f2f
+}
+
+.dayItemAccentColor {
+    /* position: relative; */
+    width: 32px;
+    height: 32px;
     background-color: #ffffff;
     text-align: center;
     display: flex;
@@ -36,17 +64,11 @@
     align-items: center;
     border-radius: 50%;
     font-weight: 400;
-    line-height: 1.25;
+    line-height: 1.28571;
+    font-size: 14px;
+    text-align: center;
     color: #2f2f2f;
     border: 1px solid #FF9D43;
-}
-
-.calendar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
-
 }
 
 .calendarNavi {
@@ -87,35 +109,23 @@
     padding: 0;
 }
 
-.dayItem {
-    /* position: relative; */
-    width: 34px;
-    height: 34px;
-    background-color: #ffffff;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-weight: 400;
-    line-height: 1.25;
-    color: #2f2f2f
-}
+
 
 .percentDayItem {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #9EBBFF;
     text-align: center;
 }
+
 
 .dayInCalendar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    gap: 8px;
+    justify-content: center;
+    gap: 4px;
     transition: transform 250ms linear;
 }
 
@@ -128,9 +138,104 @@
 .popUpWindow {
     border-radius: 10px;
     background-color: #ffffff;
-    width: 292px;
+    width: 280px;
     position: absolute;
-    top: -90%;
-    left: 0%;
+    top: -44%;
+    left: -3%;
+}
 
+
+@media screen and (min-width: 768px) {
+    .calendarWrapper {
+        gap: 20px;
+        width: 704px;
+        background-color: #ECF2FF;
+        padding: 12px 24px 32px 24px;
+    }
+
+    .monthTitle {
+        font-size: 26px;
+        line-height: 1.25;
+    }
+
+    .dayItem {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .dayItemAccentColor {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .percentDayItem {
+        font-size: 13px;
+        line-height: 1.53846;
+    }
+
+    .calendar {
+        row-gap: 20px;
+        column-gap: 34px;
+    }
+
+    .popUpWindow {
+        width: 292px;
+        top: -64.4%;
+        left: 0.5%;
+    }
+
+}
+
+
+@media screen and (min-width: 1440px) {
+
+    .calendarWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 592px;
+        background-color: #ECF2FF;
+        padding: 12px 24px 32px 24px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .calendar {
+        row-gap: 20px;
+        column-gap: 22px;
+    }
+
+    .percentDayItem {
+        font-size: 12px;
+        line-height: 1.53846;
+    }
+
+    .calendarNavi {
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 400;
+        color: #407BFF;
+        display: flex;
+        justify-content: space-between;
+        align-items: normal;
+        width: 150px;
+        height: 20px
+    }
+
+
+
+    .percentDayItem {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .popUpWindow {
+        top: -67%;
+        left: -9%;
+
+    }
 }
