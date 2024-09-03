@@ -1,8 +1,7 @@
-// TodayWaterItem.js
 import { useState } from "react";
 import css from "./todaywateritem.module.css";
 import icons from "../../../assets/icons.svg";
-import { AddWaterForm } from "../AddWaterListForm";
+import { EditWaterForm } from "../AddWaterListForm";
 
 export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
     const [amount, setAmount] = useState(initialAmount);
@@ -66,7 +65,7 @@ export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
             </div>
             {isModalOpen && (
                 <div className={css.modalOverlay}>
-                    <AddWaterForm
+                    <EditWaterForm
                         initialAmount={amount}
                         initialDate={date}
                         updateWaterData={updateWaterData}

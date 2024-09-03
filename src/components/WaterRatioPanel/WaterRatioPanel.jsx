@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   BtnAddWater,
+  ModalOverlay,
   PercentageValue,
   PercentageWrapper,
   WaterLabel,
@@ -9,7 +10,7 @@ import {
   WaterRangeField,
   WaterWrapper,
 } from "./WaterRatioPanel.styled.js";
-import { AddWaterForm } from "../../components/TodayWaterList/AddWaterListForm.jsx";
+import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm.jsx";
 import SpriteIcons from "../../assets/icons.svg";
 import {
   selectWaterToday,
@@ -35,7 +36,7 @@ export const WaterRatioPanel = () => {
   );
 
   const handleRangeChange = (event) => {
-    // Реалізуйте логіку обробки зміни діапазону, якщо потрібно
+
   };
 
   return (
@@ -68,16 +69,17 @@ export const WaterRatioPanel = () => {
         <span>Add water</span>
       </BtnAddWater>
       {modalIsOpen && (
-        <AddWaterForm
-          onClose={closeModal} // Переконайтеся, що onClose передається правильно
-          initialAmount={0} // Або інше значення, яке потрібно
-          initialDate={new Date()} // Або інше значення, яке потрібно
-          updateWaterData={(amount, date) => {
-            // Реалізуйте функцію оновлення даних про воду тут
-            console.log("Amount:", amount);
-            console.log("Date:", date);
-          }}
-        />
+        <ModalOverlay>
+          <AddWaterForm
+            onClose={closeModal}
+            initialAmount={0}
+            initialDate={new Date()}
+            updateWaterData={(amount, date) => {
+              console.log("Amount:", amount);
+              console.log("Date:", date);
+            }}
+          />
+        </ModalOverlay>
       )}
     </WaterWrapper>
   );
