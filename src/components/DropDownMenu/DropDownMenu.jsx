@@ -28,7 +28,7 @@ export const DropDownMenu = () => {
       try {
         if (!token) return;
         const response = await getUserInfo(token);
-        setUserData(response.data);
+        setUserData(response.data.data);
       } catch (error) {
         console.error("error1", error);
       }
@@ -37,8 +37,8 @@ export const DropDownMenu = () => {
     fetchUserData();
   }, [token]);
 
-  const userName = userData.name 
-console.log(userName)
+  const userName = userData.name || ""
+  const userEmail = userData.email || ""
   
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
@@ -74,7 +74,7 @@ console.log(userName)
   return (
     <DropDownContainer ref={menuRef}>
       <DropDownBtn onClick={toggleMenu}>
-        <UserName>{userData.name || "User"}</UserName>
+        <UserName>{userName || "User"}</UserName>
         <UserAvatar
           src={userData.photo || "/path/to/default-avatar.png"}
           alt="User`s Avatar"
@@ -106,9 +106,9 @@ console.log(userName)
         onClose={() => setIsSettingModalOpen(false)}
         userData={{
           photo: "userAvatar",
-          name: "userName",
-          email: userData.email,
-          gender: "male",
+          name: userName,
+          email: userEmail,
+          gender: userData.gender || "male",
         }}
         onSave={(data) => console.log("Saved data:", data)}
       />
