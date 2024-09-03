@@ -5,9 +5,10 @@ const dailyNormaSlice = createSlice({
   name: "norma",
   initialState: {
     value: 2.0,
-    showModal: false, // Додано для управління видимістю модального вікна
+    showModal: false,
     status: 'idle',
     error: null,
+    loading: false,
   },
   reducers: {
     updateNorma: (state, action) => {
@@ -24,13 +25,17 @@ const dailyNormaSlice = createSlice({
     builder
       .addCase(getNorma.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
+        state.loading = true;
       })
       .addCase(getNorma.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const newValue = action.payload / 1000;
         state.value = action.payload !== undefined ? newValue : state.value;
+        state.loading = false;
       })
       .addCase(getNorma.rejected, (state, action) => {
+        state.loading = false; 
         state.status = 'failed';
         state.error = action.payload;
       });

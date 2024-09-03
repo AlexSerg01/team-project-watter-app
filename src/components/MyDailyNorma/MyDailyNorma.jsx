@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import css from './MyDailyNorma.module.css';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal';
-import { updateNorma, openModal, closeModal } from '../../redux/dailyNorma/slice';
+import { openModal } from '../../redux/dailyNorma/slice';
 import { getNorma } from '../../redux/dailyNorma/operations';  
-import { selectNorma, selectStatus, selectError, selectShowModal } from '../../redux/dailyNorma/selectors'; // Онови селектори
+import { selectNorma, selectStatus, selectError, selectShowModal } from '../../redux/dailyNorma/selectors';
 
 export default function MyDailyNorma() {
     const dispatch = useDispatch();
@@ -29,18 +29,13 @@ export default function MyDailyNorma() {
         dispatch(openModal());
     };
 
-    const handleConfirm = (newNorma) => {
-        dispatch(updateNorma(newNorma));
-        dispatch(closeModal());
-    };
-
     return (
         <div className={css.container}>
             <h2 className={css.title}>My daily norma</h2>
             <div>
                 <span className={css.norma}>{Number(waterNorma).toFixed(1)} L</span>
                 <button className={css.btn} onClick={handleEditClick}>Edit</button>
-                {showModal && <DailyNormaModal onConfirm={handleConfirm} onClose={() => { dispatch(closeModal()) }} />}
+                {showModal && <DailyNormaModal/>}
             </div>
         </div>
     );

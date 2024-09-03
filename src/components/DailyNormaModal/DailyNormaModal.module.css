@@ -15,7 +15,7 @@
   background: var(--PRIMERY-WHITE);
   border-radius: 8px;
   max-width: 280px;
-  height: 816px;
+  min-height: 816px;
   width: 100%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -194,10 +194,15 @@ input[type="radio"]:checked::before {
   text-align: center;
 }
 
+.errorMessage {
+  color: rgb(169, 7, 7);
+  margin-bottom: 16px;
+}
+
 @media screen and (min-width: 768px) {
   .modal {
     max-width: 704px;
-    height: 696px;
+    min-height: 696px;
     padding: 32px 24px;
   }
 
@@ -241,7 +246,7 @@ input[type="radio"]:checked::before {
 @media screen and (min-width: 1440px) {
   .modal {
     max-width: 592px;
-    height: 712px;
+    min-height: 712px;
   }
 
   .calcInput {
