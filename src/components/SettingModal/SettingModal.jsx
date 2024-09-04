@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import styles from "./SettingModal.module.css";
 import defaultAvatar from "../../assets/images/avatar.png";
 import icons from "../../assets/icons.svg";
-import validateEmail from "./validateEmail";
-import validatePasswordMatch from "./validatePassword";
-import validateName from "./validateName";
+import {
+  validateName,
+  validateEmail,
+  validatePasswordField,
+  validatePasswordMatch,
+} from "./validate";
 import {
   getUserInfo,
   updateUserInfo,
@@ -107,31 +110,45 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
         : "";
     }
 
-    if (
+    const isPasswordFilled =
       formData.outdatedPassword ||
       formData.newPassword ||
-      formData.repeatPassword
-    ) {
-      outdatedPasswordError = !formData.outdatedPassword
-        ? "Outdated password is required."
-        : "";
-      newPasswordError = !formData.newPassword
-        ? "New password is required."
-        : "";
-      repeatPasswordError = validatePasswordMatch(
+      formData.repeatPassword;
+
+    outdatedPasswordError = validatePasswordField(
+      formData.outdatedPassword,
+      "Outdated password",
+      isPasswordFilled
+    );
+    newPasswordError = validatePasswordField(
+      formData.newPassword,
+      "New password",
+      isPasswordFilled
+    );
+    repeatPasswordError = validatePasswordField(
+      formData.repeatPassword,
+      "Repeat new password",
+      isPasswordFilled
+    );
+
+    if (isPasswordFilled) {
+      const passwordMatchError = validatePasswordMatch(
         formData.newPassword,
         formData.repeatPassword
       );
+      if (passwordMatchError) {
+        newPasswordError = passwordMatchError;
+        repeatPasswordError = passwordMatchError;
+      }
     }
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
+    setErrors({
       name: nameError,
       email: emailError,
       outdatedPassword: outdatedPasswordError,
       newPassword: newPasswordError,
       repeatPassword: repeatPasswordError,
-    }));
+    });
 
     if (
       nameError ||
