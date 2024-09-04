@@ -1,31 +1,15 @@
 import { useState } from "react";
 import css from "./todaywateritem.module.css";
 import icons from "../../../assets/icons.svg";
-import { EditWaterForm } from "../AddWaterListForm";
 
-export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
-    const [amount, setAmount] = useState(initialAmount);
-    const [date, setDate] = useState(initialDate);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
+
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const formatDate = (date) => {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         return `${hours}:${minutes}`;
-    };
-
-    const handleEditClick = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-    };
-
-    const updateWaterData = (newAmount, newDate) => {
-        setAmount(newAmount);
-        setDate(newDate);
     };
 
     const handleOpenDelete = () => {
@@ -51,7 +35,7 @@ export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
                     </div>
                 </div>
                 <div className={css.svgWrapper}>
-                    <button type="button" className={css.button} onClick={handleEditClick}>
+                    <button type="button" className={css.button} onClick={onEdit}>
                         <svg className={css.edit}>
                             <use href={`${icons}#icon-edit`}></use>
                         </svg>
@@ -63,16 +47,7 @@ export const TodayWaterItem = ({ initialAmount, initialDate, onDelete }) => {
                     </button>
                 </div>
             </div>
-            {isModalOpen && (
-                <div className={css.modalOverlay}>
-                    <EditWaterForm
-                        initialAmount={amount}
-                        initialDate={date}
-                        updateWaterData={updateWaterData}
-                        onClose={handleModalClose}
-                    />
-                </div>
-            )}
+   
 
             {isDeleteModalOpen && (
                 <div className={css.modalOverlay}>

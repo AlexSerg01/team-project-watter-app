@@ -3,34 +3,23 @@ import { TodayWaterItem } from "./TodayWaterItem/TodayWaterItem";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addWaterRecord, deleteWaterRecord, updateWaterRecord } from "../../redux/water/waterOperations";
+import { deleteWaterRecord, getAllWaterRecordsPerDay } from "../../redux/water/waterOperations";
 import { selectWaterRecords } from "../../redux/water/waterSelectors";
-import { EditWaterForm } from "./AddWaterListForm";
+import { EditWaterForm } from "./EditWaterForm";
 
-export const TodayWaterList = () => {
+export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
   const dispatch = useDispatch();
 
+  // Отримуємо запис про воду з Redux
   const waterRecords = useSelector(selectWaterRecords);
-  const [waterItems, setWaterItems] = useState(waterRecords);
   const [editingRecord, setEditingRecord] = useState(null);
 
   useEffect(() => {
-    setWaterItems(waterRecords);
-  }, [waterRecords]);
+    dispatch(getAllWaterRecordsPerDay());
+  }, [dispatch]);
 
-  const handleAddWater = () => {
-    const newWaterItem = {
-      amount: 250,
-    };
-
-    dispatch(addWaterRecord(newWaterItem))
-      .unwrap()
-      .then((response) => {
-        console.log("New water record added:", response);
-      })
-      .catch((error) => {
-        console.error("Failed to add water record:", error);
-      });
+  const handleEditModalClose = () => {
+    setEditingRecord(null);
   };
 
   const handleDelete = (id) => {
@@ -44,17 +33,6 @@ export const TodayWaterList = () => {
       });
   };
 
-  const handleUpdate = (id, amount, date) => {
-    dispatch(updateWaterRecord({ id, amount, date }))
-      .unwrap()
-      .then(() => {
-        console.log("Water record updated:", id);
-      })
-      .catch((error) => {
-        console.error("Failed to update water record:", error);
-      });
-  };
-
   return (
     <div className={css.tableWrapper}>
       <div className={css.todayWrapper}>
@@ -62,33 +40,33 @@ export const TodayWaterList = () => {
         <div className={css.listContainer}>
           <div className={css.hightRegulator}>
             <ul className={css.listWraper}>
-              {waterItems.map((elem) => (
-                <li key={elem.data._id}>
+              {waterRecords?.map((elem) => (
+                <li key={elem._id}>
                   <TodayWaterItem
-                    initialAmount={elem.data.amount}
-                    initialDate={new Date(elem.data.date)}
-                    onDelete={() => handleDelete(elem.data._id)}
-                    onEdit={() => setEditingRecord(elem.data)}
+                    amount={elem.amount}
+                    date={new Date(elem.date)}
+                    onDelete={() => handleDelete(elem._id)}
+                    onEdit={() => setEditingRecord(elem)}
                   />
                 </li>
               ))}
             </ul>
-            <button className={css.addBtn} onClick={handleAddWater}>
+            {waterRecords.length == 0 ? <p>No records</p> : <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
               <svg>
                 <use href={`${icons}#icon-increment`}></use>
               </svg>
               <span>Add water</span>
-            </button>
+            </button>}
           </div>
         </div>
       </div>
       {editingRecord && (
-        <EditWaterForm
-          onClose={() => setEditingRecord(null)}
-          initialAmount={editingRecord.amount}
-          initialDate={new Date(editingRecord.date)}
-          updateWaterData={(amount, date) => handleUpdate(editingRecord._id, amount, date)}
-        />
+        <div className={css.modalBackdrop}>
+          <EditWaterForm
+            onClose={handleEditModalClose}
+            editingRecord={editingRecord}
+          />
+        </div>
       )}
     </div>
   );

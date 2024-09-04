@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addWaterRecord, deleteWaterRecord, updateWaterRecord } from "./waterOperations";
+import { addWaterRecord, deleteWaterRecord, getAllWaterRecordsPerDay, updateWaterRecord } from "./waterOperations";
 
 const initialState = {
   isLoading: false,
   error: null,
   waterRecords: [],
+
 };
 
 const waterSlice = createSlice({
@@ -22,8 +23,7 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterRecords.push(action.payload);
-        console.log(state.waterRecords.length);
+        state.waterRecords.push(action.payload.data);
       })
       .addCase(deleteWaterRecord.pending, (state) => {
         state.isLoading = true;
@@ -35,7 +35,7 @@ const waterSlice = createSlice({
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords = state.waterRecords.filter(
-          (elem) => elem.data._id !== action.payload
+          (elem) => elem._id !== action.payload
         );
       })
       .addCase(updateWaterRecord.pending, (state) => {
@@ -51,9 +51,22 @@ const waterSlice = createSlice({
           (record) => record._id === action.payload._id
         );
         if (index !== -1) {
-          state.waterRecords[index] = action.payload;
+          state.waterRecords[index] = action.payload.data.amount;
         }
-      });
+        console.log(action.payload.data);
+        
+      })
+      .addCase(getAllWaterRecordsPerDay.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getAllWaterRecordsPerDay.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getAllWaterRecordsPerDay.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.waterRecords = action.payload.dailyRecords;
+      })
   },
 });
 

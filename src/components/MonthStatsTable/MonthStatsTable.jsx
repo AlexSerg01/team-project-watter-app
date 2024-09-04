@@ -29,7 +29,7 @@ export default function MonthStatsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredDay, setHoveredDay] = useState(null);
 
-  console.log(isModalOpen);
+  // console.log(isModalOpen);
 
   const waterItems = useSelector((state) => state.waterInfo.items);
 
