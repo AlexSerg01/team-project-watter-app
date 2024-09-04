@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./SettingModal.module.css";
 import defaultAvatar from "../../assets/images/avatar.png";
-import validateEmail from "./validateForgotPasswordEmail";
-import validatePasswordMatch from "./validatePasswordMatch";
+import icons from "../../assets/icons.svg";
+import validateEmail from "./validateEmail";
+import validatePasswordMatch from "./validatePassword";
 import validateName from "./validateName";
 import {
   getUserInfo,
@@ -167,13 +168,23 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
           ...response.data.data,
         });
 
-        // Обновляем данные в хедере
         onSave(response.data.data);
       }
 
       onClose();
     } catch (error) {
-      console.error("Error updating user info:", error);
+      if (
+        error.response &&
+        error.response.data.message ===
+          "New password cannot be the same as the old password"
+      ) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          newPassword: "New password cannot be the same as the old password",
+        }));
+      } else {
+        console.error("Error updating user info:", error);
+      }
     }
   };
 
@@ -205,7 +216,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
           <h2>Setting</h2>
           <button className={styles.closeBtn} onClick={onClose}>
             <svg className={styles.icon}>
-              <use href="/src/assets/icons.svg#icon-x-close" />
+              <use href={`${icons}#icon-x-close`} />
             </svg>
           </button>
         </div>
@@ -223,7 +234,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
               />
               <label htmlFor="photoUploadInput" className={styles.uploadButton}>
                 <svg className={styles.uploadIcon}>
-                  <use href="/src/assets/icons.svg#icon-upload" />
+                  <use href={`${icons}#icon-upload`} />
                 </svg>
                 Upload a photo
               </label>
@@ -315,7 +326,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                 >
                   <svg className={styles.icon}>
                     <use
-                      href={`/src/assets/icons.svg#icon-${
+                      href={`${icons}#icon-${
                         passwordVisibility.outdatedPassword
                           ? "eye-slash"
                           : "eye"
@@ -350,7 +361,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                 >
                   <svg className={styles.icon}>
                     <use
-                      href={`/src/assets/icons.svg#icon-${
+                      href={`${icons}#icon-${
                         passwordVisibility.newPassword ? "eye-slash" : "eye"
                       }`}
                     />
@@ -383,7 +394,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                 >
                   <svg className={styles.icon}>
                     <use
-                      href={`/src/assets/icons.svg#icon-${
+                      href={`${icons}#icon-${
                         passwordVisibility.repeatPassword ? "eye-slash" : "eye"
                       }`}
                     />
