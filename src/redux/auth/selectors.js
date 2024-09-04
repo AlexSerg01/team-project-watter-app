@@ -37,5 +37,5 @@ export const selectWaterRate = createSelector(
 
 export const selectWaterToday = createSelector(
   AuthReducerSelector,
-  (state) => state.waterToday
+  (state) => state.user.dailyWaterIntake
 );
