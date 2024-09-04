@@ -28,3 +28,6 @@ export const userSelector = createSelector(
   AuthReducerSelector,
   (state) => state.user
 )
+export const waterNormaSelector = createSelector(
+  AuthReducerSelector,
+  (state) => state.user.user.dailyWaterIntake)

@@ -4,26 +4,17 @@ import css from './MyDailyNorma.module.css';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal';
 import { openModal } from '../../redux/dailyNorma/slice';
 import { getNorma } from '../../redux/dailyNorma/operations';  
-import { selectNorma, selectStatus, selectError, selectShowModal } from '../../redux/dailyNorma/selectors';
+import { selectNorma, selectShowModal } from '../../redux/dailyNorma/selectors';
 
 export default function MyDailyNorma() {
     const dispatch = useDispatch();
-    const waterNorma = useSelector(selectNorma);
-    const status = useSelector(selectStatus);
-    const error = useSelector(selectError);
     const showModal = useSelector(selectShowModal);
 
     useEffect(() => {
         dispatch(getNorma());
     }, [dispatch]);
 
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
-
-    if (status === 'failed') {
-        return <div>Error: {error}</div>;
-    }
+    const waterNorma = useSelector(selectNorma);
 
     const handleEditClick = () => {
         dispatch(openModal());

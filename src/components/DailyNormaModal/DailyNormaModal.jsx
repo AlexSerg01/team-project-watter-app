@@ -8,7 +8,8 @@ const DailyNormaModal = () => {
   const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");
   const [activityTime, setActivityTime] = useState("");
-  const [norma, setNorma] = useState(0);
+  const [recommendedNorma, setRecommendedNorma] = useState(0);
+  const [userNorma, setUserNorma] = useState('');
   const [error, setError] = useState(null); // Стейт для помилки
 
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const DailyNormaModal = () => {
 
  
   useEffect(() => {
-     const calculateNorma = () => {
+    const calculateNorma = () => {
     const weightNum = parseFloat(weight) || 0;
     const activityTimeNum = parseFloat(activityTime) || 0;
     let calculatedNorma = 0;
@@ -31,14 +32,15 @@ const DailyNormaModal = () => {
     } else {
       calculatedNorma = weightNum * 0.03 + activityTimeNum * 0.4;
     }
-    setNorma(calculatedNorma.toFixed(1));
+    setRecommendedNorma(calculatedNorma.toFixed(1));
      };
     
     calculateNorma();
   }, [gender, weight, activityTime]);
 
   const handleSaveClick = () => {
-    const newIntake = norma * 1000;
+    setUserNorma(userNorma);
+    const newIntake = Number(userNorma) * 1000;
 
     const data = {
       dailyWaterIntake: String(newIntake)
@@ -47,7 +49,7 @@ const DailyNormaModal = () => {
     dispatch(updateDailyWaterIntake(data))
       .unwrap()
       .then(() => {
-        onConfirm(norma);
+        onConfirm(userNorma);
         onClose();
       })
       .catch((error) => {
@@ -151,12 +153,16 @@ const DailyNormaModal = () => {
         <div>
           <div className={css.result}>
             <p className={css.total}>The required amount of water in liters per day:</p>
-            <strong className={css.screen}>{norma} L</strong>
+            <strong className={css.screen}>{recommendedNorma} L</strong>
           </div>
         </div>
         <div>
           <label className={css.resultTitle}>Write down how much water you will drink:</label>
-          <input className={css.calcInput} type="number" placeholder="0" />
+          <input className={css.calcInput}
+            type="number"
+            placeholder="0"
+            value={userNorma}
+            onChange={(e) => setUserNorma(e.target.value)}/>
         </div>
         {error && <div className={css.errorMessage}>{'The maximum allowable water intake is 15 liters per day. Please enter valid values within this limit.'}</div>}
         <button className={css.saveBtn} onClick={handleSaveClick}>Save</button>

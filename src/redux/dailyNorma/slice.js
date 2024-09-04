@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNorma } from "./operations";
+import { getNorma, updateDailyWaterIntake } from "./operations";
 
 const dailyNormaSlice = createSlice({
   name: "norma",
   initialState: {
-    value: 2.0,
+    value: null,
     showModal: false,
     status: 'idle',
     error: null,
@@ -31,14 +31,30 @@ const dailyNormaSlice = createSlice({
       .addCase(getNorma.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const newValue = action.payload / 1000;
-        state.value = action.payload !== undefined ? newValue : state.value;
+        state.value = newValue;
         state.loading = false;
       })
       .addCase(getNorma.rejected, (state, action) => {
         state.loading = false; 
         state.status = 'failed';
         state.error = action.payload;
-      });
+      })
+     .addCase(updateDailyWaterIntake.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(updateDailyWaterIntake.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        const newValue = action.payload / 1000;
+        state.value = newValue;
+        state.loading = false;
+      })
+      .addCase(updateDailyWaterIntake.rejected, (state, action) => {
+        state.loading = false; 
+        state.status = 'failed';
+        state.error = action.payload;
+      })
   },
 });
 
