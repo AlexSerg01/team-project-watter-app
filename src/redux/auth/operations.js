@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk(
         "Authorization"
       ] = `Bearer ${response.data.data.accessToken}`;
       console.log(response.data.data.accessToken);
-      
+
       return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
     } catch (error) {
       const message =
@@ -88,6 +88,7 @@ export const logoutUser = createAsyncThunk(
     try {
       const response = await axios.post(`${API_URL}/auth/logout`);
       toast.info("You have been logged out.");
+      delete axios.defaults.headers.common["Authorization"];
       return response.data;
     } catch (error) {
       const message =

@@ -12,10 +12,10 @@ import {
 
 function SettingModal({ isOpen, onClose, userData, onSave }) {
   const [formData, setFormData] = useState({
-    photo: userData.photo || "",
-    gender: userData.gender || "",
-    name: userData.name || "",
-    email: userData.email || "",
+    photo: userData?.photo || "",
+    gender: userData?.gender || "",
+    name: userData?.name || "",
+    email: userData?.email || "",
     outdatedPassword: "",
     newPassword: "",
     repeatPassword: "",
@@ -30,7 +30,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
   });
 
   const [previewImage, setPreviewImage] = useState(
-    userData.photo || defaultAvatar
+    userData?.photo || defaultAvatar
   );
 
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -43,27 +43,19 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
     if (isOpen) {
       async function fetchUserInfo() {
         try {
-          const token = document.cookie.split("token=")[1];
-          const response = await getUserInfo(token);
+          const response = await getUserInfo();
           const { data } = response.data;
 
-          if (
-            data.photo !== formData.photo ||
-            data.gender !== formData.gender ||
-            data.name !== formData.name ||
-            data.email !== formData.email
-          ) {
-            setFormData({
-              photo: data.photo || "",
-              gender: data.gender || "",
-              name: data.name || "",
-              email: data.email || "",
-              outdatedPassword: "",
-              newPassword: "",
-              repeatPassword: "",
-            });
-            setPreviewImage(data.photo || defaultAvatar);
-          }
+          setFormData({
+            photo: data.photo || "",
+            gender: data.gender || "",
+            name: data.name || "",
+            email: data.email || "",
+            outdatedPassword: "",
+            newPassword: "",
+            repeatPassword: "",
+          });
+          setPreviewImage(data.photo || defaultAvatar);
         } catch (error) {
           console.error("Error fetching user info:", error);
         }
@@ -98,72 +90,87 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nameError = validateName(formData.name);
-    if (nameError) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        name: nameError,
-      }));
+    let nameError = "";
+    let emailError = "";
+    let outdatedPasswordError = "";
+    let newPasswordError = "";
+    let repeatPasswordError = "";
+
+    if (formData.name) {
+      nameError = validateName(formData.name);
     }
 
-    const emailError = !validateEmail(formData.email)
-      ? "Please enter a valid email address."
-      : "";
-    if (emailError) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: emailError,
-      }));
+    if (formData.email) {
+      emailError = !validateEmail(formData.email)
+        ? "Please enter a valid email address."
+        : "";
     }
 
-    const outdatedPasswordError = formData.outdatedPassword
-      ? ""
-      : "Please enter your outdated password.";
-    if (outdatedPasswordError) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        outdatedPassword: outdatedPasswordError,
-      }));
-    }
-
-    const passwordError = validatePasswordMatch(
-      formData.newPassword,
+    if (
+      formData.outdatedPassword ||
+      formData.newPassword ||
       formData.repeatPassword
-    );
-    if (passwordError) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        newPassword: formData.newPassword ? "" : passwordError,
-        repeatPassword: formData.repeatPassword ? "" : passwordError,
-      }));
+    ) {
+      outdatedPasswordError = !formData.outdatedPassword
+        ? "Outdated password is required."
+        : "";
+      newPasswordError = !formData.newPassword
+        ? "New password is required."
+        : "";
+      repeatPasswordError = validatePasswordMatch(
+        formData.newPassword,
+        formData.repeatPassword
+      );
     }
 
-    if (nameError || emailError || outdatedPasswordError || passwordError) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      name: nameError,
+      email: emailError,
+      outdatedPassword: outdatedPasswordError,
+      newPassword: newPasswordError,
+      repeatPassword: repeatPasswordError,
+    }));
+
+    if (
+      nameError ||
+      emailError ||
+      outdatedPasswordError ||
+      newPasswordError ||
+      repeatPasswordError
+    ) {
       return;
     }
 
-    try {
-      const token = document.cookie.split("token=")[1];
+    const updatedData = {};
+    if (formData.name && formData.name !== userData.name)
+      updatedData.name = formData.name;
+    if (formData.gender && formData.gender !== userData.gender)
+      updatedData.gender = formData.gender;
+    if (formData.email && userData && formData.email !== userData.email)
+      updatedData.email = formData.email;
+    if (formData.newPassword) updatedData.password = formData.newPassword;
 
+    try {
       if (formData.photo && typeof formData.photo === "object") {
         const photoFormData = new FormData();
         photoFormData.append("userPhoto", formData.photo);
-        await updateUserPhoto(token, photoFormData);
+        const photoResponse = await updateUserPhoto(photoFormData);
+        updatedData.photo = photoResponse.data.data.photourl;
+        setPreviewImage(photoResponse.data.data.photourl);
       }
 
-      const response = await updateUserInfo(token, {
-        name: formData.name,
-        gender: formData.gender,
-        email: formData.email,
-        password: formData.newPassword,
-      });
+      if (Object.keys(updatedData).length > 0) {
+        const response = await updateUserInfo(updatedData);
+        setFormData({
+          ...formData,
+          ...response.data.data,
+        });
 
-      setFormData({
-        ...formData,
-        ...response.data.data,
-      });
+        // Обновляем данные в хедере
+        onSave(response.data.data);
+      }
 
-      onSave(formData);
       onClose();
     } catch (error) {
       console.error("Error updating user info:", error);
@@ -225,7 +232,6 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
           <div className={styles.formDesktop}>
             <div className={styles.formGroup}>
               <div className={styles.leftColumn}>
-                {/* Левая колонка */}
                 <label>Your gender identity</label>
                 <div className={styles.radioGroup}>
                   <label>
