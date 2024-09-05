@@ -26,7 +26,6 @@
   font-weight: 700;
   line-height: 1;
   color: var(--PRIMERY-BLUE);
-  margin-right: 12px;
 }
 
 .btn {
@@ -42,4 +41,8 @@
 .btn:hover,
 .btn:focus {
   color: var(--SECONDARY-ORANGE);
+}
+.father {
+  display: flex;
+  gap: 12px;
 }

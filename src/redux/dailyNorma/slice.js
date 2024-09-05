@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNorma, updateDailyWaterIntake } from "./operations";
+import { getNorma } from "./operations";
 
 const dailyNormaSlice = createSlice({
   name: "norma",
   initialState: {
     value: null,
     showModal: false,
-    status: 'idle',
     error: null,
     loading: false,
   },
@@ -24,37 +23,18 @@ const dailyNormaSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getNorma.pending, (state) => {
-        state.status = 'loading';
         state.error = null;
         state.loading = true;
       })
       .addCase(getNorma.fulfilled, (state, action) => {
-        state.status = 'succeeded';
         const newValue = action.payload / 1000;
-        state.value = newValue;
+        state.value = action.payload !== undefined ? newValue : state.value;
         state.loading = false;
       })
       .addCase(getNorma.rejected, (state, action) => {
         state.loading = false; 
-        state.status = 'failed';
         state.error = action.payload;
-      })
-     .addCase(updateDailyWaterIntake.pending, (state) => {
-        state.status = 'loading';
-        state.error = null;
-        state.loading = true;
-      })
-      .addCase(updateDailyWaterIntake.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        const newValue = action.payload / 1000;
-        state.value = newValue;
-        state.loading = false;
-      })
-      .addCase(updateDailyWaterIntake.rejected, (state, action) => {
-        state.loading = false; 
-        state.status = 'failed';
-        state.error = action.payload;
-      })
+      });
   },
 });
 

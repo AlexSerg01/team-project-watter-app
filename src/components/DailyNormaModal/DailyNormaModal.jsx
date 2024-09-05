@@ -10,7 +10,7 @@ const DailyNormaModal = () => {
   const [activityTime, setActivityTime] = useState("");
   const [recommendedNorma, setRecommendedNorma] = useState(0);
   const [userNorma, setUserNorma] = useState('');
-  const [error, setError] = useState(null); // Стейт для помилки
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const onClose = () => { dispatch(closeModal()); };

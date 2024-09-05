@@ -7,6 +7,7 @@ import {
   forgotPassword,
   updatePassword,
 } from "./operations";
+import { updateDailyWaterIntake } from "../dailyNorma/operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -71,6 +72,9 @@ const authSlice = createSlice({
       .addCase(updatePassword.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      .addCase(updateDailyWaterIntake.fulfilled, (state, action) => {
+        state.user.dailyWaterIntake = action.payload.data.dailyWaterIntake;
       });
   },
 });
