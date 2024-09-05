@@ -1,19 +1,21 @@
 import { useState } from "react";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
+import { useDispatch } from "react-redux";
+import { updateWaterRecord } from "../../redux/water/waterOperations";
 
 export const EditWaterForm = ({
   onClose,
-  initialAmount,
-  initialDate,
-  updateWaterData,
+  editingRecord
 }) => {
-  const [amount, setAmount] = useState(initialAmount);
-  const [date, setDate] = useState(initialDate);
+  const [amount, setAmount] = useState(editingRecord.amount);
+  const [date, setDate] = useState(editingRecord.date);
+
+  const dispatch = useDispatch();
 
   const formatTimeForInput = (date) => {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    let hours =  new Date(date).getHours();
+    let minutes =  new Date(date).getMinutes();
     hours = hours < 10 ? `0${hours}` : hours;
     minutes = minutes < 10 ? `0${minutes}` : minutes;
     return `${hours}:${minutes}`;
@@ -27,13 +29,14 @@ export const EditWaterForm = ({
     setDate(newDate);
   };
 
+  console.log('dat',date)
   const formatDate = (date) => {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    let hours = new Date(date).getHours();
+    let minutes = new Date(date).getMinutes();
     return `${hours}:${minutes}`;
   };
-
-  const handleDec = () => {
+    
+    const handleDec = () => {
     setAmount((prev) => (prev > 50 ? prev - 50 : 0));
   };
 
@@ -41,23 +44,28 @@ export const EditWaterForm = ({
     setAmount(amount + 50);
   };
 
-  const handleChange = (e) => {
-    setAmount(Number(e.target.value));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (typeof updateWaterData === "function") {
-      updateWaterData(amount, date);
-    } else {
-      console.error("updateWaterData is not a function");
-    }
+
+    // Отримуємо значення поля amount
+    const formAmount = Number(e.target.elements.amount.value);
+
+    dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount }))
+      .unwrap()
+      .then(() => {
+        console.log("Water record updated:", formAmount);
+      })
+      .catch((error) => {
+        console.error("Failed to update water record:", error);
+      });
+
     if (typeof onClose === "function") {
       onClose();
     } else {
       console.error("onClose is not a function");
     }
   };
+
 
   return (
     <form className={css.section} onSubmit={handleSubmit}>
@@ -73,7 +81,7 @@ export const EditWaterForm = ({
             <use href={`${icons}#icon-glass`}></use>
           </svg>
           <div className={css.timeAmount}>
-            <span className={css.waterAmount}>{initialAmount} ml</span>
+            <span className={css.waterAmount}>{amount} ml</span>
             <span className={css.spanTime}>{formatDate(date)}</span>
           </div>
         </div>
@@ -117,10 +125,11 @@ export const EditWaterForm = ({
             </p>
             <input
               type="number"
-              value={amount}
-              onChange={handleChange}
+              name='amount'
               min={0}
               max={5000}
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
             />
           </div>
         </div>

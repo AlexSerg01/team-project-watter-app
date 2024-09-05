@@ -17,10 +17,7 @@ import {
   selectWaterRate,
 } from "../../redux/auth/selectors.js";
 
-export const WaterRatioPanel = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
 
   const waterTodayState = useSelector(selectWaterToday);
   const waterRate = useSelector(selectWaterRate);
@@ -60,25 +57,13 @@ export const WaterRatioPanel = () => {
           </PercentageValue>
         </PercentageWrapper>
       </WaterPanel>
-      <BtnAddWater type="button" onClick={openModal}>
+      <BtnAddWater type="button" onClick={openAddNewWaterRecordModalHandler}>
         <svg width="24" height="24" stroke="#fff" fill="none">
           <use xlinkHref={`${SpriteIcons}#icon-plus-circle`} />
         </svg>
         <span>Add water</span>
       </BtnAddWater>
-      {modalIsOpen && (
-        <ModalOverlay>
-          <AddWaterForm
-            onClose={closeModal}
-            initialAmount={0}
-            initialDate={new Date()}
-            updateWaterData={(amount, date) => {
-              console.log("Amount:", amount);
-              console.log("Date:", date);
-            }}
-          />
-        </ModalOverlay>
-      )}
+     
     </WaterWrapper>
   );
 };

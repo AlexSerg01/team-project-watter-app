@@ -26,7 +26,12 @@ export default function MonthStatsTable() {
 
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredDay, setHoveredDay] = useState(null);
+
+
   const [openDay, setOpenDay] = useState(false);
+
 
   const waterItems = useSelector((state) => state.waterInfo.items);
 
