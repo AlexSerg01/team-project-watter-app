@@ -35,9 +35,7 @@ export const WaterRatioPanel = () => {
     0
   );
 
-  const handleRangeChange = (event) => {
-
-  };
+  const handleRangeChange = (event) => {};
 
   return (
     <WaterWrapper>
