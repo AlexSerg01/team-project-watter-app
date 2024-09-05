@@ -7,7 +7,23 @@
     flex-direction: column;
     gap: 24px;
     box-sizing: border-box;
+    background-color: #ECF2FF;
+}
+
+.sectionModal {
+    padding: 32px 24px;
+    width: 592px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
     background-color: #fff;
+}
+
+.waterPreInfo {
+    background-color: #ECF2FF;
 }
 
 .crossBtn {
@@ -147,7 +163,7 @@ input {
 }
 
 .formEditInfo {
-    width: 544px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -249,6 +265,7 @@ input {
     flex-direction: column;
     gap: 12px;
     height: 212px;
+    width: 100%;
 }
 
 .tableWrapper {
@@ -261,13 +278,17 @@ input {
     background-color: #ECF2FF;
 }
 
-.todayWrapper {
-    width: 544px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    /* background-color: #ECF2FF; */
+@media screen and (min-width: 1440px) {
+
+    .todayWrapper {
+        width: 544px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+    }
 }
+
 
 .today {
     font-family: Roboto;
@@ -289,4 +310,66 @@ input {
     justify-content: center;
     align-items: center;
     z-index: 999;
+}
+
+@media screen and (max-width: 1439px) {
+    .tableWrapper {
+        gap: 20px;
+        width: 704px;
+        background-color: #ECF2FF;
+        padding: 32px 24px 32px 24px;
+    }
+
+    .section, .sectionModal {
+        width: 704px;
+
+    }
+
+    .listWraper {
+        width: 100%;
+    }
+
+    .listWraper li {
+        width: 100%;
+    }
+
+    .todayWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+
+    }
+
+    .addBtn {
+        background-color: transparent;
+        border: none;
+        color: #407BFF;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        text-align: left;
+        padding: 0;
+        display: flex;
+        gap: 8px;
+
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sectionModal, .section {
+        width: 280px;
+        padding: 24px 8px;
+    }
+
+    .inputWrapper input {
+        width: 120px;
+        height: 44px;
+    }
+
+    .waterPreInfo {
+        width: auto;
+    }
+
 }

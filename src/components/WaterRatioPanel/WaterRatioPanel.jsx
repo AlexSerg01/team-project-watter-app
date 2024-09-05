@@ -1,8 +1,8 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   BtnAddWater,
-  ModalOverlay,
+  // ModalOverlay,
   PercentageValue,
   PercentageWrapper,
   WaterLabel,
@@ -10,7 +10,7 @@ import {
   WaterRangeField,
   WaterWrapper,
 } from "./WaterRatioPanel.styled.js";
-import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm.jsx";
+// import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm.jsx";
 import SpriteIcons from "../../assets/icons.svg";
 import {
   selectWaterToday,

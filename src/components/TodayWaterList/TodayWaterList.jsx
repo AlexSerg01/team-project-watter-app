@@ -34,7 +34,7 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
   };
 
   return (
-    <div className={css.tableWrapper}>
+    <div className={css.section}>
       <div className={css.todayWrapper}>
         <p className={css.today}>Today</p>
         <div className={css.listContainer}>
@@ -51,12 +51,14 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
                 </li>
               ))}
             </ul>
-            {waterRecords.length == 0 ? <p>No records</p> : <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
+            {/* {waterRecords.length == 0 ? <p>No records</p> : */}
+              <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
               <svg>
                 <use href={`${icons}#icon-increment`}></use>
               </svg>
               <span>Add water</span>
-            </button>}
+            </button>
+            {/* } */}
           </div>
         </div>
       </div>
