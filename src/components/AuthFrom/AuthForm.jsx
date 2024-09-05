@@ -1,9 +1,18 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import css from "./AuthForm.module.css"; // Імпортуємо CSS
+
+import css from "./AuthForm.module.css";
+import icon from "../../assets/icons.svg";
+import { useState } from "react";
 
 export default function AuthForm({ type, onSubmit }) {
   const isSignup = type === "signup";
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -51,16 +60,32 @@ export default function AuthForm({ type, onSubmit }) {
 
           <div className={css.form_group}>
             <label htmlFor="password">Enter your password:</label>
-            <Field
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              autoComplete="current-password"
-              className={
-                touched.password && errors.password ? css.error_input : ""
-              }
-            />
+            <div className={css.input_wrapper}>
+              <Field
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="Password"
+                autoComplete="current-password"
+                className={
+                  touched.password && errors.password ? css.error_input : ""
+                }
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className={css.password_toggle}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                <svg className={css.icon} width="16" height="16">
+                  {showPassword ? (
+                    <use href={`${icon}#icon-eye`} />
+                  ) : (
+                    <use href={`${icon}#icon-eye-slash`} />
+                  )}
+                </svg>
+              </button>
+            </div>
             <ErrorMessage
               name="password"
               component="div"
@@ -71,18 +96,34 @@ export default function AuthForm({ type, onSubmit }) {
           {isSignup && (
             <div className={css.form_group}>
               <label htmlFor="repeatPassword">Repeat password:</label>
-              <Field
-                type="password"
-                name="repeatPassword"
-                id="repeatPassword"
-                placeholder="Repeat Password"
-                autoComplete="new-password"
-                className={
-                  touched.repeatPassword && errors.repeatPassword
-                    ? css.error_input
-                    : ""
-                }
-              />
+              <div className={css.input_wrapper}>
+                <Field
+                  type={showPassword ? "text" : "password"}
+                  name="repeatPassword"
+                  id="repeatPassword"
+                  placeholder="Repeat Password"
+                  autoComplete="new-password"
+                  className={
+                    touched.repeatPassword && errors.repeatPassword
+                      ? css.error_input
+                      : ""
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className={css.password_toggle}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <svg className={css.icon} width="16" height="16">
+                    {showPassword ? (
+                      <use href={`${icon}#icon-eye`} />
+                    ) : (
+                      <use href={`${icon}#icon-eye-slash`} />
+                    )}
+                  </svg>
+                </button>
+              </div>
               <ErrorMessage
                 name="repeatPassword"
                 component="div"

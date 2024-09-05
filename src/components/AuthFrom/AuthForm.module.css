@@ -34,6 +34,20 @@
     outline: none;
   }
 
+  .input_wrapper {
+    position: relative;
+  }
+
+  .password_toggle {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
   .auth_form .error_input {
     border-color: var(--SECONDARY-RED);
     color: var(--SECONDARY-RED);
@@ -48,7 +62,7 @@
     margin-top: 4px;
   }
 
-  .auth_form button {
+  .auth_form .submit_button {
     padding: 8px 30px;
     background-color: var(--PRIMERY-BLUE);
     color: var(--PRIMERY-WHITE);
@@ -102,6 +116,20 @@
     outline: none;
   }
 
+  .input_wrapper {
+    position: relative;
+  }
+
+  .password_toggle {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
   .auth_form .error_input {
     border-color: var(--SECONDARY-RED);
     color: var(--SECONDARY-RED);
@@ -116,7 +144,7 @@
     margin-top: 4px;
   }
 
-  .auth_form button {
+  .auth_form .submit_button {
     display: flex;
     padding: 10px 30px;
     justify-content: center;
