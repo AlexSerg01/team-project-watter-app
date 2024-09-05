@@ -1,0 +1,263 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--PRIMERY-WHITE);
+  border-radius: 8px;
+  max-width: 280px;
+  min-height: 816px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1001;
+  padding: 24px 12px;
+  font: Robboto;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 27px;
+  right: 2px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.23;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.formulas {
+  display: flex;
+  flex-direction: column;
+}
+
+.formula {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--PRIMERY-BLACK);
+  margin-top: 16px;
+}
+
+.blue {
+  font-size: 18px;
+  line-height: 1.33;
+  color: var(--PRIMERY-BLUE);
+}
+
+.note {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
+  text-align: left;
+  color: #8f8f8f;
+  border: 1px solid var(--SECONDARY-GRAY);
+  border-radius: 10px;
+  margin-top: 12px;
+  padding: 10px;
+  margin-bottom: 24px;
+}
+
+.dot {
+  color: var(--PRIMERY-BLUE);
+}
+
+.titleh3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.radio {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: left;
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.genderInput {
+  width: 14px;
+  height: 14px;
+}
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--PRIMERY-BLUE);
+  outline: none;
+  cursor: pointer;
+  margin-right: 7px;
+}
+
+input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: var(--PRIMERY-BLUE);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.titleInput {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.calcInput {
+  margin-top: 8px;
+  max-width: 256px;
+  width: 100%;
+  height: 44px;
+  padding: 12px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--SECONDARY-GRAY);
+  margin-bottom: 16px;
+}
+
+.calcInput::placeholder {
+  color: var(--PRIMERY-BLUE);
+}
+
+.total {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: left;
+  width: 190px;
+}
+
+.result {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.screen {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.33;
+  color: var(--PRIMERY-BLUE);
+  text-align: center;
+  padding-top: 8px;
+}
+
+.resultTitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  text-align: left;
+}
+
+.saveBtn {
+  width: 100%;
+  height: 36px;
+  border-radius: 10px;
+  padding: 8px 30px;
+  background: var(--PRIMERY-BLUE);
+  box-shadow: 0px 4px 8px 0px #407bff57;
+  border: none;
+  color: var(--PRIMERY-WHITE);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.errorMessage {
+  color: rgb(169, 7, 7);
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    max-width: 704px;
+    min-height: 696px;
+    padding: 32px 24px;
+  }
+
+  .modalCloseButton {
+    top: 27px;
+    right: 14px;
+  }
+  .formula {
+    margin-top: 0;
+  }
+  .formulas {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+  .note {
+    padding: 9.5px;
+  }
+  .titleInput {
+    display: block;
+  }
+  .calcInput {
+    max-width: 656px;
+  }
+  .total {
+    width: 328px;
+  }
+  .screen {
+    padding-top: 0px;
+    padding-left: 6px;
+  }
+  .saveBtn {
+    width: 160px;
+    height: 44px;
+    padding: 10px 30px;
+    margin-top: 8px;
+    margin-left: 75.5%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .modal {
+    max-width: 592px;
+    min-height: 712px;
+  }
+
+  .calcInput {
+    max-width: 544px;
+  }
+
+  .saveBtn {
+    width: 160px;
+    height: 44px;
+    padding: 10px 30px;
+    margin-top: 8px;
+    margin-left: 70.5%;
+  }
+}
