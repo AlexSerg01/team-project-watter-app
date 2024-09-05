@@ -32,9 +32,7 @@ export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
     0
   );
 
-  const handleRangeChange = (event) => {
-
-  };
+  const handleRangeChange = (event) => {};
 
   return (
     <WaterWrapper>

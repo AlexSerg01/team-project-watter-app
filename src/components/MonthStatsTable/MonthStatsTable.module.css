@@ -9,6 +9,7 @@
     padding: 12px 8px 24px 8px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
     /* box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3); */
 }
 
@@ -31,14 +32,10 @@
     row-gap: 16px;
     column-gap: 26px;
     justify-content: space-between;
-}
 
-.daysWrapper {
-    position: relative;
 }
 
 .dayItem {
-    /* position: relative; */
     width: 32px;
     height: 32px;
     background-color: #ffffff;
@@ -54,7 +51,6 @@
 }
 
 .dayItemAccentColor {
-    /* position: relative; */
     width: 32px;
     height: 32px;
     background-color: #ffffff;
@@ -121,6 +117,7 @@
 
 
 .dayInCalendar {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,18 +128,26 @@
 
 .dayInCalendar:hover {
     cursor: pointer;
-    transform: scale(110%);
+
 }
 
 
-.popUpWindow {
-    border-radius: 10px;
-    background-color: #ffffff;
-    width: 280px;
-    position: absolute;
-    top: -44%;
-    left: -3%;
+@media screen and (max-width: 767px) {
+
+    .popUpWindowRight,
+    .popUpWindowLeft {
+        border-radius: 10px;
+        background-color: #ffffff;
+        width: 280px;
+        position: absolute;
+        z-index: 9999999;
+        left: 50%;
+        top: 0%;
+        transform: translate(-50%, -101%)
+    }
+
 }
+
 
 
 @media screen and (min-width: 768px) {
@@ -156,6 +161,10 @@
     .monthTitle {
         font-size: 26px;
         line-height: 1.25;
+    }
+
+    .dayInCalendar {
+        position: relative;
     }
 
     .dayItem {
@@ -182,10 +191,33 @@
         column-gap: 34px;
     }
 
-    .popUpWindow {
+    /* .popUpWindow {
         width: 292px;
         top: -64.4%;
         left: 0.5%;
+    } */
+    .popUpWindowRight {
+        border-radius: 10px;
+        background-color: #ffffff;
+        width: 282px;
+        position: absolute;
+        /* right: 50%;
+        top: -305%; */
+        right: 100%;
+        top: 0;
+        transform: translate(6%, -101%);
+        z-index: 9999999;
+    }
+
+    .popUpWindowLeft {
+        border-radius: 10px;
+        background-color: #ffffff;
+        width: 282px;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        transform: translate(-6%, -101%);
+        z-index: 9999999;
     }
 
 }

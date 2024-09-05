@@ -12,7 +12,7 @@ export default function DaysGeneralStats({ day }) {
         <ul className={css.dayStatus}>
           <li className={css.dayStatusDate}>{day}</li>
           <li className={css.dayStatusItem}>
-            Daily norma: <span className={css.textColorAccent}>1.5L</span>
+            Daily norma: <span className={css.textColorAccent}>2L</span>
           </li>
           <li className={css.dayStatusItem}>
             Fulfillment of the daily norm:{" "}
