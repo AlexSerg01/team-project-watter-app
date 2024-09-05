@@ -26,10 +26,7 @@ export default function MonthStatsTable() {
 
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hoveredDay, setHoveredDay] = useState(null);
-
-  console.log(isModalOpen);
+  const [openDay, setOpenDay] = useState(false);
 
   const waterItems = useSelector((state) => state.waterInfo.items);
 
@@ -80,15 +77,18 @@ export default function MonthStatsTable() {
   };
 
   const handleOpenDayInfo = (day) => {
-    setHoveredDay(day);
-    setIsModalOpen(true);
+    if (openDay === day) {
+      setOpenDay(false);
+    } else {
+      setOpenDay(day);
+    }
   };
 
   const handleCloseDayInfo = () => {
-    setIsModalOpen(false);
-
-    setHoveredDay(null);
+    setOpenDay(false);
   };
+
+  const leftSideItems = [1, 2, 3, 4, 5, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25];
 
   return (
     <div className={css.calendarWrapper}>
@@ -121,33 +121,42 @@ export default function MonthStatsTable() {
       <div className={css.daysWrapper}>
         <ul className={css.calendar}>
           {waterItems.map((item) => (
-            <li className={css.dayInCalendar} key={item.date}>
+            <li
+              className={css.dayInCalendar}
+              key={item.date}
+              onClick={() => {
+                handleOpenDayInfo(item.date);
+              }}
+              onMouseLeave={handleCloseDayInfo}
+            >
               <div
                 className={
-                  item.percentageConsumed !== "100%"
+                  parseFloat(item.percentageConsumed) < 100
                     ? css.dayItemAccentColor
                     : css.dayItem
                 }
-                onClick={() => {
-                  handleOpenDayInfo(item.date);
-                }}
-                onMouseLeave={handleCloseDayInfo}
               >
                 {Number(item.date.split(",")[0])}
               </div>
               <div className={css.percentDayItem}>
                 {item.percentageConsumed}
               </div>
+              <div>
+                {openDay === item.date && (
+                  <div
+                    className={
+                      leftSideItems.includes(Number(item.date.split(",")[0]))
+                        ? css.popUpWindowLeft
+                        : css.popUpWindowRight
+                    }
+                  >
+                    <DaysGeneralStats day={openDay} />
+                  </div>
+                )}
+              </div>
             </li>
           ))}
         </ul>
-        {isModalOpen && hoveredDay && (
-          <div className={css.tableWrapper}>
-            <div className={css.popUpWindow}>
-              <DaysGeneralStats day={hoveredDay} />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

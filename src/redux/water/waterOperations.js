@@ -72,7 +72,6 @@ export const deleteWaterRecord = createAsyncThunk(
   }
 );
 
-
 export const updateWaterRecord = createAsyncThunk(
   "water/updateWaterRecord",
   async ({ id, amount }, thunkAPI) => {
