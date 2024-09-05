@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addWaterRecord, deleteWaterRecord, getAllWaterRecordsPerDay, updateWaterRecord } from "./waterOperations";
+import {
+  addWaterRecord,
+  deleteWaterRecord,
+  getAllWaterRecordsPerDay,
+  updateWaterRecord,
+} from "./waterOperations";
 
 const initialState = {
   isLoading: false,
   error: null,
   waterRecords: [],
-
 };
 
 const waterSlice = createSlice({
@@ -48,15 +52,14 @@ const waterSlice = createSlice({
       .addCase(updateWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         const index = state.waterRecords.findIndex(
-          (record) => record._id === action.payload._id
+          (record) => record._id === action.payload.data._id
         );
         if (index !== -1) {
-          state.waterRecords[index] = action.payload.data.amount;
+          state.waterRecords[index] = action.payload.data;
         }
         console.log(action.payload.data);
-        
       })
-      .addCase(getAllWaterRecordsPerDay.pending, state => {
+      .addCase(getAllWaterRecordsPerDay.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getAllWaterRecordsPerDay.rejected, (state, action) => {
@@ -66,7 +69,7 @@ const waterSlice = createSlice({
       .addCase(getAllWaterRecordsPerDay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords = action.payload.dailyRecords;
-      })
+      });
   },
 });
 
