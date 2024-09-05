@@ -1,12 +1,36 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectError } from "../../redux/auth/selectors";
 
 import css from "./AuthForm.module.css";
 import icon from "../../assets/icons.svg";
-import { useState } from "react";
 
 export default function AuthForm({ type, onSubmit }) {
   const isSignup = type === "signup";
+  const [error, setError] = useState("");
+  const authError = useSelector(selectError);
+
+  const createAuthErrorMessage = (authError) => {
+    const errorMessage =
+      typeof authError === "string" ? authError : authError.message;
+
+    switch (errorMessage) {
+      case "Unauthorized":
+        return "Email or password is incorrect!";
+      case "Not found":
+        return "The user with this data does not exist.";
+      default:
+        return "An unknown error occurred.";
+    }
+  };
+
+  useEffect(() => {
+    if (authError) {
+      setError(createAuthErrorMessage(authError));
+    }
+  }, [authError]);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -131,6 +155,9 @@ export default function AuthForm({ type, onSubmit }) {
               />
             </div>
           )}
+
+          {/* Відображення помилки запиту */}
+          {error && <div className={css.input_error}>{error}</div>}
 
           <button
             type="submit"

@@ -39,3 +39,8 @@ export const selectWaterToday = createSelector(
   AuthReducerSelector,
   (state) => state.user.dailyWaterIntake
 );
+
+export const selectError = createSelector(
+  AuthReducerSelector,
+  (state) => state.error
+);
