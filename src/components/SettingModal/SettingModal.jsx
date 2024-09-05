@@ -345,8 +345,8 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                     <use
                       href={`${icons}#icon-${
                         passwordVisibility.outdatedPassword
-                          ? "eye-slash"
-                          : "eye"
+                          ? "eye"
+                          : "eye-slash"
                       }`}
                     />
                   </svg>
@@ -379,7 +379,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                   <svg className={styles.icon}>
                     <use
                       href={`${icons}#icon-${
-                        passwordVisibility.newPassword ? "eye-slash" : "eye"
+                        passwordVisibility.newPassword ? "eye" : "eye-slash"
                       }`}
                     />
                   </svg>
@@ -412,7 +412,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
                   <svg className={styles.icon}>
                     <use
                       href={`${icons}#icon-${
-                        passwordVisibility.repeatPassword ? "eye-slash" : "eye"
+                        passwordVisibility.repeatPassword ? "eye" : "eye-slash"
                       }`}
                     />
                   </svg>
