@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import avatar from "../../assets/images/avatar.png";
 import {
   DropDownContainer,
   DropDownBtn,
@@ -12,33 +12,29 @@ import {
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
-import { getUserInfo } from "../../fetch/fetch.js";
-
+import { getUserInfo } from "../../fetch/fetch";
+import { createPortal } from "react-dom";
 
 export const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [activeModal, setActiveModal] = useState(null);
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [userInfo, setUserData] = useState(null);
   const menuRef = useRef(null);
-  const token = useSelector((state) => state.auth.user.accessToken);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        if (!token) return;
-        const response = await getUserInfo(token);
+        const response = await getUserInfo();
         setUserData(response.data.data);
       } catch (error) {
-        console.error("error1", error);
+        console.error("Error fetching user data:", error);
       }
     };
 
-    fetchUserData();
-  }, [token]);
+    fetchData();
+  }, []);
 
-  const userName = userData.name || ""
-  const userEmail = userData.email || ""
-  
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -59,21 +55,28 @@ export const DropDownMenu = () => {
   }, [isOpen]);
 
   const handleMenuItemClick = (action) => {
-    setActiveModal(action);
+    if (action === "setting") {
+      setIsSettingModalOpen(true);
+    } else if (action === "logout") {
+      setIsLogoutModalOpen(true);
+    }
     setIsOpen(false);
   };
 
-  const handleModalClose = () => {
-    setActiveModal(null);
+  const handleSave = (updatedData) => {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      ...updatedData,
+    }));
   };
 
   return (
     <>
       <DropDownContainer ref={menuRef}>
         <DropDownBtn onClick={toggleMenu}>
-          <UserName>{userName || "User"}</UserName>
+          <UserName>{userInfo?.name || "User"}</UserName>
           <UserAvatar
-            src={userData.photo || "/path/to/default-avatar.png"}
+            src={userInfo?.photo || avatar}
             alt="User`s Avatar"
             width="28"
             height="28"
@@ -99,18 +102,24 @@ export const DropDownMenu = () => {
           </Menu>
         )}
       </DropDownContainer>
-      {activeModal === "setting" && <SettingModal
-        isOpen={true}
-        onClose={handleModalClose}
-        userData={{
-          photo: "userAvatar",
-          name: userName,
-          email: userEmail,
-          gender: userData.gender || "male",
-        }}
-        onSave={(data) => console.log("Saved data:", data)}
-         />}
-      {activeModal === "logout" && <UserLogoutModal isOpen={true} onClose={handleModalClose} />}
+
+      {createPortal(
+        <SettingModal
+          isOpen={isSettingModalOpen}
+          onClose={() => setIsSettingModalOpen(false)}
+          userData={userInfo}
+          onSave={handleSave}
+        />,
+        document.body
+      )}
+
+      {createPortal(
+        <UserLogoutModal
+          isOpen={isLogoutModalOpen}
+          onClose={() => setIsLogoutModalOpen(false)}
+        />,
+        document.body
+      )}
     </>
   );
 };
