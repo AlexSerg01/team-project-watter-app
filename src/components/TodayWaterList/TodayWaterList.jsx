@@ -1,57 +1,75 @@
-import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TodayWaterItem } from "./TodayWaterItem/TodayWaterItem";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteWaterRecord, getAllWaterRecordsPerDay } from "../../redux/water/waterOperations";
+import { selectWaterRecords } from "../../redux/water/waterSelectors";
+import { EditWaterForm } from "./EditWaterForm";
 
-export const TodayWaterList = () => {
-  const [waterItems, setWaterItems] = useState([
-    {
-      id: nanoid(),
-      amount: 340,
-      date: new Date(),
-    },
-  ]);
+export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
+  const dispatch = useDispatch();
 
-  const handleAddWater = () => {
-    const newWaterItem = {
-      id: nanoid(),
-      amount: 250,
-      date: new Date(),
-    };
-    setWaterItems([newWaterItem, ...waterItems]);
+  // Отримуємо запис про воду з Redux
+  const waterRecords = useSelector(selectWaterRecords);
+  const [editingRecord, setEditingRecord] = useState(null);
+
+  useEffect(() => {
+    dispatch(getAllWaterRecordsPerDay());
+  }, [dispatch]);
+
+  const handleEditModalClose = () => {
+    setEditingRecord(null);
   };
 
   const handleDelete = (id) => {
-    setWaterItems(waterItems.filter((elem) => elem.id !== id));
+    dispatch(deleteWaterRecord(id))
+      .unwrap()
+      .then(() => {
+        console.log("Water record deleted:", id);
+      })
+      .catch((error) => {
+        console.error("Failed to delete water record:", error);
+      });
   };
 
   return (
-    <div className={css.tableWrapper}>
+    <div className={css.section}>
       <div className={css.todayWrapper}>
         <p className={css.today}>Today</p>
         <div className={css.listContainer}>
           <div className={css.hightRegulator}>
             <ul className={css.listWraper}>
-              {waterItems.map((elem) => (
-                <li key={elem.id}>
+              {waterRecords?.map((elem) => (
+                <li key={elem._id}>
                   <TodayWaterItem
-                    initialAmount={elem.amount}
-                    initialDate={elem.date}
-                    onDelete={() => handleDelete(elem.id)}
+                    amount={elem.amount}
+                    date={new Date(elem.date)}
+                    onDelete={() => handleDelete(elem._id)}
+                    onEdit={() => setEditingRecord(elem)}
                   />
                 </li>
               ))}
             </ul>
-            <button className={css.addBtn} onClick={handleAddWater}>
+            {/* {waterRecords.length == 0 ? <p>No records</p> : */}
+              <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
               <svg>
                 <use href={`${icons}#icon-increment`}></use>
               </svg>
               <span>Add water</span>
             </button>
+            {/* } */}
           </div>
         </div>
       </div>
+      {editingRecord && (
+        <div className={css.modalBackdrop}>
+          <EditWaterForm
+            onClose={handleEditModalClose}
+            editingRecord={editingRecord}
+          />
+        </div>
+      )}
     </div>
   );
 };

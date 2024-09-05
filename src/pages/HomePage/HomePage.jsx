@@ -1,24 +1,56 @@
 import { TodayWaterList } from "../../components/TodayWaterList/TodayWaterList";
-// import Header from "../../components/Header/Header";
 // import DailyNorma from "../../components/DaiilyNorma/DailyNorma";
-// import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel";
+import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPanel";
+
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 
 import css from "./HomePage.module.css";
+
 import MyDailyNorma from "../../components/MyDailyNorma/MyDailyNorma";
 
+import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm";
+import { useState } from "react";
+
+
 const HomePage = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+
+  function openAddNewWaterRecordModalHandler() {
+    setIsOpen(true);
+  }
+
   return (
     <div className={css.homeMain}>
-      <div>{/* <Header /> */}</div>
       <div className={css.homeContainer}>
         <MyDailyNorma/>
         <div className={css.homeBotle}></div>
-        <div className={css.waterRatioPanel}>{/* <WaterRatioPanel /> */}</div>
+        <div className={css.waterRatioPanel}>
+          <WaterRatioPanel
+            openAddNewWaterRecordModalHandler={
+              openAddNewWaterRecordModalHandler
+            }
+          />
+        </div>
         <div className={css.tableWrapper}>
-          <TodayWaterList />
+          <TodayWaterList
+            openAddNewWaterRecordModalHandler={
+              openAddNewWaterRecordModalHandler
+            }
+          />
           <MonthStatsTable />
         </div>
+        {modalIsOpen && (
+          <AddWaterForm
+            onClose={closeModal}
+            initialAmount={0}
+            initialDate={new Date()}
+            updateWaterData={(amount, date) => {
+              console.log("Amount:", amount);
+              console.log("Date:", date);
+            }}
+          />
+        )}
       </div>
     </div>
   );

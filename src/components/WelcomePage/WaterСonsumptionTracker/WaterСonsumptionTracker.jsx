@@ -1,4 +1,5 @@
 import css from "./WaterConsumptionTracker.module.css";
+import icon from "../../../assets/icons.svg";
 
 const WaterConsumptionTracker = ({ onTryTrackerClick }) => {
   return (
@@ -9,19 +10,19 @@ const WaterConsumptionTracker = ({ onTryTrackerClick }) => {
       <ul className={css.tracker_benefits}>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-calendar-days"></use>
+            <use href={`${icon}#icon-calendar-days`} />
           </svg>
           <p className={css.benefit_discrip}>Habit drive</p>
         </li>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-presentation-bar"></use>
+            <use href={`${icon}#icon-presentation-bar`} />
           </svg>
           <p className={css.benefit_discrip}>View statistics</p>
         </li>
         <li className={css.benefit_item}>
           <svg className={css.icon_svg} width="32" height="32">
-            <use href="/src/assets/icons.svg#icon-wrench-screwdriver"></use>
+            <use href={`${icon}#icon-wrench-screwdriver`} />
           </svg>
           <p className={css.benefit_discrip}>Personal rate setting</p>
         </li>

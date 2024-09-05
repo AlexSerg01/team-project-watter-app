@@ -61,9 +61,11 @@
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
   .homeContainer {
-    width: 768px;
+    width: 764px;
+    height: 1280px;
     margin-top: 24px;
     background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@1x.png");
+    background-size: contain;
     position: relative;
   }
 
@@ -74,7 +76,7 @@
     margin-right: auto;
     background-image: url("../../assets/images/home-page/bottle-home-page/Tablet-Botle-Home-screen@1x.png");
     position: absolute;
-    top: -16px;
+    top: 16px;
     left: 125px;
   }
 
@@ -90,126 +92,75 @@
   }
 
   .dailyBox {
+    position: absolute;
     height: 76px;
+    margin-top: 16px;
     margin-left: 32px;
   }
 
   .waterRatioPanel {
+    position: absolute;
     width: 704px;
     height: 90px;
-    margin-top: 326px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .waterRatioPanel {
-    margin-top: 40px;
-    height: 134px;
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    top: 418px;
+    margin-top: 0;
+    left: 32px;
   }
 
   .tableWrapper {
-    margin-top: 40px;
+    position: absolute;
     width: 704px;
-    margin-left: auto;
-    margin-right: auto;
+    top: 548px;
+    margin-top: 0;
+    left: 32px;
   }
 }
 
 /*=================Desk=================*/
 @media screen and (min-width: 1440px) {
   .homeContainer {
-    display: flex;
     width: 1440px;
-    margin-top: 22px;
+    height: 582px;
+    margin-top: 58px;
     background-image: url("../../assets/images/home-page/bubbles-home-page/Desk-Bubbles-Home-Page@1x.png");
+    position: relative;
   }
 
   .homeBotle {
+    position: absolute;
     background-image: url("../../assets/images/home-page/bottle-home-page/Desk-Botle-Home-screen@1x.png");
     width: 738px;
     height: 548px;
     left: 38.67px;
-    margin-top: 22px;
     background-repeat: no-repeat;
     background-size: contain;
-    margin-left: auto;
-    margin-right: auto;
+    top: -36px;
   }
-}
-
-/*=================Tablet=================*/
-@media (min-width: 768px) {
-  .homeContainer {
-    width: 764px;
-    height: 1280px;
-    margin-top: 24px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@1x.png");
-    position: relative;
-  }
-
-  .homeBotle {
-    width: 518px;
-    height: 386px;
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url("../../assets/images/home-page/bottle-home-page/Tablet-Botle-Home-screen@1x.png");
-    position: absolute;
-    top: -16px;
-    left: 125px;
-    z-index: 2;
-  }
-
   .dailyBox {
-    border: 1px solid #ecf2ff;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 8px 20px;
-    width: 164px;
-    height: 76px;
-    box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
-    margin-left: 32px;
-  }
-
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-    .homeContainer {
-      background-image: url("../../assets/images/home-page/bubbles-home-page/Desk-Bubbles-Home-Page@2x.png");
-    }
-    .homeBotle {
-      background-image: url("../../assets/images/home-page/bottle-home-page/Desk-Botle-Home-screen@2x.png");
-    }
-  }
-
-  .dailyBox {
-    height: 76px;
-    margin-left: 112px;
-    margin-top: 30px;
     position: absolute;
+    height: 76px;
+    top: -6px;
+    left: 112px;
+    margin-left: 0;
+    margin-top: 0;
   }
 
   .waterRatioPanel {
+    position: absolute;
     width: 592px;
     height: 90px;
-    position: relative;
-    margin: 0;
-    top: 654px;
+    top: 508px;
+    margin-top: 24px;
     left: 112px;
-    /* border: 1px solid #ecf2ff;
-    background-color: #fff;
-    border-radius: 10px; */
   }
 
   .tableWrapper {
-    display: inline;
+    position: absolute;
     width: 592px;
-    margin-right: 112px;
+    height: 680px;
+    top: 548px;
+    margin-top: 0;
+    left: 736px;
+    top: -36px;
   }
 }

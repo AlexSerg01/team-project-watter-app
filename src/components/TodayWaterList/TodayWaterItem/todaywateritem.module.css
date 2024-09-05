@@ -187,3 +187,41 @@
     color: #fff;
     box-shadow: 0 4px 8px 0 #407BFF57;
 }
+
+
+@media screen and (min-width: 768px) {
+    .itemWrapper {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .itemWrapper {
+        width: 100%;
+        height: 26px;
+    }
+    .infoWrapper {
+        min-width: 0;
+    }
+    .glass{
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+@media screen and (max-width: 767px){
+    .modalDelete {
+        width: 280px;
+        height: 280px;
+    }
+
+    .choiseBtns{
+        flex-direction: column;
+        width: 232px;
+        height: 96px;
+    }
+    .choiseBtns button {
+        width: 100%;
+    }
+}
