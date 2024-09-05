@@ -68,19 +68,6 @@
   margin-right: 10px;
 }
 
-.photoUpload .avatar {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  border-radius: 50%;
-  border: 1px solid var(--PRIMERY-BLUE);
-  background-color: var(--PRIMERY-WHITE);
-  color: var(--PRIMERY-BLUE);
-}
-
 .uploadIcon {
   width: 16px;
   height: 16px;

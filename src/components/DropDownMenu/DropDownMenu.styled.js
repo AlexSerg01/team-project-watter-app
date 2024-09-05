@@ -49,6 +49,14 @@ export const CreateAvatar = styled.div`
   color: var(--PRIMERY-BLUE);
   font-size: 14px;
   font-weight: 500;
+
+  &.avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+    margin-right: 10px;
+    border: 2px solid var(--PRIMERY-BLUE);
+  }
 `;
 
 export const ChevronIcon = styled.svg`

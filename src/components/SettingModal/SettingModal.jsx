@@ -12,6 +12,7 @@ import {
   updateUserInfo,
   updateUserPhoto,
 } from "../../fetch/fetch";
+import { CreateAvatar } from "../DropDownMenu/DropDownMenu.styled.js";
 import { getUserLogoInfo } from "../utils/userAvatarUtils";
 
 function SettingModal({ isOpen, onClose, userData, onSave }) {
@@ -247,9 +248,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
               {previewImage ? (
                   <img src={previewImage} alt="User" />
                 ) : (
-                  <div className={styles.avatar}>
-                    {initial}
-                  </div>
+                  <CreateAvatar className="avatar-large">{initial}</CreateAvatar>
               )}
               <input
                 type="file"
