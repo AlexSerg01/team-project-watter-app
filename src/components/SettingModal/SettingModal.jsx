@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./SettingModal.module.css";
-import defaultAvatar from "../../assets/images/avatar.png";
 import icons from "../../assets/icons.svg";
 import {
   validateName,
@@ -13,6 +12,7 @@ import {
   updateUserInfo,
   updateUserPhoto,
 } from "../../fetch/fetch";
+import { getUserLogoInfo } from "../utils/userAvatarUtils";
 
 function SettingModal({ isOpen, onClose, userData, onSave }) {
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
   });
 
   const [previewImage, setPreviewImage] = useState(
-    userData?.photo || defaultAvatar
+    userData?.photo || ""
   );
 
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -59,7 +59,7 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
             newPassword: "",
             repeatPassword: "",
           });
-          setPreviewImage(data.photo || defaultAvatar);
+          setPreviewImage(data.photo || "");
         } catch (error) {
           console.error("Error fetching user info:", error);
         }
@@ -226,6 +226,8 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
 
   if (!isOpen) return null;
 
+  const { initial } = getUserLogoInfo(userData);
+
   return (
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -242,7 +244,13 @@ function SettingModal({ isOpen, onClose, userData, onSave }) {
           <div className={styles.formGroup}>
             <label>Your photo</label>
             <div className={styles.photoUpload}>
-              <img src={previewImage} alt="User" />
+              {previewImage ? (
+                  <img src={previewImage} alt="User" />
+                ) : (
+                  <div className={styles.avatar}>
+                    {initial}
+                  </div>
+              )}
               <input
                 type="file"
                 onChange={handlePhotoUpload}
