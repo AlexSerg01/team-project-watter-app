@@ -29,7 +29,7 @@ const userSlice = createSlice({
         state.gender = action.payload.gender || "";
         state.waterRate = action.payload.waterRate;
       })
-      .addCase(fetchUserData.rejected, handleRejected);
+      .addCase(getUserData.rejected, handleRejected);
   },
 });
 
