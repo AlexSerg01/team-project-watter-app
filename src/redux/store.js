@@ -27,6 +27,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Налаштування store з persistedReducer
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable serializable check
+    }),
 });
 
 // Експортуємо persistor
