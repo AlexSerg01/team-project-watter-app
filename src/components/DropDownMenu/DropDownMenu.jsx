@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import avatar from "../../assets/images/avatar.png";
 import {
   DropDownContainer,
   DropDownBtn,
@@ -8,18 +7,20 @@ import {
   ChevronIcon,
   Menu,
   MenuItem,
+  CreateAvatar
 } from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
 import { getUserInfo } from "../../fetch/fetch";
 import { createPortal } from "react-dom";
+import { getUserLogoInfo } from "../utils/userAvatarUtils.js";
 
 export const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [userInfo, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -70,17 +71,23 @@ export const DropDownMenu = () => {
     }));
   };
 
+  const { avatar, userName, initial } = getUserLogoInfo(userData);
+
   return (
     <>
       <DropDownContainer ref={menuRef}>
         <DropDownBtn onClick={toggleMenu}>
-          <UserName>{userInfo?.name || "User"}</UserName>
+          <UserName>{ userName }</UserName>
+          {avatar ? (
           <UserAvatar
-            src={userInfo?.photo || avatar}
-            alt="User`s Avatar"
+            src={avatar}
+            alt="User's Avatar"
             width="28"
             height="28"
-          ></UserAvatar>
+          />
+        ) : (
+          <CreateAvatar>{initial}</CreateAvatar>
+        )}
           <ChevronIcon>
             <use href={`${icons}#icon-chevron-down`} />
           </ChevronIcon>
@@ -107,7 +114,7 @@ export const DropDownMenu = () => {
         <SettingModal
           isOpen={isSettingModalOpen}
           onClose={() => setIsSettingModalOpen(false)}
-          userData={userInfo}
+          userData={userData}
           onSave={handleSave}
         />,
         document.body
