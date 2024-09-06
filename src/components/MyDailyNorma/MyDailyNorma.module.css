@@ -1,18 +1,17 @@
 .container {
   font-family: Roboto;
+  background-color: #fff;
   text-align: left;
   width: 164px;
   height: 74px;
   box-shadow: 0px 4px 8px 0px #9ebbff1f;
   border: 1px solid #ecf2ff;
   border-radius: 10px;
-  margin-left: 20px;
   padding: 8px 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 12px;
-  z-index: 999999;
 }
 
 .title {
