@@ -8,9 +8,9 @@ import { waterReducer } from "./water/waterSlice";
 
 // Конфігурація для persist
 const persistConfig = {
-  key: "root", // ключ для збереження стану
-  storage, // сховище, яке буде використовуватись
-  whitelist: ["auth"], // вкажіть ред'юсери, які ви хочете зберігати
+  key: "root",
+  storage,
+  whitelist: ["auth"],
 };
 
 // Об'єднання ред'юсерів
