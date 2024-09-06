@@ -30,7 +30,6 @@ export default function MonthStatsTable() {
   const [openDay, setOpenDay] = useState(false);
 
   const waterItems = useSelector((state) => state.waterInfo.items);
-  console.log(waterItems);
 
   const dispatch = useDispatch();
 
