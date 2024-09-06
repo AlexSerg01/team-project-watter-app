@@ -253,6 +253,15 @@ input {
 
 }
 
+.addBtn:hover{
+    color: #FF9D43;
+    cursor: pointer;
+}
+
+.addBtn:hover svg{
+    stroke: #FF9D43;
+}
+
 
 .listContainer {
     box-sizing: border-box;

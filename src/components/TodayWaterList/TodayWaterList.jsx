@@ -52,7 +52,7 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
               ))}
             </ul>
             {/* {waterRecords.length == 0 ? <p>No records</p> : */}
-              <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
+            <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
               <svg>
                 <use href={`${icons}#icon-increment`}></use>
               </svg>
