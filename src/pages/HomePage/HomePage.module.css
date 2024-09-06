@@ -1,10 +1,12 @@
 /*=================Mobile=================*/
+
 .homeContainer {
   background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@1x.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   margin-top: 24px;
+  margin: 0 auto;
 }
 
 .homeBotle {
@@ -28,13 +30,8 @@
 }
 
 .dailyBox {
-  border: 1px solid #ecf2ff;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 8px 20px;
   width: 164px;
   height: 74px;
-  box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
   margin-left: 20px;
   margin-top: 52px;
 }
@@ -56,6 +53,7 @@
   background-color: #ecf2ff;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 4px 14px #407bff4d;
 }
 
 /*=================Tablet=================*/
@@ -96,6 +94,7 @@
     height: 76px;
     margin-top: 16px;
     margin-left: 32px;
+    z-index: 9999;
   }
 
   .waterRatioPanel {
@@ -119,6 +118,7 @@
 /*=================Desk=================*/
 @media screen and (min-width: 1440px) {
   .homeContainer {
+    background-position: top center;
     width: 1440px;
     height: 582px;
     margin-top: 58px;
@@ -136,6 +136,7 @@
     background-size: contain;
     top: -36px;
   }
+
   .dailyBox {
     position: absolute;
     height: 76px;
@@ -143,6 +144,7 @@
     left: 112px;
     margin-left: 0;
     margin-top: 0;
+    z-index: 9999;
   }
 
   .waterRatioPanel {
@@ -160,7 +162,7 @@
     height: 680px;
     top: 548px;
     margin-top: 0;
-    left: 736px;
+    left: 744px;
     top: -36px;
   }
 }
