@@ -30,7 +30,7 @@ export default function MonthStatsTable() {
   const [openDay, setOpenDay] = useState(false);
 
   const waterItems = useSelector((state) => state.water.items);
-  console.log(waterItems);
+  const isLoading = useSelector((state) => state.water.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -95,6 +95,7 @@ export default function MonthStatsTable() {
     <div className={css.calendarWrapper}>
       <div className={css.monthHeader}>
         <p className={css.monthTitle}>Month</p>
+        {isLoading && <Loader />}
         <div className={css.calendarNavi}>
           <button className={css.chevronBtn} onClick={prevMonth}>
             <svg className={css.chevronBtnIcon}>
