@@ -2,8 +2,10 @@ import css from "./DaysGeneralStats.module.css";
 import { useSelector } from "react-redux";
 
 export default function DaysGeneralStats({ day }) {
-  const waterItems = useSelector((state) => state.waterInfo.items);
-  
+
+  const waterItems = useSelector((state) => state.water.items);
+
+
   const dayData = waterItems.find((data) => data.date === day);
   
   if (!waterItems) {

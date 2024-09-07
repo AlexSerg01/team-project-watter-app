@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://team-project-b-watter-app.onrender.com";
-
+// const API_URL = "https://team-project-b-watter-app.onrender.com";
+const API_URL = "http://localhost:14000";
 export function setAuthHeader(token) {
   axios.defaults.headers.common.Authorization = token;
 }
