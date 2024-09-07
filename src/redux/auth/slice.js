@@ -87,7 +87,7 @@ import {
   loginUser,
   forgotPassword,
   updatePassword,
-  logoutUser
+  logoutUser,
 } from "./operations";
 import { updateDailyWaterIntake } from "../dailyNorma/operations";
 

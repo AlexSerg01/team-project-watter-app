@@ -21,7 +21,7 @@ export const getAllWaterRecordsPerDay = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data.data);
+      // console.log(response.data.data.percentageOfNorm);
 
       return response.data.data;
     } catch (error) {

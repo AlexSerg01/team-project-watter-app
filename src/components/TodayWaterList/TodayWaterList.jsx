@@ -3,7 +3,10 @@ import { TodayWaterItem } from "./TodayWaterItem/TodayWaterItem";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteWaterRecord, getAllWaterRecordsPerDay } from "../../redux/water/waterOperations";
+import {
+  deleteWaterRecord,
+  getAllWaterRecordsPerDay,
+} from "../../redux/water/waterOperations";
 import { selectWaterRecords } from "../../redux/water/waterSelectors";
 import { EditWaterForm } from "./EditWaterForm";
 
@@ -52,7 +55,10 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
               ))}
             </ul>
             {/* {waterRecords.length == 0 ? <p>No records</p> : */}
-              <button className={css.addBtn} onClick={openAddNewWaterRecordModalHandler}>
+            <button
+              className={css.addBtn}
+              onClick={openAddNewWaterRecordModalHandler}
+            >
               <svg>
                 <use href={`${icons}#icon-increment`}></use>
               </svg>

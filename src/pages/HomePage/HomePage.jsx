@@ -1,6 +1,6 @@
 import { TodayWaterList } from "../../components/TodayWaterList/TodayWaterList";
 // import DailyNorma from "../../components/DaiilyNorma/DailyNorma";
-import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPanel";
+import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPanel.jsx";
 
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 
@@ -10,7 +10,6 @@ import MyDailyNorma from "../../components/MyDailyNorma/MyDailyNorma";
 
 import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm";
 import { useState } from "react";
-
 
 const HomePage = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,7 +22,7 @@ const HomePage = () => {
   return (
     <div className={css.homeMain}>
       <div className={css.homeContainer}>
-        <MyDailyNorma/>
+        <MyDailyNorma />
         <div className={css.homeBotle}></div>
         <div className={css.waterRatioPanel}>
           <WaterRatioPanel
