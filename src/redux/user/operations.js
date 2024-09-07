@@ -12,3 +12,15 @@ export const getUserData = createAsyncThunk(
     }
   }
 );
+
+export const patchUserPhoto = createAsyncThunk(
+  "user/patchUserPhoto",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch("/user/userPhoto");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

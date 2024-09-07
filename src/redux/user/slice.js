@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserData } from "./operations";
+import { getUserData, patchUserPhoto } from "./operations";
 
 const initialUserState = {
+  name: "",
+  email: "",
+  photo: "",
   gender: "",
   waterRate: null,
   loading: false,
@@ -26,10 +29,16 @@ const userSlice = createSlice({
       .addCase(getUserData.pending, handlePending)
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.gender = action.payload.gender || "";
+        state.email = action.payload.email;
+        state.gender = action.payload.gender || "female";
         state.waterRate = action.payload.waterRate;
       })
-      .addCase(getUserData.rejected, handleRejected);
+      .addCase(getUserData.rejected, handleRejected)
+      .addCase(patchUserPhoto.pending, handlePending)
+      .addCase(patchUserPhoto.fulfilled, (state, action) => {
+        state.loading = false;
+        state.photo = action.payload.photoUrl;
+      });
   },
 });
 
