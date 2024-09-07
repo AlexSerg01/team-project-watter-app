@@ -4,12 +4,14 @@ import {
   deleteWaterRecord,
   getAllWaterRecordsPerDay,
   updateWaterRecord,
+  fetchWaterMonthInfo,
 } from "./waterOperations";
 
 const initialState = {
   isLoading: false,
   error: null,
   waterRecords: [],
+  items: [],
 };
 
 const waterSlice = createSlice({
@@ -69,6 +71,19 @@ const waterSlice = createSlice({
       .addCase(getAllWaterRecordsPerDay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords = action.payload.dailyRecords;
+      })
+      // =========================================
+      .addCase(fetchWaterMonthInfo.pending, (state) => {
+        state.error = false;
+        state.isLoading = true;
+      })
+      .addCase(fetchWaterMonthInfo.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchWaterMonthInfo.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
       });
   },
 });

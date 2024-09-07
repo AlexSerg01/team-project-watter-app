@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // localStorage буде використовуватись за замовчуванням
 import authReducer from "./auth/slice";
-import waterInfoReducer from "./waterInfo/waterSlice";
+// import waterInfoReducer from "./waterInfo/waterSlice";
 import { dailyNormaReducer } from "./dailyNorma/slice";
 import { waterReducer } from "./water/waterSlice";
 
@@ -16,7 +16,7 @@ const persistConfig = {
 // Об'єднання ред'юсерів
 const rootReducer = combineReducers({
   auth: authReducer,
-  waterInfo: waterInfoReducer,
+  // waterInfo: waterInfoReducer,
   norma: dailyNormaReducer,
   water: waterReducer,
 });

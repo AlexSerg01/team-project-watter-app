@@ -16,12 +16,14 @@
   margin-right: auto;
   background-image: url("../../assets/images/home-page/bottle-home-page/Mobile-Botle-Home-screen@1x.png");
 }
+
 @media (min-resolution: 192dpi),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
+(min-resolution: 192dpi),
+(min-resolution: 2dppx) {
   .homeContainer {
     background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@2x.png");
   }
+
   .homeBotle {
     background-image: url("../../assets/images/home-page/bottle-home-page/Mobile-Botle-Home-screen@2x.png");
   }
@@ -38,6 +40,7 @@
   margin-left: 20px;
   margin-top: 52px;
 }
+
 .waterRatioPanel {
   margin-top: 40px;
   height: 134px;
@@ -45,21 +48,28 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .tableWrapper {
   margin-top: 40px;
   width: 280px;
-  height: 836px;
+  /* height: 836px; */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  /* gap: 24px; */
   background-color: #ecf2ff;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3);
 }
 
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
+  .homeMain {
+    display: flex;
+    justify-content: center;
+  }
+
   .homeContainer {
     width: 764px;
     height: 1280px;
@@ -81,11 +91,12 @@
   }
 
   @media (min-resolution: 192dpi),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     .homeContainer {
       background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@2x.png");
     }
+
     .homeBotle {
       background-image: url("../../assets/images/home-page/bottle-home-page/Tablet-Botle-Home-screen@2x.png");
     }
@@ -136,6 +147,7 @@
     background-size: contain;
     top: -36px;
   }
+
   .dailyBox {
     position: absolute;
     height: 76px;
@@ -157,7 +169,7 @@
   .tableWrapper {
     position: absolute;
     width: 592px;
-    height: 680px;
+    /* height: 680px; */
     top: 548px;
     margin-top: 0;
     left: 736px;
