@@ -57,7 +57,7 @@ export const addWaterRecord = createAsyncThunk(
           },
         }
       );
-      // console.log(response.data.data);
+      
 
       return response.data;
     } catch (error) {
