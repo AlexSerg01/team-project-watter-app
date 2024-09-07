@@ -2,7 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectError } from "../../redux/auth/selectors";
+import { selectError, selectisLoading } from "../../redux/auth/selectors";
+import Loader from "../Loader/Loader";
 
 import css from "./AuthForm.module.css";
 import icon from "../../assets/icons.svg";
@@ -11,6 +12,7 @@ export default function AuthForm({ type, onSubmit }) {
   const isSignup = type === "signup";
   const [error, setError] = useState("");
   const authError = useSelector(selectError);
+  const isLoading = useSelector(selectisLoading);
 
   const createAuthErrorMessage = (authError) => {
     const errorMessage =
@@ -161,10 +163,10 @@ export default function AuthForm({ type, onSubmit }) {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isLoading || isSubmitting}
             className={css.submit_button}
           >
-            {isSignup ? "Sign Up" : "Sign In"}
+            {isLoading ? <Loader /> : isSignup ? "Sign Up" : "Sign In"}
           </button>
 
           {!isSignup && (

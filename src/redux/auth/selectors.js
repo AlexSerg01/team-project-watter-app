@@ -51,3 +51,7 @@ export const selectError = createSelector(
   (state) => state.error
 );
 
+export const selectisLoading = createSelector(
+  AuthReducerSelector,
+  (state) => state.is
+);
