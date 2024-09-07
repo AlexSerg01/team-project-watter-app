@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 
 export default function DaysGeneralStats({ day }) {
   const waterItems = useSelector((state) => state.waterInfo.items);
-
+  
   const dayData = waterItems.find((data) => data.date === day);
-
+  
   if (!waterItems) {
     return (
       <div className={css.dayStatusWrapper}>

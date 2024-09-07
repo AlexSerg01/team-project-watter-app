@@ -9,7 +9,6 @@ export const getAllWaterRecordsPerDay = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/water");
-
       return response.data.data;
     } catch (error) {
       if (error.response) {

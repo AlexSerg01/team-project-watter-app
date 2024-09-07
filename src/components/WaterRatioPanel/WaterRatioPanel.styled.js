@@ -12,7 +12,6 @@ export const WaterWrapper = styled.div`
     align-items: normal;
   }
   @media screen and (min-width: 1440px) {
-    position: absolute;
     top: 620px;
   }
 `;
@@ -42,19 +41,23 @@ export const WaterRangeField = styled.input`
   outline: none;
   width: 256px;
   height: 8px;
+  padding: 5px 0;
   margin-bottom: ${theme.spacing(6)};
   margin-right: ${theme.spacing(4)};
   background: ${theme.colors.skyblue};
   border-radius: 10px;
   overflow: hidden;
+  z-index: 0;
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 14px;
     height: 14px;
+    z-index: 3;
     background: ${theme.colors.white};
     border-radius: 50%;
     border: 1px solid ${theme.colors.blue};
     cursor: pointer;
+    // margin-top: -8px;
     box-shadow: -410px 0 0 400px ${theme.colors.lightblue};
   }
   @media screen and (min-width: 768px) {
@@ -127,7 +130,6 @@ export const PercentageValue = styled.span`
     margin-left: ${theme.spacing(3.5)};
   }
 `;
-
 
 export const ModalOverlay = styled.div`
   position: fixed;

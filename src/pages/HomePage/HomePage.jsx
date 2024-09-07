@@ -3,10 +3,9 @@ import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPane
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 import MyDailyNorma from "../../components/MyDailyNorma/MyDailyNorma";
 import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm";
-
 import { useState } from "react";
-
 import css from "./HomePage.module.css";
+
 
 const HomePage = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
