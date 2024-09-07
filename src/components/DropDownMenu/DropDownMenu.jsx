@@ -7,34 +7,24 @@ import {
   ChevronIcon,
   Menu,
   MenuItem,
-  CreateAvatar
+  CreateAvatar,
 } from "./DropDownMenu.styled";
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
-import { getUserInfo } from "../../fetch/fetch";
+
 import { createPortal } from "react-dom";
-import { getUserLogoInfo } from "../utils/userAvatarUtils.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserName, selectUserPhoto } from "../../redux/user/selectors.js";
+import { patchUserInfo } from "../../redux/user/operations.js";
 
 export const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
   const menuRef = useRef(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getUserInfo();
-        setUserData(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
@@ -65,29 +55,29 @@ export const DropDownMenu = () => {
   };
 
   const handleSave = (updatedData) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      ...updatedData,
-    }));
+    dispatch(patchUserInfo(updatedData));
   };
 
-  const { avatar, userName, initial } = getUserLogoInfo(userData);
+  const userName = useSelector(selectUserName);
+  const avatar = useSelector(selectUserPhoto);
 
   return (
     <>
       <DropDownContainer ref={menuRef}>
         <DropDownBtn onClick={toggleMenu}>
-          <UserName>{ userName }</UserName>
+          <UserName>{userName}</UserName>
           {avatar ? (
-          <UserAvatar
-            src={avatar}
-            alt="User's Avatar"
-            width="28"
-            height="28"
-          />
-        ) : (
-          <CreateAvatar>{initial}</CreateAvatar>
-        )}
+            <UserAvatar
+              src={avatar}
+              alt="User's Avatar"
+              width="28"
+              height="28"
+            />
+          ) : (
+            <CreateAvatar>
+              {userName?.charAt(0).toUpperCase() || ""}
+            </CreateAvatar>
+          )}
           <ChevronIcon>
             <use href={`${icons}#icon-chevron-down`} />
           </ChevronIcon>
@@ -114,7 +104,6 @@ export const DropDownMenu = () => {
         <SettingModal
           isOpen={isSettingModalOpen}
           onClose={() => setIsSettingModalOpen(false)}
-          userData={userData}
           onSave={handleSave}
         />,
         document.body

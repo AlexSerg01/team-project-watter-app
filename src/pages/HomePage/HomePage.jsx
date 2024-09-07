@@ -3,13 +3,20 @@ import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPane
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 import MyDailyNorma from "../../components/MyDailyNorma/MyDailyNorma";
 import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./HomePage.module.css";
-
+import { useDispatch } from "react-redux";
+import { getUserData } from "../../redux/user/operations";
 
 const HomePage = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
 
   function openAddNewWaterRecordModalHandler() {
     setIsOpen(true);
