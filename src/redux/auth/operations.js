@@ -27,11 +27,11 @@ export const loginUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/auth/login`, data);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.data.accessToken}`;
+      const token = response.data.data.accessToken;
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
+      return response.data.data;
     } catch (error) {
       const message =
         error.response?.data?.message || "Login failed. Please try again.";
@@ -40,6 +40,7 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
 // Додавання forgotPassword та updatePassword операцій
 export const forgotPassword = createAsyncThunk(
   "auth/forgotPassword",
@@ -86,8 +87,9 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/auth/logout`);
-      toast.info("You have been logged out.");
+      localStorage.removeItem("token");
       delete axios.defaults.headers.common["Authorization"];
+      toast.info("You have been logged out.");
       return response.data;
     } catch (error) {
       const message =

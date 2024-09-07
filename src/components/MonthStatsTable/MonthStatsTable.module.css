@@ -31,7 +31,7 @@
     flex-wrap: wrap;
     row-gap: 16px;
     column-gap: 26px;
-    justify-content: space-between;
+    justify-content: flex-start;
 
 }
 
@@ -90,13 +90,14 @@
     border: none;
     padding: 0;
     line-height: 0;
-    stroke: #407BFF
+    stroke: #407BFF;
 }
 
 .chevronBtn:hover,
 .chevronBtn:focus {
     border: none;
-
+    cursor: pointer;
+    outline: none;
 }
 
 .chevronBtnHidden {
@@ -117,11 +118,11 @@
 
 
 .dayInCalendar {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     gap: 4px;
     transition: transform 250ms linear;
 }
@@ -140,15 +141,14 @@
         background-color: #ffffff;
         width: 280px;
         position: absolute;
+        overflow: hidden;
         z-index: 9999999;
         left: 50%;
         top: 0%;
-        transform: translate(-50%, -101%)
+        transform: translate(-50%, -102%)
     }
 
 }
-
-
 
 @media screen and (min-width: 768px) {
     .calendarWrapper {
@@ -191,18 +191,11 @@
         column-gap: 34px;
     }
 
-    /* .popUpWindow {
-        width: 292px;
-        top: -64.4%;
-        left: 0.5%;
-    } */
     .popUpWindowRight {
         border-radius: 10px;
         background-color: #ffffff;
         width: 282px;
         position: absolute;
-        /* right: 50%;
-        top: -305%; */
         right: 100%;
         top: 0;
         transform: translate(6%, -101%);
@@ -258,16 +251,15 @@
         height: 20px
     }
 
-
-
     .percentDayItem {
         font-size: 12px;
         line-height: 1.5;
     }
 
-    .popUpWindow {
-        top: -67%;
-        left: -9%;
-
+    .popUpWindowRight,
+    .popUpWindowLeft {
+        left: 100%;
+        top: 0;
+        transform: translate(-105%, -101%);
     }
 }

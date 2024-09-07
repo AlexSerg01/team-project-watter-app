@@ -96,12 +96,12 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     isAuthenticated: false,
-    status: "idle", // idle, loading, succeeded, failed
+    isLoading: false,
     error: null,
     forgotPassword: { isLoading: false, error: null },
     updatePassword: { isLoading: false, error: null },
-    waterToday: { dailyWaterList: [] }, // Додано waterToday
-    waterRate: 2000, // Додано waterRate, приклад значення
+    waterToday: { dailyWaterList: [] },
+    waterRate: 2000,
   },
   reducers: {
     logout(state) {
@@ -113,57 +113,57 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        state.status = "succeeded";
         toast.success("Login successful!");
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(registerUser.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        state.status = "succeeded";
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(forgotPassword.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(forgotPassword.fulfilled, (state) => {
-        state.status = "succeeded";
+        state.isLoading = false;
       })
       .addCase(forgotPassword.rejected, (state, action) => {
-        state.status = "failed";
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(updatePassword.pending, (state) => {
-        state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(updatePassword.fulfilled, (state) => {
-        state.status = "succeeded";
+        state.isLoading = false;
       })
       .addCase(updatePassword.rejected, (state, action) => {
-        state.status = "failed";
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(updateDailyWaterIntake.fulfilled, (state, action) => {
         state.user.dailyWaterIntake = action.payload.data.dailyWaterIntake;
       })
       .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
-        state.status = "succeeded";
         toast.success("Logout successful!");
       })
       .addCase(logoutUser.rejected, (state, action) => {

@@ -1,7 +1,7 @@
 .welcome_page_backgr {
   background-image: url("../../assets/images/background-main-page/mobile/Background-Main-Page-Mobile.png");
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
   min-height: 100vh;
 }
@@ -34,7 +34,7 @@
     padding: 40px 32px 32px 32px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1440px) {
   .welcome_page_backgr {
     background-image: url("../../assets/images/background-main-page/desktop/Background-Main-Page.png"),
       url("../../assets/images/background-main-page/desktop/Background-element-Main-Page.png");

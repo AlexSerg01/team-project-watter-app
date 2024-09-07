@@ -55,6 +55,7 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
               ))}
             </ul>
             {/* {waterRecords.length == 0 ? <p>No records</p> : */}
+
             <button
               className={css.addBtn}
               onClick={openAddNewWaterRecordModalHandler}
@@ -64,7 +65,6 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
               </svg>
               <span>Add water</span>
             </button>
-            {/* } */}
           </div>
         </div>
       </div>

@@ -57,7 +57,6 @@ const waterSlice = createSlice({
         if (index !== -1) {
           state.waterRecords[index] = action.payload.data;
         }
-        console.log(action.payload.data);
       })
       .addCase(getAllWaterRecordsPerDay.pending, (state) => {
         state.isLoading = true;

@@ -7,8 +7,8 @@ export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const formatDate = (date) => {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
+        let hours = date.getHours().toString().padStart(2,'0');
+        let minutes = date.getMinutes().toString().padStart(2, '0');
         return `${hours}:${minutes}`;
     };
 
@@ -36,14 +36,18 @@ export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
                 </div>
                 <div className={css.svgWrapper}>
                     <button type="button" className={css.button} onClick={onEdit}>
-                        <svg className={css.edit}>
-                            <use href={`${icons}#icon-edit`}></use>
-                        </svg>
+                        <span className={css.underline}>
+                            <svg className={css.edit}>
+                                <use href={`${icons}#icon-edit`}></use>
+                            </svg>
+                        </span>
                     </button>
                     <button type="button" className={css.button} onClick={handleOpenDelete}>
-                        <svg className={css.delete}>
-                            <use href={`${icons}#icon-delete`}></use>
-                        </svg>
+                        <span className={css.underlineRed}>
+                            <svg className={css.delete}>
+                                <use href={`${icons}#icon-delete`}></use>
+                            </svg>
+                        </span>
                     </button>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import css from "./MonthStatsTable.module.css";
 import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWaterInfo } from "../../redux/waterInfo/waterOperations.js";
+import Loader from "../Loader/Loader";
 
 export default function MonthStatsTable() {
   const currentMonth = new Date().getMonth();
@@ -26,12 +27,7 @@ export default function MonthStatsTable() {
 
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hoveredDay, setHoveredDay] = useState(null);
-
-
   const [openDay, setOpenDay] = useState(false);
-
 
   const waterItems = useSelector((state) => state.waterInfo.items);
 
@@ -125,42 +121,46 @@ export default function MonthStatsTable() {
       </div>
       <div className={css.daysWrapper}>
         <ul className={css.calendar}>
-          {waterItems.map((item) => (
-            <li
-              className={css.dayInCalendar}
-              key={item.date}
-              onClick={() => {
-                handleOpenDayInfo(item.date);
-              }}
-              onMouseLeave={handleCloseDayInfo}
-            >
-              <div
-                className={
-                  parseFloat(item.percentageConsumed) < 100
-                    ? css.dayItemAccentColor
-                    : css.dayItem
-                }
+          {waterItems.length === 0 ? (
+            <Loader className={css.loader} />
+          ) : (
+            waterItems.map((item) => (
+              <li
+                className={css.dayInCalendar}
+                key={item.date}
+                onClick={() => {
+                  handleOpenDayInfo(item.date);
+                }}
+                onMouseLeave={handleCloseDayInfo}
               >
-                {Number(item.date.split(",")[0])}
-              </div>
-              <div className={css.percentDayItem}>
-                {item.percentageConsumed}
-              </div>
-              <div>
-                {openDay === item.date && (
-                  <div
-                    className={
-                      leftSideItems.includes(Number(item.date.split(",")[0]))
-                        ? css.popUpWindowLeft
-                        : css.popUpWindowRight
-                    }
-                  >
-                    <DaysGeneralStats day={openDay} />
-                  </div>
-                )}
-              </div>
-            </li>
-          ))}
+                <div
+                  className={
+                    parseFloat(item.percentageConsumed) < 100
+                      ? css.dayItemAccentColor
+                      : css.dayItem
+                  }
+                >
+                  {Number(item.date.split(",")[0])}
+                </div>
+                <div className={css.percentDayItem}>
+                  {item.percentageConsumed}
+                </div>
+                <div>
+                  {openDay === item.date && (
+                    <div
+                      className={
+                        leftSideItems.includes(Number(item.date.split(",")[0]))
+                          ? css.popUpWindowLeft
+                          : css.popUpWindowRight
+                      }
+                    >
+                      <DaysGeneralStats day={openDay} />
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
+          )}
         </ul>
       </div>
     </div>
