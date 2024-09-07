@@ -1,23 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserData, patchUserPhoto } from "./operations";
+import {
+  getUserData,
+  patchUserInfo,
+  patchUserPhoto,
+  patchDailyWater,
+} from "./operations";
 
 const initialUserState = {
-  name: "",
-  email: "",
-  photo: "",
-  gender: "",
-  waterRate: null,
+  data: null,
   loading: false,
   error: null,
 };
 
 const handlePending = (state) => {
-  state.isLoading = true;
+  state.loading = true;
   state.error = null;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
+  state.loading = false;
   state.error = action.payload;
 };
 
@@ -29,16 +30,30 @@ const userSlice = createSlice({
       .addCase(getUserData.pending, handlePending)
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.email = action.payload.email;
-        state.gender = action.payload.gender || "female";
-        state.waterRate = action.payload.waterRate;
+        state.data = action.payload;
       })
       .addCase(getUserData.rejected, handleRejected)
+
       .addCase(patchUserPhoto.pending, handlePending)
       .addCase(patchUserPhoto.fulfilled, (state, action) => {
         state.loading = false;
-        state.photo = action.payload.photoUrl;
-      });
+        state.data.photo = action.payload.photoUrl;
+      })
+      .addCase(patchUserPhoto.rejected, handleRejected)
+
+      .addCase(patchUserInfo.pending, handlePending)
+      .addCase(patchUserInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(patchUserInfo.rejected, handleRejected)
+
+      .addCase(patchDailyWater.pending, handlePending)
+      .addCase(patchDailyWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data.dailyWaterIntake = action.payload.dailyWaterIntake;
+      })
+      .addCase(patchDailyWater.rejected, handleRejected);
   },
 });
 
