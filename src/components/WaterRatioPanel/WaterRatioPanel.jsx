@@ -1,8 +1,7 @@
-// import { useState } from "react";
 import { useSelector } from "react-redux";
+// import css from "../../pages/HomePage/HomePage.module.css";
 import {
   BtnAddWater,
-  // ModalOverlay,
   PercentageValue,
   PercentageWrapper,
   WaterLabel,
@@ -10,7 +9,6 @@ import {
   WaterRangeField,
   WaterWrapper,
 } from "./WaterRatioPanel.styled.js";
-// import { AddWaterForm } from "../../components/WaterRatioPanel/AddWaterForm.jsx";
 import SpriteIcons from "../../assets/icons.svg";
 import {
   selectWaterToday,
@@ -18,21 +16,22 @@ import {
 } from "../../redux/auth/selectors.js";
 
 export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
-
-  const waterTodayState = useSelector(selectWaterToday);
-  const waterRate = useSelector(selectWaterRate);
-
-  if (!waterTodayState || !waterRate) {
-    return <div>Loading...</div>;
-  }
-
-  const { dailyWaterList } = waterTodayState;
-  const totalWaterVolume = dailyWaterList.reduce(
-    (sum, entry) => sum + entry.waterVolume,
+  const waterTodayState = useSelector(selectWaterToday) || {
+    dailyWaterList: [],
+  };
+  const waterRate = useSelector(selectWaterRate) || 1;
+  const dailyWaterList = waterTodayState.dailyWaterList;
+  console.log(dailyWaterList);
+  const waterDaylyInfo = useSelector((state) => state.water.waterRecords);
+  const totalWaterAmount = waterDaylyInfo.reduce(
+    (total, record) => total + record.amount,
     0
   );
-
-  const handleRangeChange = (event) => {};
+  const waterPercentage = Math.round((totalWaterAmount / waterRate) * 100);
+  const handleRangeChange = (event) => {
+    const newValue = event.target.value;
+    console.log("New water percentage: ", newValue);
+  };
 
   return (
     <WaterWrapper>
@@ -42,10 +41,11 @@ export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
           type="range"
           name="water-ratio"
           id="water-ratio"
-          value={Math.round((totalWaterVolume / waterRate) * 100)}
+          value={waterPercentage}
           min="0"
           max="100"
           onChange={handleRangeChange}
+          disabled={waterRate === 0}
         />
         <PercentageWrapper>
           <PercentageValue className="water-range-value-min">
@@ -63,7 +63,6 @@ export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
         </svg>
         <span>Add water</span>
       </BtnAddWater>
-     
     </WaterWrapper>
   );
 };

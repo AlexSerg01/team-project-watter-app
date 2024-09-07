@@ -5,6 +5,7 @@ import authReducer from "./auth/slice";
 // import waterInfoReducer from "./waterInfo/waterSlice";
 import { dailyNormaReducer } from "./dailyNorma/slice";
 import { waterReducer } from "./water/waterSlice";
+import { userReducer } from "./user/slice";
 
 // Конфігурація для persist
 const persistConfig = {
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   // waterInfo: waterInfoReducer,
   norma: dailyNormaReducer,
   water: waterReducer,
+  user: userReducer,
 });
 
 // persistReducer для збереження стану

@@ -80,6 +80,9 @@
     font-size: 16px;
     line-height: 20px;
   }
+  .auth_form a:hover {
+    color: var(--SECONDARY-ORANGE);
+  }
 }
 
 @media (min-width: 768px) {
@@ -169,5 +172,8 @@
     font-size: 16px;
     line-height: 20px;
     margin-bottom: 16px;
+  }
+  .auth_form a:hover {
+    color: var(--SECONDARY-ORANGE);
   }
 }
