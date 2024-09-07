@@ -4,12 +4,14 @@ import {
   deleteWaterRecord,
   getAllWaterRecordsPerDay,
   updateWaterRecord,
+  fetchWaterMonthInfo,
 } from "./waterOperations";
 
 const initialState = {
   isLoading: false,
   error: null,
   waterRecords: [],
+  items: [],
 };
 
 const waterSlice = createSlice({
@@ -28,6 +30,15 @@ const waterSlice = createSlice({
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords.push(action.payload.data);
+
+        // ========== оновлення відсотків в календарі, при додаванні води ===========================
+        const dayIndex = state.items.findIndex(
+          (item) => item.date === action.payload.data.date
+        );
+        if (dayIndex !== -1) {
+          state.items[dayIndex] = action.payload.data;
+        }
+        // ============================================
       })
       .addCase(deleteWaterRecord.pending, (state) => {
         state.isLoading = true;
@@ -57,7 +68,16 @@ const waterSlice = createSlice({
         if (index !== -1) {
           state.waterRecords[index] = action.payload.data;
         }
+        // ========== оновлення відсотків в календарі, при оновленні води ================
+        const dayIndex = state.items.findIndex(
+          (item) => item.date === action.payload.data.date
+        );
+        if (dayIndex !== -1) {
+          state.items[dayIndex] = action.payload.data;
+        }
+        // =====================================
       })
+
       .addCase(getAllWaterRecordsPerDay.pending, (state) => {
         state.isLoading = true;
       })
@@ -68,6 +88,19 @@ const waterSlice = createSlice({
       .addCase(getAllWaterRecordsPerDay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords = action.payload.dailyRecords;
+      })
+      // =========================================
+      .addCase(fetchWaterMonthInfo.pending, (state) => {
+        state.error = false;
+        state.isLoading = true;
+      })
+      .addCase(fetchWaterMonthInfo.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchWaterMonthInfo.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
       });
   },
 });
