@@ -1,12 +1,4 @@
-import styled from "styled-components";
-
-export const HeaderStyle = styled.header`
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
-
-export const HeaderContainer = styled.div`
+.headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,9 +19,9 @@ export const HeaderContainer = styled.div`
     margin-top: 12px;
     padding: 12px 112px;
   }
-`;
+}
 
-export const SignInLink = styled.a`
+.signInLink {
   display: inline-block;
   color: var(--PRIMERY-BLUE);
   text-decoration: none;
@@ -49,10 +41,10 @@ export const SignInLink = styled.a`
     font-size: 18px;
     line-height: 1.33;
   }
-`;
+}
 
-export const SignInIcon = styled.svg`
+.signInIcon {
   margin-left: 10px;
   width: 28px;
   height: 28px;
-`;
+}
