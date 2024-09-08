@@ -1,15 +1,26 @@
 /*=================Mobile=================*/
 
 .homeContainer {
+  display: flex;
+  flex-direction: row;
   background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@1x.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin-top: 24px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+  position: fixed;
+  margin-top: 52px;
 }
 
-.homeBotle {
+.dailyBox {
+  margin-top: -24px;
+  margin-left: 20px;
+  width: 164px;
+  height: 74px;
+}
+.homeBottle {
   width: 280px;
   height: 208px;
   background-repeat: no-repeat;
@@ -20,22 +31,15 @@
 }
 
 @media (min-resolution: 192dpi),
-(min-resolution: 192dpi),
-(min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
   .homeContainer {
     background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@2x.png");
   }
 
-  .homeBotle {
+  .homeBottle {
     background-image: url("../../assets/images/home-page/bottle-home-page/Mobile-Botle-Home-screen@2x.png");
   }
-}
-
-.dailyBox {
-  width: 164px;
-  height: 74px;
-  margin-left: 20px;
-  margin-top: 52px;
 }
 
 .waterRatioPanel {
@@ -49,11 +53,9 @@
 .tableWrapper {
   margin-top: 40px;
   width: 280px;
-  /* height: 836px; */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  /* gap: 24px; */
   background-color: #ecf2ff;
   margin-left: auto;
   margin-right: auto;
@@ -62,11 +64,6 @@
 
 /*=================Tablet=================*/
 @media screen and (min-width: 768px) {
-  .homeMain {
-    display: flex;
-    justify-content: center;
-  }
-
   .homeContainer {
     width: 764px;
     height: 1280px;
@@ -76,7 +73,7 @@
     position: relative;
   }
 
-  .homeBotle {
+  .homeBottle {
     width: 518px;
     height: 386px;
     margin-left: auto;
@@ -88,13 +85,13 @@
   }
 
   @media (min-resolution: 192dpi),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
     .homeContainer {
       background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@2x.png");
     }
 
-    .homeBotle {
+    .homeBottle {
       background-image: url("../../assets/images/home-page/bottle-home-page/Tablet-Botle-Home-screen@2x.png");
     }
   }
@@ -136,7 +133,7 @@
     position: relative;
   }
 
-  .homeBotle {
+  .homeBottle {
     position: absolute;
     background-image: url("../../assets/images/home-page/bottle-home-page/Desk-Botle-Home-screen@1x.png");
     width: 738px;
@@ -145,6 +142,18 @@
     background-repeat: no-repeat;
     background-size: contain;
     top: -36px;
+  }
+
+  @media (min-resolution: 192dpi),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .homeContainer {
+      background-image: url("../../assets/images/home-page/bubbles-home-page/Desk-Bubbles-Home-Page@2x.png");
+    }
+
+    .homeBottle {
+      background-image: url("../../assets/images/home-page/bottle-home-page/Desk-Botle-Home-screen@2x.png");
+    }
   }
 
   .dailyBox {
@@ -169,7 +178,6 @@
   .tableWrapper {
     position: absolute;
     width: 592px;
-    /* height: 680px; */
     top: 548px;
     margin-top: 0;
     left: 744px;
