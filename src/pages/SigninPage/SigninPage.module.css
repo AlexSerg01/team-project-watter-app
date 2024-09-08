@@ -202,8 +202,8 @@
     display: flex;
     flex-direction: column;
     justify-content: right;
-    padding-right: 216px;
-    padding-top: 162px;
+    /* padding-right: 216px;
+    padding-top: 162px; */
   }
 
   @media (min-resolution: 192dpi),
