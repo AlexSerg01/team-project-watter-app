@@ -48,15 +48,13 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
                 <li key={nanoid()}>
                   <TodayWaterItem
                     amount={elem.amount}
-                    date={new Date(elem.date)}
+                    date={new Date(elem.createdAt)}
                     onDelete={() => handleDelete(elem._id)}
                     onEdit={() => setEditingRecord(elem)}
                   />
                 </li>
               ))}
             </ul>
-            {waterRecords.length == 0 ? <p>No records</p> :
-
               <button
                 className={css.addBtn}
                 onClick={openAddNewWaterRecordModalHandler}
@@ -66,7 +64,6 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
                 </svg>
                 <span>Add water</span>
               </button>
-            }
           </div>
         </div>
       </div>

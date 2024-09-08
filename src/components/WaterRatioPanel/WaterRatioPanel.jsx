@@ -21,7 +21,7 @@ export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
   };
   const waterRate = useSelector(selectWaterRate) || 1;
   const dailyWaterList = waterTodayState.dailyWaterList;
-  console.log(dailyWaterList);
+  // console.log(dailyWaterList);
   const waterDaylyInfo = useSelector((state) => state.water.waterRecords);
   const totalWaterAmount = waterDaylyInfo.reduce(
     (total, record) => total + record.amount,
