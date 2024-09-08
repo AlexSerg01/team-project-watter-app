@@ -1,14 +1,12 @@
-import styled from "styled-components";
-
-export const LogoStyle = styled.a`
+.logoStyle {
   display: flex;
   align-items: center;
   height: 100%;
   margin: 0;
   padding: 0;
+}
 
-  img {
+.logoImg {
     height: 48px;
     width: 112px;
-  }
-`;
+}

@@ -1,10 +1,5 @@
 import { Logo } from "../Logo/Logo";
-import {
-  HeaderContainer,
-  HeaderStyle,
-  SignInLink,
-  SignInIcon,
-} from "./Header.styled";
+import styles from "./Header.module.css";
 import { DropDownMenu } from "../DropDownMenu/DropDownMenu";
 import icons from "../../assets/icons.svg";
 import { useSelector } from "react-redux";
@@ -13,21 +8,20 @@ export const Header = () => {
   const isLogedin = useSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <HeaderStyle>
-      <HeaderContainer>
+    <header>
+      <div className={styles.headerContainer}>
         <Logo />
         {isLogedin ? (
           <DropDownMenu />
         ) : (
-          //* Зробити заміну іконки при зміні теми та кольору тексту*/
-          <SignInLink href="/signin">
+          <a href="/signin" className={styles.signInLink}>
             Sign in
-            <SignInIcon>
+            <svg className={styles.signInIcon}>
               <use href={`${icons}#icon-user`} />
-            </SignInIcon>
-          </SignInLink>
+            </svg>
+          </a>
         )}
-      </HeaderContainer>
-    </HeaderStyle>
+      </div>
+    </header>
   );
 };
