@@ -5,6 +5,7 @@ import {
   getAllWaterRecordsPerDay,
   updateWaterRecord,
   fetchWaterMonthInfo,
+  getNorma,
 } from "./waterOperations";
 
 const initialState = {
@@ -12,12 +13,25 @@ const initialState = {
   error: null,
   waterRecords: [],
   items: [],
+  norma: null,
+  showModal: false,
+  loading: false,
 };
 
 const waterSlice = createSlice({
   name: "water",
   initialState,
-  reducers: {},
+  reducers: {
+    updateNorma: (state, action) => {
+      state.norma = action.payload;
+    },
+    openModal: (state) => {
+      state.showModal = true;
+    },
+    closeModal: (state) => {
+      state.showModal = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addWaterRecord.pending, (state) => {
@@ -29,8 +43,8 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-         const { id, ...restParams } = action.payload.data;
-        state.waterRecords.push({ ...restParams , _id:id});
+        const { id, ...restParams } = action.payload.data;
+        state.waterRecords.push({ ...restParams, _id: id });
        
 
         // ========== оновлення відсотків в календарі, при додаванні води =========
@@ -69,8 +83,8 @@ const waterSlice = createSlice({
         );
         
         if (index !== -1) {
-          const { id, ...restParams} = action.payload.data
-          state.waterRecords[index] = { ...restParams , _id:id};
+          const { id, ...restParams } = action.payload.data
+          state.waterRecords[index] = { ...restParams, _id: id };
         }
         console.log(state.waterRecords[index]);
         
@@ -109,8 +123,23 @@ const waterSlice = createSlice({
       .addCase(fetchWaterMonthInfo.rejected, (state) => {
         state.isLoading = false;
         state.error = true;
+      })
+      // отримання норми води
+      .addCase(getNorma.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(getNorma.fulfilled, (state, action) => {
+        const newValue = action.payload / 1000;
+        state.norma = action.payload !== undefined ? newValue : state.value;
+        state.loading = false;
+      })
+      .addCase(getNorma.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const waterReducer = waterSlice.reducer;
+export const { updateNorma, openModal, closeModal } = waterSlice.actions;

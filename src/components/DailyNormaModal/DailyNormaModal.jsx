@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { updateDailyWaterIntake } from '../../redux/dailyNorma/operations';
+import { updateDailyWaterIntake } from '../../redux/water/waterOperations';
 import css from './DailyNormaModal.module.css';
 import { useEffect, useState } from "react";
-import { closeModal, updateNorma } from '../../redux/dailyNorma/slice';
+import { closeModal, updateNorma } from '../../redux/water/waterSlice';
 
 const DailyNormaModal = () => {
   const [gender, setGender] = useState("woman");

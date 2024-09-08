@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-// import css from "../../pages/HomePage/HomePage.module.css";
 import {
   BtnAddWater,
   PercentageValue,
@@ -11,23 +10,32 @@ import {
 } from "./WaterRatioPanel.styled.js";
 import SpriteIcons from "../../assets/icons.svg";
 import {
-  selectWaterToday,
+  // selectWaterToday,
   selectWaterRate,
 } from "../../redux/auth/selectors.js";
+import { selectNorma } from "../../redux/water/waterSelectors.js";
 
 export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
-  const waterTodayState = useSelector(selectWaterToday) || {
-    dailyWaterList: [],
-  };
+  // const waterTodayState = useSelector(selectWaterToday) || {
+  //   dailyWaterList: [],
+  // };
   const waterRate = useSelector(selectWaterRate) || 1;
-  const dailyWaterList = waterTodayState.dailyWaterList;
-  // console.log(dailyWaterList);
-  const waterDaylyInfo = useSelector((state) => state.water.waterRecords);
+  // const dailyWaterList = waterTodayState.dailyWaterList;
+
+  const waterDaylyInfo = useSelector((state) => state.water?.waterRecords || []);
   const totalWaterAmount = waterDaylyInfo.reduce(
     (total, record) => total + record.amount,
     0
   );
-  const waterPercentage = Math.round((totalWaterAmount / waterRate) * 100);
+
+
+  const dailyNorma = Number(useSelector(selectNorma)) * 1000 || 1;
+  
+
+  const waterPercentage = Math.round((totalWaterAmount / dailyNorma) * 100);
+  
+  const validWaterPercentage = isNaN(waterPercentage) ? 0 : waterPercentage;
+
   const handleRangeChange = (event) => {
     const newValue = event.target.value;
     console.log("New water percentage: ", newValue);
@@ -41,7 +49,7 @@ export const WaterRatioPanel = ({ openAddNewWaterRecordModalHandler }) => {
           type="range"
           name="water-ratio"
           id="water-ratio"
-          value={waterPercentage}
+          value={validWaterPercentage}
           min="0"
           max="100"
           onChange={handleRangeChange}

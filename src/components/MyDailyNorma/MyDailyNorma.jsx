@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import css from './MyDailyNorma.module.css';
 import DailyNormaModal from '../DailyNormaModal/DailyNormaModal';
-import { openModal } from '../../redux/dailyNorma/slice';
-import { getNorma } from '../../redux/dailyNorma/operations';  
-import { selectNorma, selectShowModal } from '../../redux/dailyNorma/selectors';
+import { openModal } from '../../redux/water/waterSlice';
+import { getNorma } from '../../redux/water/waterOperations';  
+import { selectNorma, selectShowModal } from '../../redux/water/waterSelectors';
 import Loader from '../Loader/Loader';
 
 export default function MyDailyNorma() {
