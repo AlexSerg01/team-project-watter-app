@@ -1,4 +1,3 @@
-// waterOperations.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -78,6 +77,7 @@ export const fetchWaterMonthInfo = createAsyncThunk(
     try {
       const state = thunkAPI.getState();
       const token = state.auth.user.accessToken;
+      console.log(token)
       let { year, month } = currentDate();
       month += 1;
       const response = await axios.get(`/water/${month}/${year}`, {

@@ -20,27 +20,36 @@ const DailyNormaModal = () => {
     dispatch(closeModal());
   };
 
- 
   useEffect(() => {
     const calculateNorma = () => {
-    const weightNum = parseFloat(weight) || 0;
-    const activityTimeNum = parseFloat(activityTime) || 0;
-    let calculatedNorma = 0;
+      const weightNum = parseFloat(weight) || 0;
+      const activityTimeNum = parseFloat(activityTime) || 0;
+      let calculatedNorma = 0;
 
-    if (gender === "man") {
-      calculatedNorma = weightNum * 0.04 + activityTimeNum * 0.6;
-    } else {
-      calculatedNorma = weightNum * 0.03 + activityTimeNum * 0.4;
-    }
-    setRecommendedNorma(calculatedNorma.toFixed(1));
-     };
-    
+      if (gender === "man") {
+        calculatedNorma = weightNum * 0.04 + activityTimeNum * 0.6;
+      } else {
+        calculatedNorma = weightNum * 0.03 + activityTimeNum * 0.4;
+      }
+      setRecommendedNorma(calculatedNorma.toFixed(1));
+    };
+
     calculateNorma();
   }, [gender, weight, activityTime]);
 
   const handleSaveClick = () => {
+    const intake = parseFloat(userNorma);
+
+    if (intake <= 0) {
+      setError('The water intake is too small. Please enter a value greater than 0.');
+      return;
+    } else if (intake > 15) {
+      setError('The maximum allowable water intake is 15 liters per day. Please enter valid values within this limit.');
+      return;
+    }
+
     setUserNorma(userNorma);
-    const newIntake = Number(userNorma) * 1000;
+    const newIntake = intake * 1000;
 
     const data = {
       dailyWaterIntake: String(newIntake)
@@ -54,7 +63,7 @@ const DailyNormaModal = () => {
       })
       .catch((error) => {
         console.error("Failed to update daily water intake: ", error);
-        setError("Failed to update daily water intake. Please try again."); // Встановлюємо повідомлення про помилку
+        setError("The water intake is too small. Please enter a value greater than 0.");
       });
   };
 
@@ -71,8 +80,6 @@ const DailyNormaModal = () => {
   };
 
   useEffect(() => {
-
-    
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
@@ -91,7 +98,7 @@ const DailyNormaModal = () => {
         <div>
           <div className={css.formulas}>
             <p className={css.formula}>For girl: <span className={css.blue}>V=(M*0,03) + (T*0,4)</span></p>
-            <p className={css.formula}>For man: <span className={css.blue}>V=(M*0,04) + (T*0,6)</span> </p>
+            <p className={css.formula}>For man: <span className={css.blue}>V=(M*0,04) + (T*0,6)</span></p>
           </div>
           <p className={css.note}>
             <span className={css.dot}>*</span> V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)
@@ -143,11 +150,12 @@ const DailyNormaModal = () => {
             max='24'
             onChange={(e) => setActivityTime(e.target.value)}
             onInput={(e) => {
-    if (e.target.value > 24) {
-      e.target.value = 24;
-    } else if (e.target.value < 0) {
-      e.target.value = 0;
-    }}}
+              if (e.target.value > 24) {
+                e.target.value = 24;
+              } else if (e.target.value < 0) {
+                e.target.value = 0;
+              }
+            }}
           />
         </div>
         <div>
@@ -162,9 +170,10 @@ const DailyNormaModal = () => {
             type="number"
             placeholder="0"
             value={userNorma}
-            onChange={(e) => setUserNorma(e.target.value)}/>
+            onChange={(e) => setUserNorma(e.target.value)}
+          />
         </div>
-        {error && <div className={css.errorMessage}>{'The maximum allowable water intake is 15 liters per day. Please enter valid values within this limit.'}</div>}
+        {error && <div className={css.errorMessage}>{error}</div>}
         <button className={css.saveBtn} onClick={handleSaveClick}>Save</button>
       </div>
     </div>

@@ -97,6 +97,8 @@ const waterSlice = createSlice({
       .addCase(getAllWaterRecordsPerDay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterRecords = action.payload.dailyRecords;
+        console.log(state.waterRecords);
+        
       })
       // =========================================
       .addCase(fetchWaterMonthInfo.pending, (state) => {
