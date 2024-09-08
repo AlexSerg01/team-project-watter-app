@@ -29,7 +29,9 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterRecords.push(action.payload.data);
+         const { id, ...restParams } = action.payload.data;
+        state.waterRecords.push({ ...restParams , _id:id});
+       
 
         // ========== оновлення відсотків в календарі, при додаванні води ===========================
         const dayIndex = state.items.findIndex(
@@ -63,10 +65,12 @@ const waterSlice = createSlice({
       .addCase(updateWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         const index = state.waterRecords.findIndex(
-          (record) => record._id === action.payload.data._id
+          (record) => record._id === action.payload.data.id
         );
+        
         if (index !== -1) {
-          state.waterRecords[index] = action.payload.data;
+          const { id, ...restParams} = action.payload.data
+          state.waterRecords[index] = { ...restParams , _id:id};
         }
         // ========== оновлення відсотків в календарі, при оновленні води ================
         const dayIndex = state.items.findIndex(

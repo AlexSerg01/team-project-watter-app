@@ -55,10 +55,11 @@ export const deleteWaterRecord = createAsyncThunk(
 
 export const updateWaterRecord = createAsyncThunk(
   "water/updateWaterRecord",
-  async ({ id, amount }, thunkAPI) => {
+  async ({ id, amount, time }, thunkAPI) => {
     try {
       const response = await axios.patch(`/water/${id}`, {
         amount: amount,
+        time: time
       });
       return response.data;
     } catch (error) {

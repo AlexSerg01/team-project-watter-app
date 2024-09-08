@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,7 @@ import { updateWaterRecord } from "../../redux/water/waterOperations";
 
 export const EditWaterForm = ({ onClose, editingRecord }) => {
   const [amount, setAmount] = useState(editingRecord.amount);
-  const [date, setDate] = useState(editingRecord.date);
+  const [date, setDate] = useState(editingRecord.time);
 
   const dispatch = useDispatch();
 
@@ -19,11 +19,11 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
   };
 
   const handleTimeChange = (e) => {
-    const [hours, minutes] = e.target.value.split(":").map(Number);
-    const newDate = new Date(date);
-    newDate.setHours(hours);
-    newDate.setMinutes(minutes);
-    setDate(newDate);
+    // const [hours, minutes] = e.target.value.split(":").map(Number);
+    // const newDate = new Date(date);
+    // newDate.setHours(hours);
+    // newDate.setMinutes(minutes);
+    setDate(e.target.value);
   };
 
   const formatDate = (date) => {
@@ -45,7 +45,7 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
 
     const formAmount = Number(e.target.elements.amount.value);
 
-    dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount}))
+    dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount, time: date }))
       .unwrap()
       .then(() => {
         console.log("Water record updated:", formAmount);
@@ -81,7 +81,7 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
           </svg>
           <div className={css.timeAmount}>
             <span className={css.waterAmount}>{amount ? `${amount} ml` : "0 ml"}</span>
-            <span className={css.spanTime}>{formatDate(date)}</span>
+            <span className={css.spanTime}>{date}</span>
           </div>
         </div>
         <div className={css.amountCorrection}>
@@ -115,10 +115,10 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
             <input className={css.editFormInput}
               type="time"
               step={300}
-              value={formatTimeForInput(date)}
+              value={date}
               onChange={handleTimeChange}
             />
-          </div>
+            </div>
           <div className={css.inputWrapper}>
             <p className={css.numberTopic}>Enter the value of the water used:</p>
             <input className={css.editFormInput}
@@ -126,7 +126,7 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
               name="amount"
               min={0}
               max={5000}
-              value={amount === "" ? "" : amount} 
+              value={amount === "" ? "" : amount}
               onChange={handleAmountChange}
             />
           </div>
