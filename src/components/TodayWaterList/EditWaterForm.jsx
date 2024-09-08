@@ -45,10 +45,10 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
 
     const formAmount = Number(e.target.elements.amount.value);
 
-    dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount, date: date }))
+    dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount}))
       .unwrap()
       .then(() => {
-        console.log("Water record updated:", formAmount, date);
+        console.log("Water record updated:", formAmount);
       })
       .catch((error) => {
         console.error("Failed to update water record:", error);
@@ -112,15 +112,16 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
           </div>
           <div className={css.inputWrapper}>
             <p>Recording time:</p>
-            <input
+            <input className={css.editFormInput}
               type="time"
+              step={300}
               value={formatTimeForInput(date)}
               onChange={handleTimeChange}
             />
           </div>
           <div className={css.inputWrapper}>
             <p className={css.numberTopic}>Enter the value of the water used:</p>
-            <input
+            <input className={css.editFormInput}
               type="number"
               name="amount"
               min={0}
