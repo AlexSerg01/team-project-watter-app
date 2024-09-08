@@ -48,7 +48,7 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
                 <li key={nanoid()}>
                   <TodayWaterItem
                     amount={elem.amount}
-                    date={new Date(elem.createdAt)}
+                    date={elem.time}
                     onDelete={() => handleDelete(elem._id)}
                     onEdit={() => setEditingRecord(elem)}
                   />

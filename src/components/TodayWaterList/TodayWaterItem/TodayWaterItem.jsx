@@ -2,15 +2,15 @@ import { useState } from "react";
 import css from "./todaywateritem.module.css";
 import icons from "../../../assets/icons.svg";
 
-export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
+export const TodayWaterItem = ({ amount, date, onDelete, onEdit }) => {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    const formatDate = (date) => {
-        let hours = date.getHours().toString().padStart(2,'0');
-        let minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${hours}:${minutes}`;
-    };
+    // const formatDate = (date) => {
+    //     let hours = date.getHours().toString().padStart(2, '0');
+    //     let minutes = date.getMinutes().toString().padStart(2, '0');
+    //     return `${hours}:${minutes}`;
+    // };
 
     const handleOpenDelete = () => {
         setIsDeleteModalOpen(true);
@@ -20,6 +20,14 @@ export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
         setIsDeleteModalOpen(false);
     };
 
+
+    function formatToCorrectTime(date) {
+        if (!date) return
+        if (date?.length === 5) return date;
+        const formattedDate = date.slice(0, -6)
+        return formattedDate.length === 4 ? `0${formattedDate}` : formattedDate
+
+    }
     return (
         <>
             <div className={css.itemWrapper}>
@@ -31,7 +39,7 @@ export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
                         <p className={css.amount}>
                             {amount === 0 ? "Drink some water" : `${amount}ml`}
                         </p>
-                        <p className={css.date}>{formatDate(date)}</p>
+                        <p className={css.date}>{formatToCorrectTime(date)}</p>
                     </div>
                 </div>
                 <div className={css.svgWrapper}>
@@ -51,7 +59,7 @@ export const TodayWaterItem = ({ amount, date, onDelete, onEdit}) => {
                     </button>
                 </div>
             </div>
-   
+
 
             {isDeleteModalOpen && (
                 <div className={css.modalOverlay}>
