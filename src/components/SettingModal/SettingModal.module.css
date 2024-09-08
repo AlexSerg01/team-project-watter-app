@@ -137,8 +137,8 @@
 }
 
 .input {
-  border-radius: 6px;
-  border: 1px solid rgb(215, 227, 255);
+  max-width: 256px;
+  height: 44px;
 }
 
 .modalContent input::placeholder {
@@ -151,6 +151,7 @@
   align-items: center;
   max-width: 256px;
   height: 44px;
+  padding: 12px 10px;
   margin-top: 8px;
 }
 
@@ -168,8 +169,10 @@
 }
 
 .passwordGroup input {
-  margin-top: 8px;
   flex-grow: 1;
+  height: 44px;
+  padding: 12px 10px;
+  margin-top: 8px;
 }
 
 .passwordGroup svg {
@@ -263,7 +266,6 @@
 
   .formGroup {
     margin-right: 12px;
-    margin-bottom: 23px;
   }
 
   .radioGroup {

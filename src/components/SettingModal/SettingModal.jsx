@@ -17,12 +17,30 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  outdatedPassword: Yup.string(),
-  newPassword: Yup.string(),
-  repeatPassword: Yup.string().oneOf(
-    [Yup.ref("newPassword"), null],
-    "Passwords must match"
-  ),
+
+  outdatedPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters long.")
+    .nullable(),
+
+  newPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters long.")
+    .when("outdatedPassword", {
+      is: (outdatedPassword) => !!outdatedPassword,
+      then: (schema) =>
+        schema
+          .required("New password is required")
+          .notOneOf(
+            [Yup.ref("outdatedPassword")],
+            "New password cannot be the same as the old password"
+          ),
+    }),
+
+  repeatPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+    .when("newPassword", {
+      is: (newPassword) => !!newPassword,
+      then: (schema) => schema.required("Repeat password is required"),
+    }),
 });
 
 function SettingModal({ isOpen, onClose, onSave }) {
@@ -73,7 +91,6 @@ function SettingModal({ isOpen, onClose, onSave }) {
       };
       reader.readAsDataURL(file);
 
-      // Dispatch action to upload the photo
       dispatch(patchUserPhoto(file));
     }
   };
@@ -108,7 +125,6 @@ function SettingModal({ isOpen, onClose, onSave }) {
     }
 
     try {
-      // Оновлення фото користувача та інших даних
       if (values.photo && typeof values.photo === "object") {
         const photoFormData = new FormData();
         photoFormData.append("userPhoto", values.photo);
@@ -116,7 +132,6 @@ function SettingModal({ isOpen, onClose, onSave }) {
         const photoResponse = await dispatch(
           patchUserPhoto(photoFormData)
         ).unwrap();
-
         updatedData.photo = photoResponse.photoUrl;
       }
 
@@ -124,25 +139,31 @@ function SettingModal({ isOpen, onClose, onSave }) {
         await dispatch(patchUserInfo(updatedData)).unwrap();
       }
 
-      // Виклик пропсу onSave для оновлення даних в DropDownMenu
       onSave(updatedData);
       onClose();
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data.message ===
-          "New password cannot be the same as the old password"
-      ) {
-        setFieldError(
-          "newPassword",
-          "New password cannot be the same as the old password"
-        );
+      if (error.response) {
+        const errorMessage = error.response.data?.message;
+
+        if (
+          error.response.status === 401 &&
+          errorMessage === "Access token expired"
+        ) {
+          localStorage.clear();
+          window.location.href = "/";
+        }
+
+        if (
+          errorMessage === "New password cannot be the same as the old password"
+        ) {
+          setFieldError("newPassword", errorMessage);
+        }
       } else {
         console.error("Error updating user info:", error);
       }
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
   };
 
   return (
@@ -174,13 +195,15 @@ function SettingModal({ isOpen, onClose, onSave }) {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, setFieldValue }) => (
+          {({ isSubmitting, errors, touched, handleBlur, setFieldValue }) => (
             <Form>
               <div className={styles.formGroup}>
                 <label htmlFor="photoUploadInput">Your photo</label>
                 <div className={styles.photoUpload}>
                   {previewPhoto ? (
                     <img src={previewPhoto} alt="User photo" />
+                  ) : userPhoto ? (
+                    <img src={userPhoto} alt="User photo" />
                   ) : (
                     <div className={styles.createLargeAvatar}>
                       {initial}
@@ -208,169 +231,225 @@ function SettingModal({ isOpen, onClose, onSave }) {
               </div>
 
               <div className={styles.formDesktop}>
-                <div className={styles.formGroup}>
-                  <label>Your gender identity</label>
-                  <div className={styles.radioGroup}>
-                    <label>
-                      <Field type="radio" name="gender" value="female" />
-                      Woman
-                    </label>
-                    <label>
-                      <Field type="radio" name="gender" value="male" />
-                      Man
-                    </label>
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label>Your name</label>
-                  <Field
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    className={styles.inputGroup}
-                  />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    className={styles.errorMessage}
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label>E-mail</label>
-                  <Field
-                    type="email"
-                    name="email"
-                    placeholder="Your E-mail"
-                    className={styles.inputGroup}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className={styles.errorMessage}
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label>Password</label>
-
-                  <div className={styles.passwordName}>
-                    <label>Outdated password:</label>
+                <div className={styles.leftColumn}>
+                  <div className={styles.formGroup}>
+                    <label>Your gender identity</label>
+                    <div className={styles.radioGroup}>
+                      <label>
+                        <Field type="radio" name="gender" value="female" />
+                        Woman
+                      </label>
+                      <label>
+                        <Field type="radio" name="gender" value="male" />
+                        Man
+                      </label>
+                    </div>
                   </div>
 
-                  <div className={styles.passwordGroup}>
-                    <Field
-                      type={
-                        passwordVisibility.outdatedPassword
-                          ? "text"
-                          : "password"
-                      }
+                  <div className={styles.formGroup}>
+                    <label>Your name</label>
+                    <Field name="name">
+                      {({ field, form }) => (
+                        <input
+                          {...field}
+                          type="text"
+                          placeholder="Your name"
+                          className={`${styles.inputGroup} ${
+                            form.errors.name && form.touched.name
+                              ? styles.errorInput
+                              : ""
+                          }`}
+                        />
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label>E-mail</label>
+                    <Field name="email">
+                      {({ field, form }) => (
+                        <input
+                          {...field}
+                          type="email"
+                          placeholder="Your E-mail"
+                          className={`${styles.inputGroup} ${
+                            form.errors.email && form.touched.email
+                              ? styles.errorInput
+                              : ""
+                          }`}
+                        />
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.rightColumn}>
+                  <div className={styles.formGroup}>
+                    <label>Password</label>
+
+                    <div className={styles.passwordName}>
+                      <label>Outdated password:</label>
+                    </div>
+
+                    <div className={styles.passwordGroup}>
+                      <Field name="outdatedPassword">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            type={
+                              passwordVisibility.outdatedPassword
+                                ? "text"
+                                : "password"
+                            }
+                            placeholder="Password"
+                            onBlur={handleBlur}
+                            className={
+                              errors.outdatedPassword &&
+                              touched.outdatedPassword
+                                ? styles.errorInput
+                                : ""
+                            }
+                          />
+                        )}
+                      </Field>
+                      <button
+                        type="button"
+                        className={styles.togglePassword}
+                        onClick={() =>
+                          togglePasswordVisibility("outdatedPassword")
+                        }
+                        aria-label="Toggle outdated password visibility"
+                      >
+                        <svg className={styles.icon}>
+                          <use
+                            href={`${icons}#icon-${
+                              passwordVisibility.outdatedPassword
+                                ? "eye"
+                                : "eye-slash"
+                            }`}
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <ErrorMessage
                       name="outdatedPassword"
-                      placeholder="Password"
+                      component="div"
+                      className={styles.errorMessage}
                     />
-                    <button
-                      type="button"
-                      className={styles.togglePassword}
-                      onClick={() =>
-                        togglePasswordVisibility("outdatedPassword")
-                      }
-                      aria-label="Toggle outdated password visibility"
-                    >
-                      <svg className={styles.icon}>
-                        <use
-                          href={`${icons}#icon-${
-                            passwordVisibility.outdatedPassword
-                              ? "eye"
-                              : "eye-slash"
-                          }`}
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <ErrorMessage
-                    name="outdatedPassword"
-                    component="div"
-                    className={styles.errorMessage}
-                  />
 
-                  <div className={styles.passwordName}>
-                    <label>New Password:</label>
-                  </div>
+                    <div className={styles.passwordName}>
+                      <label>New Password:</label>
+                    </div>
 
-                  <div className={styles.passwordGroup}>
-                    <Field
-                      type={
-                        passwordVisibility.newPassword ? "text" : "password"
-                      }
+                    <div className={styles.passwordGroup}>
+                      <Field name="newPassword">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            type={
+                              passwordVisibility.newPassword
+                                ? "text"
+                                : "password"
+                            }
+                            placeholder="Password"
+                            onBlur={handleBlur}
+                            className={
+                              errors.newPassword && touched.newPassword
+                                ? styles.errorInput
+                                : ""
+                            }
+                          />
+                        )}
+                      </Field>
+                      <button
+                        type="button"
+                        className={styles.togglePassword}
+                        onClick={() => togglePasswordVisibility("newPassword")}
+                        aria-label="Toggle new password visibility"
+                      >
+                        <svg className={styles.icon}>
+                          <use
+                            href={`${icons}#icon-${
+                              passwordVisibility.newPassword
+                                ? "eye"
+                                : "eye-slash"
+                            }`}
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <ErrorMessage
                       name="newPassword"
-                      placeholder="Password"
+                      component="div"
+                      className={styles.errorMessage}
                     />
-                    <button
-                      type="button"
-                      className={styles.togglePassword}
-                      onClick={() => togglePasswordVisibility("newPassword")}
-                      aria-label="Toggle new password visibility"
-                    >
-                      <svg className={styles.icon}>
-                        <use
-                          href={`${icons}#icon-${
-                            passwordVisibility.newPassword ? "eye" : "eye-slash"
-                          }`}
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <ErrorMessage
-                    name="newPassword"
-                    component="div"
-                    className={styles.errorMessage}
-                  />
+                    <div className={styles.passwordName}>
+                      <label>Repeat new password:</label>
+                    </div>
 
-                  <div className={styles.passwordName}>
-                    <label>Repeat new password:</label>
-                  </div>
-
-                  <div className={styles.passwordGroup}>
-                    <Field
-                      type={
-                        passwordVisibility.repeatPassword ? "text" : "password"
-                      }
+                    <div className={styles.passwordGroup}>
+                      <Field name="repeatPassword">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            type={
+                              passwordVisibility.repeatPassword
+                                ? "text"
+                                : "password"
+                            }
+                            placeholder="Password"
+                            onBlur={handleBlur}
+                            className={
+                              errors.repeatPassword && touched.repeatPassword
+                                ? styles.errorInput
+                                : ""
+                            }
+                          />
+                        )}
+                      </Field>
+                      <button
+                        type="button"
+                        className={styles.togglePassword}
+                        onClick={() =>
+                          togglePasswordVisibility("repeatPassword")
+                        }
+                        aria-label="Toggle repeat new password visibility"
+                      >
+                        <svg className={styles.icon}>
+                          <use
+                            href={`${icons}#icon-${
+                              passwordVisibility.repeatPassword
+                                ? "eye"
+                                : "eye-slash"
+                            }`}
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <ErrorMessage
                       name="repeatPassword"
-                      placeholder="Password"
+                      component="div"
+                      className={styles.errorMessage}
                     />
-                    <button
-                      type="button"
-                      className={styles.togglePassword}
-                      onClick={() => togglePasswordVisibility("repeatPassword")}
-                      aria-label="Toggle repeat new password visibility"
-                    >
-                      <svg className={styles.icon}>
-                        <use
-                          href={`${icons}#icon-${
-                            passwordVisibility.repeatPassword
-                              ? "eye"
-                              : "eye-slash"
-                          }`}
-                        />
-                      </svg>
-                    </button>
                   </div>
-                  <ErrorMessage
-                    name="repeatPassword"
-                    component="div"
-                    className={styles.errorMessage}
-                  />
                 </div>
               </div>
-
               <div className={styles.formButton}>
                 <button
                   type="submit"
                   className={styles.submitButton}
                   disabled={isSubmitting}
                 >
-                  Save changes
+                  Save
                 </button>
               </div>
             </Form>
