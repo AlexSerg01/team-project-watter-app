@@ -9,17 +9,18 @@ import {
 } from "../../redux/water/waterOperations";
 import { selectWaterRecords } from "../../redux/water/waterSelectors";
 import { EditWaterForm } from "./EditWaterForm";
+import { nanoid } from "nanoid";
 
 export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
   const dispatch = useDispatch();
 
-  // Отримуємо запис про воду з Redux
   const waterRecords = useSelector(selectWaterRecords);
   const [editingRecord, setEditingRecord] = useState(null);
 
   useEffect(() => {
     dispatch(getAllWaterRecordsPerDay());
   }, [dispatch]);
+
 
   const handleEditModalClose = () => {
     setEditingRecord(null);
@@ -43,8 +44,8 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
         <div className={css.listContainer}>
           <div className={css.hightRegulator}>
             <ul className={css.listWraper}>
-              {waterRecords?.map((elem) => (
-                <li key={elem._id}>
+              {waterRecords.map((elem) => (
+                <li key={nanoid()}>
                   <TodayWaterItem
                     amount={elem.amount}
                     date={new Date(elem.date)}
@@ -54,17 +55,18 @@ export const TodayWaterList = ({ openAddNewWaterRecordModalHandler }) => {
                 </li>
               ))}
             </ul>
-            {/* {waterRecords.length == 0 ? <p>No records</p> : */}
+            {waterRecords.length == 0 ? <p>No records</p> :
 
-            <button
-              className={css.addBtn}
-              onClick={openAddNewWaterRecordModalHandler}
-            >
-              <svg>
-                <use href={`${icons}#icon-increment`}></use>
-              </svg>
-              <span>Add water</span>
-            </button>
+              <button
+                className={css.addBtn}
+                onClick={openAddNewWaterRecordModalHandler}
+              >
+                <svg>
+                  <use href={`${icons}#icon-increment`}></use>
+                </svg>
+                <span>Add water</span>
+              </button>
+            }
           </div>
         </div>
       </div>
