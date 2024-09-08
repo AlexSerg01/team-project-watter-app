@@ -93,6 +93,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   position: fixed;
+  z-index: 1000;
 }
 .titleFormThumb {
   margin-top: -28px;
@@ -125,7 +126,6 @@
   margin-right: auto;
   background-image: url("../../assets/images/signin/BottleSignin-Mobile/Bottle-for-Sign-in.png");
   /* margin-top: -26px; */
-  z-index: -1;
 }
 
 @media (min-resolution: 192dpi),
