@@ -8,6 +8,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+
 const SigninPage = lazy(() => import("./pages/SigninPage/SigninPage"));
 const SignupPage = lazy(() => import("./pages/SignupPage/SignupPage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -25,6 +26,22 @@ function App() {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
+
+    const responseInterceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("persist:root");
+          return <Navigate to="/signin" />;
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axios.interceptors.response.eject(responseInterceptor);
+    };
   }, []);
 
   const PrivateRoute = ({ children }) => {
