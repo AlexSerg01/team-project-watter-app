@@ -28,7 +28,7 @@ const HomePage = () => {
         <div className={css.dailyBox}>
           <MyDailyNorma />
         </div>
-        <div className={css.homeBotle}></div>
+        <div className={css.homeBottle}></div>
         <div className={css.waterRatioPanel}>
           <WaterRatioPanel
             openAddNewWaterRecordModalHandler={

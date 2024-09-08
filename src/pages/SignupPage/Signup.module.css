@@ -2,71 +2,117 @@
   background-repeat: no-repeat;
   background-position: top center;
   background-size: contain;
-  height: calc(100vh - 65px);
-  background-image: image-set(
-    url(../../assets/images/background/Forfot_Update_Password/sign-in-out-mobile.png)
-      1x,
-    url(../../assets/images/background/Forfot_Update_Password/sign-in-out-mobile-2x.png)
-      2x
-  );
+  background-image: url("../../assets/images/background/mobile/Background-m-MainPage.png");
+  margin-top: 52px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: fixed;
+  z-index: 1000;
 }
 .titleFormThumb {
+  margin-top: -28px;
   width: 280px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
 }
-.redirektLink {
+/* .redirektLink {
   margin-top: 16px;
   font: weight 400px;
   font-size: 16px;
   line-height: 1.25;
   color: var(--PRIMERY-BLUE);
-}
+} */
 .block_name {
   font-weight: 500;
   font-size: 26px;
   line-height: 1.23;
+  margin-bottom: 16px;
 }
+
+.bottleWrapper {
+  width: 280px;
+  height: 210px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url("../../assets/images/signin/BottleSignin-Mobile/Bottle-for-Sign-in.png");
+  margin-top: -26px;
+}
+
+@media (min-resolution: 192dpi),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .sectionForm {
+    background-image: url("../../assets/images/background/mobile/Mobile-Background-element-SignIn-Up@2x.png");
+  }
+
+  .bottleWrapper {
+    background-image: url("../../assets/images/signin/BottleSignin-Mobile/Bottle-for-Sign-in@2x.png");
+  }
+}
+
 @media screen and (max-width: 767px) {
   .resetPasswordContainer {
     display: flex;
     justify-content: center;
   }
-  .titleFormThumb {
+  /* .titleFormThumb {
     margin-top: 24px;
-  }
+  } */
 }
 
 @media screen and (min-width: 768px) {
+  .bottleWrapper {
+    display: none;
+  }
   .sectionForm {
+    /* display: flex; */
     background-size: contain;
     width: 100%;
     height: 100%;
-    background-image: image-set(
-      url(../../assets/images/background/Forfot_Update_Password/botle-sign-in-tablet.png)
-        1x,
-      url(../../assets/images/background/Forfot_Update_Password/botle-sign-in-tablet-2x.png)
-        2x
-    );
+    background-image: url("../../assets/images/signin/BottleSignin-Tablet/Bottle-for-Sign-in.png");
+    margin-top: -56px;
   }
   .titleFormThumb {
     width: 336px;
     margin-left: 32px;
-    margin-top: 40px;
+    margin-top: 114px;
+  }
+
+  @media (min-resolution: 192dpi),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .sectionForm {
+      background-image: url("../../assets/images/background/tablet/Bottle-for-tablet-Signin@2x.png");
+    }
   }
 }
 @media screen and (min-width: 1440px) {
   .sectionForm {
-    background-size: cover;
-    background-image: image-set(
-      url(../../assets/images/background/Forfot_Update_Password/sign-in-out-desktop.png)
-        1x,
-      url(../../assets/images/background/Forfot_Update_Password/sign-in-out-desktop-2x.png)
-        2x
-    );
+    width: 1440px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+    background-image: url("../../assets/images/background-main-page/desktop/Background-element-Main-Page.png");
+    margin-top: -12px;
+    position: relative;
   }
+
+  .bottleWrapper {
+    width: 916px;
+    height: 680px;
+    display: flex;
+    top: 56px;
+    right: 575px;
+    background-image: url("../../assets/images/signin/BottleSignin-Desktop/Bottle-for-Sign-in.png");
+    position: absolute;
+    z-index: -1;
+  }
+
   .resetPasswordContainer {
     display: flex;
     flex-direction: column;
@@ -74,9 +120,22 @@
     padding-right: 216px;
     padding-top: 162px;
   }
+
+  @media (min-resolution: 192dpi),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .sectionForm {
+      background-image: url("../../assets/images/background-main-page/desktop/Background-element-Main-Page@2x.png");
+    }
+
+    .bottleWrapper {
+      background-image: url("../../assets/images/signin/BottleSignin-Desktop/Bottle-for-Sign-in@2x.png");
+    }
+  }
   .titleFormThumb {
     width: 384px;
     align-self: flex-end;
-    margin-top: 0;
+    margin-top: 148px;
+    margin-right: 216px;
   }
 }
