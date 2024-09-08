@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./SettingModal.module.css";
 import icons from "../../assets/icons.svg";
-import { CreateAvatar } from "../DropDownMenu/DropDownMenu.styled.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
@@ -81,7 +80,13 @@ function SettingModal({ isOpen, onClose, onSave }) {
 
   if (!isOpen) return null;
 
-  const initial = userName?.charAt(0).toUpperCase() || "";
+  let initial = "";
+
+  if (userName) {
+    initial = userName.charAt(0).toUpperCase();
+  } else if (userEmail) {
+    initial = userEmail.charAt(0).toUpperCase();
+  }
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     const updatedData = {};
@@ -177,9 +182,9 @@ function SettingModal({ isOpen, onClose, onSave }) {
                   {previewPhoto ? (
                     <img src={previewPhoto} alt="User photo" />
                   ) : (
-                    <CreateAvatar className="avatar-large">
+                    <div className={styles.createLargeAvatar}>
                       {initial}
-                    </CreateAvatar>
+                    </div>
                   )}
                   <input
                     type="file"

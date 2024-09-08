@@ -1,21 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  DropDownContainer,
-  DropDownBtn,
-  UserName,
-  UserAvatar,
-  ChevronIcon,
-  Menu,
-  MenuItem,
-  CreateAvatar,
-} from "./DropDownMenu.styled";
+import styles from "./DropDownMenu.module.css";
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
 
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserName, selectUserPhoto } from "../../redux/user/selectors.js";
+import { selectUserName, selectUserPhoto, selectUserEmail } from "../../redux/user/selectors.js";
 import { patchUserInfo } from "../../redux/user/operations.js";
 
 export const DropDownMenu = () => {
@@ -58,47 +49,56 @@ export const DropDownMenu = () => {
     dispatch(patchUserInfo(updatedData));
   };
 
-  const userName = useSelector(selectUserName);
+  const name = useSelector(selectUserName);
+  const email = useSelector(selectUserEmail);
+  const userName = name || email || "";
   const avatar = useSelector(selectUserPhoto);
 
   return (
     <>
-      <DropDownContainer ref={menuRef}>
-        <DropDownBtn onClick={toggleMenu}>
-          <UserName>{userName}</UserName>
+      <div className={styles.dropDownContainer} ref={menuRef}>
+        <button className={styles.dropDownBtn} onClick={toggleMenu}>
+          <p className={styles.userName}>{userName}</p>
           {avatar ? (
-            <UserAvatar
+            <img
               src={avatar}
               alt="User's Avatar"
               width="28"
               height="28"
+              className={styles.userAvatar}
             />
           ) : (
-            <CreateAvatar>
+            <div className={styles.createAvatar}>
               {userName?.charAt(0).toUpperCase() || ""}
-            </CreateAvatar>
+            </div>
           )}
-          <ChevronIcon>
+          <svg className={styles.chevronIcon}>
             <use href={`${icons}#icon-chevron-down`} />
-          </ChevronIcon>
-        </DropDownBtn>
+          </svg>
+        </button>
         {isOpen && (
-          <Menu>
-            <MenuItem onClick={() => handleMenuItemClick("setting")}>
+          <div className={styles.menu}>
+            <button
+              className={styles.menuItem}
+              onClick={() => handleMenuItemClick("setting")}
+            >
               <svg width="16" height="16">
                 <use href={`${icons}#icon-setting`} />
               </svg>
               Setting
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("logout")}>
+            </button>
+            <button
+              className={styles.menuItem}
+              onClick={() => handleMenuItemClick("logout")}
+            >
               <svg width="16" height="16">
                 <use href={`${icons}#icon-logout`} />
               </svg>
               Log out
-            </MenuItem>
-          </Menu>
+            </button>
+          </div>
         )}
-      </DropDownContainer>
+      </div>
 
       {createPortal(
         <SettingModal
