@@ -298,3 +298,18 @@
     margin-left: 800px;
   }
 }
+
+.createLargeAvatar {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--PRIMERY-BLUE);;
+  background-color: var(--PRIMERY-WHITE);
+  color: var(--PRIMERY-BLUE);
+  font-size: 36px;
+  font-weight: 500;
+}

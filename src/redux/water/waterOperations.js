@@ -43,7 +43,7 @@ export const deleteWaterRecord = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await axios.delete(`/water/${id}`);
-      return id;
+      return response.data;
     } catch (error) {
       if (error.response) {
         return thunkAPI.rejectWithValue(error.response.data);

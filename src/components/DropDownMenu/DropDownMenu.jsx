@@ -1,40 +1,21 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  DropDownContainer,
-  DropDownBtn,
-  UserName,
-  UserAvatar,
-  ChevronIcon,
-  Menu,
-  MenuItem,
-  CreateAvatar
-} from "./DropDownMenu.styled";
+import styles from "./DropDownMenu.module.css";
 import icons from "../../assets/icons.svg";
 import SettingModal from "../SettingModal/SettingModal";
 import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
-import { getUserInfo } from "../../fetch/fetch";
+
 import { createPortal } from "react-dom";
-import { getUserLogoInfo } from "../utils/userAvatarUtils.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserName, selectUserPhoto, selectUserEmail } from "../../redux/user/selectors.js";
+import { patchUserInfo } from "../../redux/user/operations.js";
 
 export const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
   const menuRef = useRef(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getUserInfo();
-        setUserData(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
@@ -65,56 +46,64 @@ export const DropDownMenu = () => {
   };
 
   const handleSave = (updatedData) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      ...updatedData,
-    }));
+    dispatch(patchUserInfo(updatedData));
   };
 
-  const { avatar, userName, initial } = getUserLogoInfo(userData);
+  const name = useSelector(selectUserName);
+  const email = useSelector(selectUserEmail);
+  const userName = name || email || "";
+  const avatar = useSelector(selectUserPhoto);
 
   return (
     <>
-      <DropDownContainer ref={menuRef}>
-        <DropDownBtn onClick={toggleMenu}>
-          <UserName>{ userName }</UserName>
+      <div className={styles.dropDownContainer} ref={menuRef}>
+        <button className={styles.dropDownBtn} onClick={toggleMenu}>
+          <p className={styles.userName}>{userName}</p>
           {avatar ? (
-          <UserAvatar
-            src={avatar}
-            alt="User's Avatar"
-            width="28"
-            height="28"
-          />
-        ) : (
-          <CreateAvatar>{initial}</CreateAvatar>
-        )}
-          <ChevronIcon>
+            <img
+              src={avatar}
+              alt="User's Avatar"
+              width="28"
+              height="28"
+              className={styles.userAvatar}
+            />
+          ) : (
+            <div className={styles.createAvatar}>
+              {userName?.charAt(0).toUpperCase() || ""}
+            </div>
+          )}
+          <svg className={styles.chevronIcon}>
             <use href={`${icons}#icon-chevron-down`} />
-          </ChevronIcon>
-        </DropDownBtn>
+          </svg>
+        </button>
         {isOpen && (
-          <Menu>
-            <MenuItem onClick={() => handleMenuItemClick("setting")}>
+          <div className={styles.menu}>
+            <button
+              className={styles.menuItem}
+              onClick={() => handleMenuItemClick("setting")}
+            >
               <svg width="16" height="16">
                 <use href={`${icons}#icon-setting`} />
               </svg>
               Setting
-            </MenuItem>
-            <MenuItem onClick={() => handleMenuItemClick("logout")}>
+            </button>
+            <button
+              className={styles.menuItem}
+              onClick={() => handleMenuItemClick("logout")}
+            >
               <svg width="16" height="16">
                 <use href={`${icons}#icon-logout`} />
               </svg>
               Log out
-            </MenuItem>
-          </Menu>
+            </button>
+          </div>
         )}
-      </DropDownContainer>
+      </div>
 
       {createPortal(
         <SettingModal
           isOpen={isSettingModalOpen}
           onClose={() => setIsSettingModalOpen(false)}
-          userData={userData}
           onSave={handleSave}
         />,
         document.body

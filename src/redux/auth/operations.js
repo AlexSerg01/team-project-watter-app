@@ -11,7 +11,7 @@ export const registerUser = createAsyncThunk(
       const response = await axios.post(`${API_URL}/auth/register`, data);
       toast.success("Registration successful!");
       axios.defaults.headers.common.Authorization = `Bearer ${response.data.data.accessToken}`;
-      return response.data.data; // Припускаємо, що дані знаходяться у полі `data.data`
+      return response.data.data;
     } catch (error) {
       const message =
         error.response?.data?.message ||

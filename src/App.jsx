@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import axios from "axios";
 import {
   BrowserRouter as Router,
@@ -8,12 +8,16 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import SigninPage from "./pages/SigninPage/SigninPage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import HomePage from "./pages/HomePage/HomePage";
-import Main from "./pages/WelcomePage/Main";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
+const SigninPage = lazy(() => import("./pages/SigninPage/SigninPage"));
+const SignupPage = lazy(() => import("./pages/SignupPage/SignupPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const Main = lazy(() => import("./pages/WelcomePage/Main"));
+const ForgotPasswordPage = lazy(() =>
+  import("./pages/ForgotPasswordPage/ForgotPasswordPage")
+);
+const UpdatePasswordPage = lazy(() =>
+  import("./pages/UpdatePasswordPage/UpdatePasswordPage")
+);
 
 function App() {
   useEffect(() => {
