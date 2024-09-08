@@ -52,6 +52,15 @@ const waterSlice = createSlice({
         state.waterRecords = state.waterRecords.filter(
           (elem) => elem._id !== action.payload
         );
+
+        // ========= оновлення відсотків в календарі, при видаленні води ===========================
+        // const dayIndex = state.items.findIndex(
+        //   (item) => item.date === action.payload.data.date
+        // );
+        // if (dayIndex !== -1) {
+        //   state.items[dayIndex] = action.payload.data;
+        // }
+        // ===============================================================================
       })
       .addCase(updateWaterRecord.pending, (state) => {
         state.isLoading = true;

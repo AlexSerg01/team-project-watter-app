@@ -1,256 +1,252 @@
 .section {
-    padding: 32px 24px;
-    width: 592px;
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    box-sizing: border-box;
-    background-color: #ECF2FF;
+  padding: 32px 24px;
+  width: 592px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  background-color: #ecf2ff;
 }
 
 .sectionModal {
-    padding: 32px 24px;
-    width: 592px;
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    box-sizing: border-box;
-    background-color: #fff;
+  padding: 32px 24px;
+  width: 592px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  background-color: #fff;
 }
 
 .waterPreInfo {
-    background-color: #ECF2FF;
+  background-color: #ecf2ff;
 }
 
 .crossBtn {
-    position: absolute;
-    top: 36px;
-    right: 24px;
-    background-color: transparent;
-    border: none;
+  position: absolute;
+  top: 36px;
+  right: 24px;
+  background-color: transparent;
+  border: none;
 }
 
 svg {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .sectionHeader {
-    margin: 0;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 32px;
+  margin: 0;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
 }
 
 .waterPreInfo {
-    display: flex;
-    flex-direction: row;
-    background-color: #ECF2FF;
-    width: 254px;
-    height: 52px;
-    gap: 12px;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: #ecf2ff;
+  width: 254px;
+  height: 52px;
+  gap: 12px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .svgGlass {
-    width: 36px;
-    height: 36px;
+  width: 36px;
+  height: 36px;
 }
 
 .waterAmount {
-    color: #407BFF;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
-    display: flex;
+  color: #407bff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  display: flex;
 }
 
 .timeAmount {
-    width: 156px;
-    height: 24px;
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: center;
+  width: 156px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
 }
 
 .spanTime {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
 }
 
 .amountCorrection {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
 }
 
-
 .enteredData {
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
 }
 
 .amountBtnDec,
 .amountBtnInc {
-    width: 44px;
-    height: 44px;
-    border: 1px solid #9EBBFF;
-    border-radius: 30px;
-    box-shadow: 0 2px 4px #407BFF33;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #9ebbff;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px #407bff33;
 }
 
 .spanAmount {
-    width: 92px;
-    height: 36px;
-    border-radius: 40px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #D7E3FF;
-    color: #407BFF;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
+  width: 92px;
+  height: 36px;
+  border-radius: 40px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d7e3ff;
+  color: #407bff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .amountCalc {
-    display: flex;
-    flex-direction: row;
-    gap: 7px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
 }
 
 .inputWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .inputWrapper .numberTopic {
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
 }
 
 input {
-    width: 544px;
-    height: 44px;
-    border: 1px solid #D7E3FF;
-    padding: 12px 10px;
-    border-radius: 6px;
-    box-sizing: border-box;
-    color: #407BFF;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: left;
+  width: 544px;
+  height: 14px;
+  border: 1px solid #d7e3ff;
+  /* padding: 12px; */
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #407bff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
 }
 
 .formEditInfo {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .saveBtnWrapper {
-    width: 100%;
-    height: 44px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .finalAmountSave {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
 }
 
 .saveBtnWrapper button {
-    height: 44px;
-    width: 160px;
-    background-color: #407BFF;
-    color: #FFFFFF;
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding: 10px 30px;
-    border: none;
-    box-shadow: 0 4px 8px 0 #407BFF57;
+  height: 44px;
+  width: 160px;
+  background-color: #407bff;
+  color: #ffffff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  border: none;
+  box-shadow: 0 4px 8px 0 #407bff57;
 }
 
 .saveBtnWrapper p {
-    margin: auto;
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-    text-align: center;
-    color: #407BFF;
+  margin: auto;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: #407bff;
 }
 
 .listWraper {
-    list-style: none;
-    padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    min-height: 0;
-    max-height: 212px;
-    scrollbar-width: 2px;
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  max-height: 212px;
+  scrollbar-width: 2px;
 }
 
 .listWraper::-webkit-scrollbar {
-    width: 1px;
+  width: 1px;
 }
 
 .listWraper::-webkit-scrollbar-button {
-    display: none;
+  display: none;
 }
 
 .listWraper::-webkit-scrollbar-thumb {
-    background-color: #9EBBFF;
-    border-radius: 8px;
+  background-color: #9ebbff;
+  border-radius: 8px;
 }
 
 .listWraper::-webkit-scrollbar-track {
-    background-color: #D7E3FF;
+  background-color: #d7e3ff;
 }
 
-
 .addBtn {
-    background-color: transparent;
-    border: none;
-    color: #407BFF;
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 24px;
-    text-align: left;
-    padding: 0;
-    display: flex;
-    gap: 8px;
-
+  background-color: transparent;
+  border: none;
+  color: #407bff;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  gap: 8px;
 }
 
 .addBtn:hover{
@@ -262,123 +258,116 @@ input {
     stroke: #FF9D43;
 }
 
-
 .listContainer {
-    box-sizing: border-box;
-    overflow-y: auto;
-
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .hightRegulator {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    height: 212px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 212px;
+  width: 100%;
 }
 
 .tableWrapper {
-    width: 592px;
-    padding: 32px 24px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    background-color: #ECF2FF;
+  width: 592px;
+  padding: 32px 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #ecf2ff;
 }
 
 @media screen and (min-width: 1440px) {
-
-    .todayWrapper {
-        width: 544px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-    }
+  .todayWrapper {
+    width: 544px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
-
 .today {
-    font-family: Roboto;
-    font-size: 26px;
-    font-weight: 500;
-    line-height: 32px;
-    text-align: left;
-    margin: 0;
+  font-family: Roboto;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  margin: 0;
 }
 
 .modalBackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 @media screen and (max-width: 1439px) {
-    .tableWrapper {
-        gap: 20px;
-        width: 704px;
-        background-color: #ECF2FF;
-        padding: 32px 24px 32px 24px;
-    }
+  .tableWrapper {
+    gap: 20px;
+    width: 704px;
+    background-color: #ecf2ff;
+    padding: 32px 24px 32px 24px;
+  }
 
-    .section, .sectionModal {
-        width: 704px;
+  .section,
+  .sectionModal {
+    width: 704px;
+  }
 
-    }
+  .listWraper {
+    width: 100%;
+  }
 
-    .listWraper {
-        width: 100%;
-    }
+  .listWraper li {
+    width: 100%;
+  }
 
-    .listWraper li {
-        width: 100%;
-    }
+  .todayWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
 
-    .todayWrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        row-gap: 16px;
-
-    }
-
-    .addBtn {
-        background-color: transparent;
-        border: none;
-        color: #407BFF;
-        font-family: Roboto;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 24px;
-        text-align: left;
-        padding: 0;
-        display: flex;
-        gap: 8px;
-
-    }
+  .addBtn {
+    background-color: transparent;
+    border: none;
+    color: #407bff;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+  }
 }
 
 @media screen and (max-width: 767px) {
-    .sectionModal, .section {
-        width: 280px;
-        padding: 24px 8px;
-    }
+  .sectionModal,
+  .section {
+    width: 280px;
+    padding: 24px 8px;
+  }
 
-    .inputWrapper input {
-        width: 120px;
-        height: 44px;
-    }
+  .inputWrapper input {
+    width: 120px;
+    height: 44px;
+  }
 
-    .waterPreInfo {
-        width: auto;
-    }
-
+  .waterPreInfo {
+    width: auto;
+  }
 }
