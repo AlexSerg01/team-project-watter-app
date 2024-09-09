@@ -1,8 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateDailyWaterIntake } from '../../redux/water/waterOperations';
 import css from './DailyNormaModal.module.css';
 import { useEffect, useState } from "react";
 import { closeModal, updateNorma } from '../../redux/water/waterSlice';
+import { selectNorma } from '../../redux/water/waterSelectors';
 
 const DailyNormaModal = () => {
   const [gender, setGender] = useState("woman");
@@ -13,7 +14,14 @@ const DailyNormaModal = () => {
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
-  const onClose = () => { dispatch(closeModal()); };
+  const onClose = () => { dispatch(closeModal()) };
+  const waterNorma = useSelector(selectNorma);
+
+  useEffect(() => {
+    if (waterNorma) {
+      setUserNorma(waterNorma);
+    }
+  }, [waterNorma]);
 
   const onConfirm = (newNorma) => {
     dispatch(updateNorma(newNorma));
@@ -166,7 +174,8 @@ const DailyNormaModal = () => {
         </div>
         <div>
           <label className={css.resultTitle}>Write down how much water you will drink:</label>
-          <input className={css.calcInput}
+          <input
+            className={css.calcInput}
             type="number"
             placeholder="0"
             value={userNorma}
