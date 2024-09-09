@@ -45,7 +45,6 @@ const waterSlice = createSlice({
         state.isLoading = false;
         const { id, ...restParams } = action.payload.data;
         state.waterRecords.push({ ...restParams, _id: id });
-       
 
         // ========== оновлення відсотків в календарі, при додаванні води =========
         const dayIndex = state.items.findIndex(
@@ -67,7 +66,15 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.waterRecords = state.waterRecords.filter(
           (elem) => elem._id !== action.payload.data.id
-        )
+        );
+        // ========= оновлення відсотків в календарі, при видаленні води ============
+        const dayIndex = state.items.findIndex(
+          (item) => item.date === action.payload.data.date
+        );
+        if (dayIndex !== -1) {
+          state.items[dayIndex] = action.payload.data;
+        }
+        // ============================================================================
       })
       .addCase(updateWaterRecord.pending, (state) => {
         state.isLoading = true;
@@ -81,13 +88,15 @@ const waterSlice = createSlice({
         const index = state.waterRecords.findIndex(
           (record) => record._id === action.payload.data.id
         );
-        
+
         if (index !== -1) {
+
           const { id, ...restParams } = action.payload.data
+
           state.waterRecords[index] = { ...restParams, _id: id };
         }
         console.log(state.waterRecords[index]);
-        
+
         // ========== оновлення відсотків в календарі, при оновленні води ================
         const dayIndex = state.items.findIndex(
           (item) => item.date === action.payload.data.date
@@ -109,7 +118,6 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.waterRecords = action.payload.dailyRecords;
         // console.log(state.waterRecords);
-        
       })
       // =========================================
       .addCase(fetchWaterMonthInfo.pending, (state) => {
