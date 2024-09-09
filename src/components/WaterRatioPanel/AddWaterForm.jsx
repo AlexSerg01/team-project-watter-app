@@ -10,6 +10,7 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
     const [date, setDate] = useState(initialDate);
     const dispatch = useDispatch();
 
+
     const formatTimeForInput = (date) => {
         let hours = date.getHours();
         let minutes = date.getMinutes();
@@ -34,9 +35,11 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
         setAmount(amount + 50);
     };
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addWaterRecord({ amount: Number(amount) }))
+        dispatch(addWaterRecord({ amount: Number(amount), time: formatTimeForInput(date)}))
             .unwrap()
             .then((response) => {
                 console.log("New water record added:", response);
