@@ -89,7 +89,7 @@ import {
   updatePassword,
   logoutUser,
 } from "./operations";
-import { updateDailyWaterIntake } from "../dailyNorma/operations";
+import { updateDailyWaterIntake } from "../water/waterOperations";
 
 const authSlice = createSlice({
   name: "auth",
