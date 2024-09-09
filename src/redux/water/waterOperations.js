@@ -25,6 +25,7 @@ export const addWaterRecord = createAsyncThunk(
     try {
       const response = await axios.post("/water", {
         amount: data.amount,
+        time: data.time,
       });
       return response.data;
     } catch (error) {
@@ -59,7 +60,7 @@ export const updateWaterRecord = createAsyncThunk(
     try {
       const response = await axios.patch(`/water/${id}`, {
         amount: amount,
-        time: time
+        time: time,
       });
       return response.data;
     } catch (error) {

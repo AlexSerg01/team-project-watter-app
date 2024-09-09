@@ -110,6 +110,9 @@ svg {
   border: 1px solid #9ebbff;
   border-radius: 30px;
   box-shadow: 0 2px 4px #407bff33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spanAmount {
@@ -371,5 +374,10 @@ input {
 
   .waterPreInfo {
     width: auto;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 10px;
   }
 }
