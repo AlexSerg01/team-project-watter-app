@@ -4,15 +4,15 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectError, selectisLoading } from "../../redux/auth/selectors";
 import Loader from "../Loader/Loader";
-
 import css from "./AuthForm.module.css";
 import icon from "../../assets/icons.svg";
+import { toast } from "react-toastify";
 
 export default function AuthForm({ type, onSubmit }) {
   const isSignup = type === "signup";
-  const [error, setError] = useState("");
   const authError = useSelector(selectError);
   const isLoading = useSelector(selectisLoading);
+  const [showPassword, setShowPassword] = useState(false);
 
   const createAuthErrorMessage = (authError) => {
     const errorMessage =
@@ -23,18 +23,15 @@ export default function AuthForm({ type, onSubmit }) {
         return "Email or password is incorrect!";
       case "Not found":
         return "The user with this data does not exist.";
-      default:
-        return "An unknown error occurred.";
     }
   };
 
   useEffect(() => {
     if (authError) {
-      setError(createAuthErrorMessage(authError));
+      const errorMessage = createAuthErrorMessage(authError);
+      toast.error(errorMessage);
     }
   }, [authError]);
-
-  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -157,9 +154,6 @@ export default function AuthForm({ type, onSubmit }) {
               />
             </div>
           )}
-
-          {/* Відображення помилки запиту */}
-          {error && <div className={css.input_error}>{error}</div>}
 
           <button
             type="submit"

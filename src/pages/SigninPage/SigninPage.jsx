@@ -2,10 +2,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthFrom/AuthForm";
 import { loginUser } from "../../redux/auth/operations";
-
 import css from "./SigninPage.module.css";
 import { Section } from "../../components/Section/Section";
 import { Container } from "../../components/Container/Container";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SigninPage = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const SigninPage = () => {
           </p>
         </div>
       </Container>
+      <ToastContainer position="top-right" autoClose={5000} />
       <div className={css.bottleWrapper}></div>
     </Section>
   );

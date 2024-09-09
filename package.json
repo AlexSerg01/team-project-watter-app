@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.7",
     "@popperjs/core": "^2.11.8",
+    "@reduxjs/toolkit": "^2.2.7",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "axios": "^1.7.2",
     "formik": "^2.4.6",

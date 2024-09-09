@@ -1,23 +1,32 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/auth/operations";
+import { clearError } from "../../redux/auth/slice"; // Імпортуй clearError
 import AuthForm from "../../components/AuthFrom/AuthForm";
-
 import css from "./Signup.module.css";
 import { Section } from "../../components/Section/Section";
 import { Container } from "../../components/Container/Container";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+
 const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Очищення помилки при завантаженні сторінки
+    dispatch(clearError());
+  }, [dispatch]);
+
   const handleSignup = (values, { setSubmitting }) => {
-    // Очищення поля repeatPassword
-    // eslint-disable-next-line no-unused-vars
     const { repeatPassword, ...signupData } = values;
 
     dispatch(registerUser(signupData)).then((result) => {
       if (registerUser.fulfilled.match(result)) {
         navigate("/signin");
+      } else if (registerUser.rejected.match(result)) {
+        toast.error(result.error.message || "Registration failed");
       }
       setSubmitting(false);
     });
@@ -29,13 +38,9 @@ const SignupPage = () => {
         <div className={css.titleFormThumb}>
           <h2 className={css.block_name}>Sign Up</h2>
           <AuthForm type="signup" onSubmit={handleSignup} />
-          {/* <p>
-            <a className={css.redirektLink} href="/reset-password">
-              Forgot your password?
-            </a>
-          </p> */}
         </div>
       </Container>
+      <ToastContainer position="top-right" autoClose={5000} />
       <div className={css.bottleWrapper}></div>
     </Section>
   );
