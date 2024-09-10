@@ -18,7 +18,7 @@
   margin: 44px auto;
   padding: 32px 12px;
   transform: scale(0.9);
-  animation: fadeIn 0.5s forwards; /* Анимация увеличения и появления */
+  animation: fadeIn 0.5s forwards;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 

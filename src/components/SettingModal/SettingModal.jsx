@@ -12,7 +12,11 @@ import {
   selectUserName,
   selectUserPhoto,
 } from "../../redux/user/selectors.js";
-import { patchUserInfo, patchUserPhoto } from "../../redux/user/operations.js";
+import {
+  getUserData,
+  patchUserInfo,
+  patchUserPhoto,
+} from "../../redux/user/operations.js";
 import axios from "axios";
 
 axios.interceptors.response.use(
@@ -154,21 +158,26 @@ function SettingModal({ isOpen, onClose, onSave }) {
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     const updatedData = {};
-
-    if (values.name && values.name !== userName) {
-      updatedData.name = values.name;
-    }
-    if (values.gender && values.gender !== userGender) {
-      updatedData.gender = values.gender;
-    }
-    if (values.email && values.email !== userEmail) {
-      updatedData.email = values.email;
-    }
-    if (values.newPassword) {
-      updatedData.password = values.newPassword;
-    }
+    let passwordChanged = false;
 
     try {
+      const serverData = await dispatch(getUserData()).unwrap();
+      const currentData = serverData;
+
+      if (values.name && values.name !== currentData.name) {
+        updatedData.name = values.name;
+      }
+      if (values.gender && values.gender !== currentData.gender) {
+        updatedData.gender = values.gender;
+      }
+      if (values.email && values.email !== currentData.email) {
+        updatedData.email = values.email;
+      }
+
+      if (values.newPassword) {
+        passwordChanged = true;
+      }
+
       if (values.photo && typeof values.photo === "object") {
         const photoFormData = new FormData();
         photoFormData.append("userPhoto", values.photo);
@@ -180,9 +189,20 @@ function SettingModal({ isOpen, onClose, onSave }) {
         toast.success("Photo updated successfully!");
       }
 
-      if (Object.keys(updatedData).length > 0) {
-        await dispatch(patchUserInfo(updatedData)).unwrap();
-        toast.success("User info updated successfully!");
+      if (passwordChanged || Object.keys(updatedData).length > 0) {
+        if (Object.keys(updatedData).length > 0) {
+          await dispatch(patchUserInfo(updatedData)).unwrap();
+          toast.success("User info updated successfully!");
+        }
+
+        if (passwordChanged) {
+          await dispatch(
+            patchUserInfo({ password: values.newPassword })
+          ).unwrap();
+          toast.success("Password updated successfully!");
+        }
+      } else {
+        toast.info("No changes detected.");
       }
 
       onSave(updatedData);
