@@ -7,6 +7,7 @@
   background: rgba(0, 0, 0, 0.8);
   overflow-y: auto;
   z-index: 1000;
+  animation: fadeIn 0.5s forwards;
 }
 
 .modalContent {
@@ -16,6 +17,9 @@
   background: rgb(255, 255, 255);
   margin: 44px auto;
   padding: 32px 12px;
+  transform: scale(0.9);
+  animation: fadeIn 0.5s forwards; /* Анимация увеличения и появления */
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .modalHeader {
@@ -309,7 +313,7 @@
   justify-content: center;
   margin-right: 10px;
   border-radius: 50%;
-  border: 2px solid var(--PRIMERY-BLUE);;
+  border: 2px solid var(--PRIMERY-BLUE);
   background-color: var(--PRIMERY-WHITE);
   color: var(--PRIMERY-BLUE);
   font-size: 36px;
