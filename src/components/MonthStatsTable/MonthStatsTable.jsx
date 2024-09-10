@@ -5,6 +5,7 @@ import DaysGeneralStats from "../DaysGeneralStats/DaysGeneralStats";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWaterMonthInfo } from "../../redux/water/waterOperations";
 import Loader from "../Loader/Loader";
+import { selectNorma } from "../../redux/water/waterSelectors";
 
 export default function MonthStatsTable() {
   const currentMonth = new Date().getMonth();
@@ -32,13 +33,14 @@ export default function MonthStatsTable() {
   const waterItems = useSelector((state) => state.water.items);
   const isLoading = useSelector((state) => state.water.isLoading);
   const dispatch = useDispatch();
+  const waterNorma = useSelector(selectNorma)
 
   useEffect(() => {
     const currentDate = () => {
       return { month, year };
     };
     dispatch(fetchWaterMonthInfo(currentDate));
-  }, [dispatch, month, year]);
+  }, [dispatch, month, year, waterNorma]);
 
   const nextMonth = () => {
     setMonth((prevMonth) => {
