@@ -90,8 +90,9 @@
     border-bottom: 1px solid #EF5050;
 }
 
-.button:focus {
-    border: none;
+.button:focus,
+.button:active {
+    outline: none;
 }
 
 .modalOverlay {
