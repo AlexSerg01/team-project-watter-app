@@ -144,8 +144,6 @@ function SettingModal({ isOpen, onClose, onSave }) {
         setPreviewPhoto(reader.result);
       };
       reader.readAsDataURL(file);
-
-      dispatch(patchUserPhoto(file));
     }
   };
 
