@@ -254,6 +254,11 @@ input {
   gap: 8px;
 }
 
+.addBtn:active,
+.addBtn:focus {
+  outline: none;
+}
+
 .addBtn:hover{
     color: #FF9D43;
     cursor: pointer;
