@@ -47,7 +47,7 @@ const HomePage = () => {
         {modalIsOpen && (
           <AddWaterForm
             onClose={closeModal}
-            initialAmount={0}
+            initialAmount={''}
             initialDate={new Date()}
             updateWaterData={(amount, date) => {
               console.log("Amount:", amount);

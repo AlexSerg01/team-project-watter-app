@@ -1,35 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 import { updateWaterRecord } from "../../redux/water/waterOperations";
 
 export const EditWaterForm = ({ onClose, editingRecord }) => {
   const [amount, setAmount] = useState(editingRecord.amount);
   const [date, setDate] = useState(editingRecord.time);
-
   const dispatch = useDispatch();
 
-  const formatTimeForInput = (date) => {
-    let hours = new Date(date).getHours();
-    let minutes = new Date(date).getMinutes();
-    hours = hours < 10 ? `0${hours}` : hours;
-    minutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${hours}:${minutes}`;
-  };
-
   const handleTimeChange = (e) => {
-    // const [hours, minutes] = e.target.value.split(":").map(Number);
-    // const newDate = new Date(date);
-    // newDate.setHours(hours);
-    // newDate.setMinutes(minutes);
     setDate(e.target.value);
-  };
-
-  const formatDate = (date) => {
-    let hours = new Date(date).getHours();
-    let minutes = new Date(date).getMinutes();
-    return `${hours}:${minutes}`;
   };
 
   const handleDec = () => {
@@ -37,21 +20,31 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
   };
 
   const handleInc = () => {
-    setAmount(amount + 50);
+    setAmount((prev) => (prev < 5000 ? prev + 50 : 5000));
+  };
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    setAmount(value === "" ? "" : Number(value));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formAmount = Number(e.target.elements.amount.value);
+    const formAmount = Number(amount);
+
+    if (formAmount <= 0 || formAmount > 5000) {
+      toast.error("Put correct walue of water!"); 
+      return;
+    }
 
     dispatch(updateWaterRecord({ id: editingRecord._id, amount: formAmount, time: date }))
       .unwrap()
       .then(() => {
-        console.log("Water record updated:", formAmount);
+        toast.success("Record updated!");
       })
       .catch((error) => {
-        console.error("Failed to update water record:", error);
+        toast.error("Record is not updated");
       });
 
     if (typeof onClose === "function") {
@@ -59,11 +52,6 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
     } else {
       console.error("onClose is not a function");
     }
-  };
-
-  const handleAmountChange = (e) => {
-    const value = e.target.value;
-    setAmount(value === "" ? "" : Number(value));
   };
 
   return (
@@ -112,20 +100,20 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
           </div>
           <div className={css.inputWrapper}>
             <p>Recording time:</p>
-            <input className={css.editFormInput}
+            <input
+              className={css.editFormInput}
               type="time"
               step={300}
               value={date}
               onChange={handleTimeChange}
             />
-            </div>
+          </div>
           <div className={css.inputWrapper}>
             <p className={css.numberTopic}>Enter the value of the water used:</p>
-            <input className={css.editFormInput}
+            <input
+              className={css.editFormInput}
               type="number"
               name="amount"
-              min={0}
-              max={5000}
               value={amount === "" ? "" : amount}
               onChange={handleAmountChange}
             />
@@ -138,6 +126,8 @@ export const EditWaterForm = ({ onClose, editingRecord }) => {
           <button type="submit">Save</button>
         </div>
       </div>
+
+      <ToastContainer />
     </form>
   );
 };
