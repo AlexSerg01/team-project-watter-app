@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import css from "../TodayWaterList/addwaterlist.module.css";
 import icons from "../../assets/icons.svg";
 import { addWaterRecord } from "../../redux/water/waterOperations";
@@ -9,7 +11,6 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
     const [amount, setAmount] = useState(initialAmount);
     const [date, setDate] = useState(initialDate);
     const dispatch = useDispatch();
-
 
     const formatTimeForInput = (date) => {
         let hours = date.getHours();
@@ -32,20 +33,24 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
     };
 
     const handleInc = () => {
-        setAmount(amount + 50);
+        setAmount((prev) => (prev < 5000 ? prev + 50 : 5000));
     };
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addWaterRecord({ amount: Number(amount), time: formatTimeForInput(date)}))
+        if (amount <= 0 || amount > 5000) {
+            toast.error("Put correct value of water!");
+            return;
+        }
+
+        dispatch(addWaterRecord({ amount: Number(amount), time: formatTimeForInput(date) }))
             .unwrap()
             .then((response) => {
-                console.log("New water record added:", response);
+                toast.success("Record succesfully added!"); 
             })
             .catch((error) => {
-                console.error("Failed to add water record:", error);
+                toast.error("Record is not added."); 
+
             });
 
         if (onClose) {
@@ -104,8 +109,6 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
                             <input
                                 name="amount"
                                 type="number"
-                                min={0}
-                                max={5000}
                                 value={amount}
                                 onChange={(e) => setAmount(Number(e.target.value))}
                             />
@@ -119,6 +122,9 @@ export const AddWaterForm = ({ onClose, initialAmount, initialDate }) => {
                     </div>
                 </div>
             </form>
+
+            {/* Контейнер для тостерів */}
+            <ToastContainer />
         </ModalOverlay>
     );
 };
