@@ -2,7 +2,8 @@
 
 .homeContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  max-width: 320px;
   background-image: url("../../assets/images/home-page/bubbles-home-page/Mobile-Bubbles-Home-Page@1x.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -65,6 +66,7 @@
 @media screen and (min-width: 768px) {
   .homeContainer {
     width: 764px;
+    max-width: 768px;
     height: 1280px;
     margin-top: 24px;
     background-image: url("../../assets/images/home-page/bubbles-home-page/Tablet-Bubbles-Home-Page@1x.png");
@@ -126,6 +128,7 @@
   .homeContainer {
     background-position: top center;
     width: 1440px;
+    max-width: 1440px;
     height: 582px;
     margin-top: 58px;
     background-image: url("../../assets/images/home-page/bubbles-home-page/Desk-Bubbles-Home-Page@1x.png");
